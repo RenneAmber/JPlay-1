@@ -9,7 +9,6 @@ import java.util.List;
 public class recommendUtil {
     public static void execute(String train, String test, String output) {
         String recommendPath = System.getProperty("user.dir") + "\\src\\main\\webapp\\tools\\Recommender.exe";
-//        System.out.println(recommendPath);
         List<String> convert = new ArrayList<String>();
         convert.add(recommendPath);
         convert.add(train);
