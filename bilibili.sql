@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-07-13 03:30:28
+-- Generation Time: 2016-07-13 08:29:37
 -- 服务器版本： 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -378,7 +378,7 @@ CREATE TABLE `user` (
   `birthday` date DEFAULT NULL,
   `created` datetime NOT NULL,
   `last_update` datetime NOT NULL,
-  `realname` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `realName` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `university` varchar(200) COLLATE utf8_bin DEFAULT NULL,
   `experience` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
