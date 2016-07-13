@@ -18,6 +18,7 @@ public class userAction extends baseAction {
     private userService userService;
     private videoService videoService;
     private List<Video> videoBeanList;
+    private int userId;
     private User userBean;
     private String username;
     private String gender;
@@ -30,7 +31,8 @@ public class userAction extends baseAction {
     private Map<String, Object> dataMap = new HashMap<String, Object>();
 
     public String deleteUser() throws Exception {
-        userService.deleteUser();
+        userService.deleteUser(userId);
+        return SUCCESS;
     }
 
     public String listMyVideo() throws Exception {
@@ -151,5 +153,13 @@ public class userAction extends baseAction {
 
     public void setDataMap(Map<String, Object> dataMap) {
         this.dataMap = dataMap;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
