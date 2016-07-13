@@ -4,6 +4,7 @@ import com.dao.videoDAO;
 import com.pojo.Video;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +33,15 @@ public class videoDAOImpl extends HibernateDaoSupport implements videoDAO {
      */
     @Override
     public void deleteVideo(int videoId) {
-        getHibernateTemplate().delete(getHibernateTemplate().load(Video.class, videoId));
+        Video vdo = getHibernateTemplate().load(Video.class, videoId);
+        getHibernateTemplate().delete(vdo);
         getHibernateTemplate().flush();
+
+
+        File f = new File(vdo.getLink());
+        if(f.exists()) {
+            f.delete();
+        }
     }
 
     /**

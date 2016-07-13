@@ -10,18 +10,15 @@ import com.service.commentService;
 import com.service.replyService;
 import com.service.userService;
 import com.service.videoService;
+import com.util.ftsearchUtil;
 import com.util.mongoUtil;
 import com.util.timeUtil;
-import com.util.ftsearchUtil;
 
-
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 
 import static org.apache.struts2.ServletActionContext.getServletContext;
 
@@ -122,6 +119,36 @@ public class videoAction extends baseAction {
         }
     }
 
+    public String delete() throws Exception{
+        try{
+            videoService.deleteVideo(videoId);
+            return SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return ERROR;
+        }
+    }
+
+    public String update() throws Exception{
+        try{
+            Video video = videoService.findVideoById(videoId);
+
+            if(content != null &&content.length() !=0) {
+                video.setContent(content);
+            }
+
+            video.setLastUpdate(timeUtil.GetCurrentTime());
+
+            if(title != null &&title.length() !=0){
+                video.setTitle(title);
+            }
+
+            return SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return ERROR;
+        }
+    }
     public String thumbCount(){
         videoService.videoThumbCount(videoId);
         return SUCCESS;
