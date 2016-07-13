@@ -37,14 +37,14 @@ public class replyServiceImpl implements replyService {
         return replyDAO.findReplyById(replyId);
     }
 
-    @Override
-    public int findMaxReplyId() {
-        return replyDAO.findMaxReplyId();
-    }
+//    @Override
+//    public int findMaxReplyId() {
+//        return replyDAO.findMaxReplyId();
+//    }
 
     @Override
-    public void makeReplyOnComment(int commentId, String username, Reply reply) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public void makeReplyOnComment(int commentId, String email, Reply reply) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         createReply(reply);
         CommentReply commentReply = new CommentReply();
         commentReply.setCommentId(commentId);
@@ -58,8 +58,8 @@ public class replyServiceImpl implements replyService {
     }
 
     @Override
-    public void makeReplyOnPost(int postId, String username, Reply reply) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public void makeReplyOnPost(int postId, String email, Reply reply) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         createReply(reply);
         PostReply postReply = new PostReply();
         postReply.setPostId(postId);
@@ -83,8 +83,8 @@ public class replyServiceImpl implements replyService {
     }
 
     @Override
-    public void reportReply(int replyId, String username, String reason) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public void reportReply(int replyId, String email, String reason) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         ReplyReport replyReport = new ReplyReport();
         replyReport.setReplyId(replyId);
         replyReport.setUserId(userId);

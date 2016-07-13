@@ -16,7 +16,7 @@ public class userRoleDAOImpl extends HibernateDaoSupport implements userRoleDAO 
 
     @Override
     public void deleteUserRole(int userId, int roleId) {
-        getHibernateTemplate().delete(getHibernateTemplate().find("from UserRole as userrole where userrole.userId = ? and userrole.roleId = ?",userId,roleId).get(0));
+        getHibernateTemplate().delete(getHibernateTemplate().find("from UserRole as userrole where userrole.userId = ? and userrole.roleId = ?", userId, roleId).get(0));
         getHibernateTemplate().flush();
     }
 }

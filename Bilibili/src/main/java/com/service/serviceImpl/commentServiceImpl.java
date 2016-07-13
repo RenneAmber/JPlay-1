@@ -44,14 +44,14 @@ public class commentServiceImpl implements commentService {
         return commentDAO.getAllCommentCount();
     }
 
-    @Override
-    public int findMaxCommentId() {
-        return commentDAO.findMaxCommentId();
-    }
+//    @Override
+//    public int findMaxCommentId() {
+//        return commentDAO.findMaxCommentId();
+//    }
 
     @Override
-    public void makeCommentOnVideo(int videoId, String username, Comment comment) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public void makeCommentOnVideo(int videoId, String email, Comment comment) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         createComment(comment);
         UserComment userComment = new UserComment();
         userComment.setCommentId(comment.getCommentId());
@@ -65,8 +65,8 @@ public class commentServiceImpl implements commentService {
     }
 
     @Override
-    public void reportComment(int commentId, String username, String reason) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public void reportComment(int commentId, String email, String reason) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         CommentReport commentReport = new CommentReport();
         commentReport.setCommentId(commentId);
         commentReport.setUserId(userId);

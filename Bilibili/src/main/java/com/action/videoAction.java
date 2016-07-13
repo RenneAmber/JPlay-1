@@ -46,6 +46,18 @@ public class videoAction extends baseAction {
     private List<Video> videoBeanList;
     private String keyword;
 
+    /** For Administrator **/
+    public String deleteVideo() {
+        videoService.deleteVideo(videoId);
+        return SUCCESS;
+    }
+
+    public String listVideos() {
+        videoBeanList = videoService.findAllVideos();
+        return SUCCESS;
+    }
+
+    /** For User **/
     public String upload() throws Exception  {
         System.out.println("Start uploading...");
         try {
@@ -75,7 +87,7 @@ public class videoAction extends baseAction {
 
             //设置video初始属性
             Video video = new Video();
-            video.setVideoId(videoService.findMaxVideoId()+1);
+//            video.setVideoId(videoService.findMaxVideoId()+1);
             video.setTitle(title);
             video.setContent(content);
             video.setLink("videos/"+serialName + ".mp4");

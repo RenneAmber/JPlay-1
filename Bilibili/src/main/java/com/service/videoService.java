@@ -52,7 +52,7 @@ public interface videoService {
      */
     public int getAllVideoCount();
 
-    public int findMaxVideoId();
+//    public int findMaxVideoId();
 
     public Category findCategoryByName(String categoryName);
 
@@ -62,6 +62,8 @@ public interface videoService {
 
     public void addVideoUper(String email,int videoId);
 
-    public List<Video>showVideoByUper(String email);
+    public List<Video> showVideoByUper(String email);
+
+    public List<Video> findAllVideos();
 
 }

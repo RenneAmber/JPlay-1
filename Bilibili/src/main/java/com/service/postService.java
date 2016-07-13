@@ -33,7 +33,7 @@ public interface postService {
      */
     public Post findPostById(int postId);
 
-    public int findMaxPostId();
+//    public int findMaxPostId();
 
     public void postPublish(String username,int groupId, Post post);
 

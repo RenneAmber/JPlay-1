@@ -32,7 +32,7 @@ public class commentDAOImpl extends HibernateDaoSupport implements commentDAO {
      */
     @Override
     public void deleteComment(int commentId) {
-        getHibernateTemplate().delete(getHibernateTemplate().load(Comment.class,commentId));
+        getHibernateTemplate().delete(getHibernateTemplate().load(Comment.class, commentId));
         getHibernateTemplate().flush();
     }
 
@@ -63,28 +63,32 @@ public class commentDAOImpl extends HibernateDaoSupport implements commentDAO {
         return Integer.parseInt(String.valueOf(getHibernateTemplate().find(hql).get(0)));
     }
 
-    @Override
-    public int findMaxCommentId() {
-        String hql = "select max(comment.commentId) as maxinum from Comment as comment";
-        if(getHibernateTemplate().find(hql).get(0)==null)
-            return 0;
-        else
-            return Integer.parseInt(String.valueOf(getHibernateTemplate().find(hql).get(0)));
-    }
+//    @Override
+//    public int findMaxCommentId() {
+//        String hql = "select max(comment.commentId) as maxinum from Comment as comment";
+//        if(getHibernateTemplate().find(hql).get(0)==null)
+//            return 0;
+//        else
+//            return Integer.parseInt(String.valueOf(getHibernateTemplate().find(hql).get(0)));
+//    }
 
     @Override
     public List<Comment> findCommentsByVideoId(int videoId) {
-        String hql = "select commentId as cid from VideoComment where videoId=?";
-        if(getHibernateTemplate().find(hql,videoId).size()==0)
+        String hql = "select commentId as cid from VideoComment where videoId = ?";
+        List<Integer> commentIdList = (List<Integer>) getHibernateTemplate().find(hql, videoId);
+        if (commentIdList.size() == 0)
             return null;
-        else
-        {
+        else {
             List<Comment>result = new ArrayList<Comment>();
-            List<Integer>commentIdList= (List<Integer>) getHibernateTemplate().find(hql,videoId);
-            for(int i=0;i<commentIdList.size();i++){
+            for(int i = 0; i < commentIdList.size(); i++){
                 result.add((Comment)getHibernateTemplate().find("from Comment as comment where comment.commentId=?",commentIdList.get(i)).get(0));
             }
             return result;
         }
+    }
+
+    @Override
+    public List<Comment> findAllComments() {
+        return (List<Comment>) getHibernateTemplate().find("from Comment");
     }
 }

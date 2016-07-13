@@ -37,9 +37,11 @@ public interface replyDAO {
      */
     public Reply findReplyById(int replyId);
 
-    public int findMaxReplyId();
+//    public int findMaxReplyId();
 
     public List<Reply> findRepliesByCommentId(int commentId);
 
     public List<Reply> findRepliesByPostId(int postId);
+
+    public List<Reply> findAllReplies();
 }

@@ -49,8 +49,8 @@ public class userServiceImpl implements userService {
     }
 
     @Override
-    public User findUserByUsername(String username) {
-        return userDAO.findUserByUsername(username);
+    public User findUserByUsername(String email) {
+        return userDAO.findUserByEmail(email);
     }
 
     @Override
@@ -107,8 +107,8 @@ public class userServiceImpl implements userService {
 
 
     @Override
-    public void subscribeSeries(String username, String seriesName) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public void subscribeSeries(String email, String seriesName) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         Subscribe subscribe = new Subscribe();
         subscribe.setUserId(userId);
         subscribe.setSeriesName(seriesName);
@@ -116,8 +116,8 @@ public class userServiceImpl implements userService {
     }
 
     @Override
-    public void addFavouriteGroup(String username,String groupName) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public void addFavouriteGroup(String email,String groupName) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         FavoriteGroup favoriteGroup = new FavoriteGroup();
         favoriteGroup.setUserId(userId);
         favoriteGroup.setGroupName(groupName);
@@ -133,8 +133,8 @@ public class userServiceImpl implements userService {
     }
 
     @Override
-    public void giveUserRole(String username, int roleId) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public void giveUserRole(String email, int roleId) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         UserRole userRole = new UserRole();
         userRole.setUserId(userId);
         userRole.setRoleId(roleId);
@@ -181,13 +181,13 @@ public class userServiceImpl implements userService {
         this.userRoleDAO = userRoleDAO;
     }
 
-    public List<Letter> showLetterByUser(String username) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public List<Letter> showLetterByUser(String email) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         return letterDAO.listLetter(userId);
     }
 
-    public List<InterestGroup> showGroupsByUsername(String username) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public List<InterestGroup> showGroupsByUsername(String email) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         return interestGroupUserDAO.listMyGroups(userId);
     }
 

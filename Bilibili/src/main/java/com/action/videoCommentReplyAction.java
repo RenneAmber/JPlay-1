@@ -19,7 +19,7 @@ public class videoCommentReplyAction extends replyAction {
         Map Session = ActionContext.getContext().getSession();
         String username = (String)Session.get("username");
         Reply reply = new Reply();
-        reply.setReplyId(replyService.findMaxReplyId()+1);
+//        reply.setReplyId(replyService.findMaxReplyId() + 1);
         reply.setContent(replyContent);
         reply.setThumbCount(0);
         reply.setReplyPusher(username);

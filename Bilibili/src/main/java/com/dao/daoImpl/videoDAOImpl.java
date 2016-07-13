@@ -67,14 +67,14 @@ public class videoDAOImpl extends HibernateDaoSupport implements videoDAO {
         return Integer.parseInt(String.valueOf(getHibernateTemplate().find(hql).get(0)));
     }
 
-    @Override
-    public int findMaxVideoId() {
-        String hql = "select max(video.videoId) as maxinum from Video as video";
-        if(getHibernateTemplate().find(hql).get(0)==null)
-            return 0;
-        else
-        return Integer.parseInt(String.valueOf(getHibernateTemplate().find(hql).get(0)));
-    }
+//    @Override
+//    public int findMaxVideoId() {
+//        String hql = "select max(video.videoId) as maxinum from Video as video";
+//        if(getHibernateTemplate().find(hql).get(0)==null)
+//            return 0;
+//        else
+//        return Integer.parseInt(String.valueOf(getHibernateTemplate().find(hql).get(0)));
+//    }
 
     @Override
     public List<Video> findVideoListByUserId(int userId) {
@@ -90,6 +90,11 @@ public class videoDAOImpl extends HibernateDaoSupport implements videoDAO {
             }
             return result;
         }
+    }
+
+    @Override
+    public List<Video> findAllVideos() {
+        return (List<Video>) getHibernateTemplate().find("from Video ");
     }
 
 

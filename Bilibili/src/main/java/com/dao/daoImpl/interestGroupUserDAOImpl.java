@@ -20,8 +20,7 @@ public class interestGroupUserDAOImpl extends HibernateDaoSupport implements int
 
     @Override
     public void deleteInterestGroupUser(int userId, int interestGroupId) {
-        getHibernateTemplate().delete(getHibernateTemplate().
-                find("from InterestGroupUser where InterestGroupUser.userId = ? and InterestGroupUser.interestGroupId = ?", userId, interestGroupId));
+        getHibernateTemplate().delete(getHibernateTemplate().find("from InterestGroupUser where InterestGroupUser.userId = ? and InterestGroupUser.interestGroupId = ?", userId, interestGroupId));
         getHibernateTemplate().flush();
     }
 
@@ -32,20 +31,21 @@ public class interestGroupUserDAOImpl extends HibernateDaoSupport implements int
 
     @Override
     public InterestGroupUser findInterestGroupUserByKeys(int userId, int interestGroupId) {
-        if(getHibernateTemplate().find("from InterestGroupUser where InterestGroupUser.userId = ? and InterestGroupUser.interestGroupId = ?",userId,interestGroupId).size()==0)
-            return null;
-        else
-            return (InterestGroupUser)getHibernateTemplate().find("from InterestGroupUser where InterestGroupUser.userId = ? and InterestGroupUser.interestGroupId = ?",userId,interestGroupId).get(0);
+        return (InterestGroupUser) getHibernateTemplate().find("from InterestGroupUser where InterestGroupUser.userId = ? and InterestGroupUser.interestGroupId = ?", userId, interestGroupId);
+//        if(getHibernateTemplate().find("from InterestGroupUser where InterestGroupUser.userId = ? and InterestGroupUser.interestGroupId = ?", userId, interestGroupId).size() == 0)
+//            return null;
+//        else
+//            return (InterestGroupUser)getHibernateTemplate().find("from InterestGroupUser where InterestGroupUser.userId = ? and InterestGroupUser.interestGroupId = ?",userId,interestGroupId).get(0);
     }
 
     public List<InterestGroup> listMyGroups(int userId) {
-        String hql = "select interestGroupId from InterestGroupUser where userId=?";
-        List<InterestGroup>result = new ArrayList<InterestGroup>();
-        List<Integer> groupIdList= (List<Integer>) getHibernateTemplate().find(hql,userId);
+        String hql = "select interestGroupId from InterestGroupUser where userId = ?";
+        List<InterestGroup> result = new ArrayList<InterestGroup>();
+        List<Integer> groupIdList= (List<Integer>) getHibernateTemplate().find(hql, userId);
 
-        if(groupIdList.size()!=0) {
-            for(int i=0;i<groupIdList.size();i++){
-                result.add((InterestGroup) getHibernateTemplate().find("from InterestGroup as group where group.interestGroupId=?",groupIdList.get(i)).get(0));
+        if(groupIdList.size() != 0) {
+            for (int i = 0;i < groupIdList.size(); i++){
+                result.add((InterestGroup) getHibernateTemplate().find("from InterestGroup as group where group.interestGroupId = ?",groupIdList.get(i)).get(0));
             }
             System.out.println(result.size()+ " " + result.get(0).getInterestGroupName());
         }

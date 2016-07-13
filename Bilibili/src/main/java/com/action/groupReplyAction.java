@@ -20,9 +20,9 @@ public class groupReplyAction extends replyAction {
         Reply reply = new Reply();
         reply.setContent(replyContent);
         reply.setThumbCount(0);
-        reply.setReplyId(replyService.findMaxReplyId()+1);
+//        reply.setReplyId(replyService.findMaxReplyId() + 1);
         reply.setReplyPusher(username);
-        replyService.makeReplyOnPost(postId,username,reply);
+        replyService.makeReplyOnPost(postId, username, reply);
         return SUCCESS;
     }
 

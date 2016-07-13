@@ -52,28 +52,30 @@ public class userDAOImpl extends HibernateDaoSupport implements userDAO {
      */
     @Override
     public User findUserById(int userId) {
-        return  getHibernateTemplate().load(User.class, userId);
+        return getHibernateTemplate().load(User.class, userId);
     }
 
     /**
      * findUserByUsername方法实现了根据username找到一个user信息的功能
      * @param username 传入username作为查找因子
-     * @return 返回需要查找的User类的对象
+     * @return 返回需要查找的User类的对象列表
      */
     @Override
-    public User findUserByUsername(String username) {
-        if(getHibernateTemplate().find("from User as user where user.username = ?",username).size()==0)
-            return null;
-        else
-            return (User)getHibernateTemplate().find("from User as user where user.username = ?",username).get(0);
+    public List<User> findUserByUsername(String username) {
+        return (List<User>) getHibernateTemplate().find("from User as user where user.username = ?",username);
+//        if(getHibernateTemplate().find("from User as user where user.username = ?",username).size()==0)
+//            return null;
+//        else
+//            return .get(0);
     }
 
     @Override
     public User findUserByEmail(String email) {
-        if(getHibernateTemplate().find("from User as user where user.email = ?", email).size() == 0)
-            return null;
-        else
-            return (User)getHibernateTemplate().find("from User as user where user.email = ?",email).get(0);
+        return (User) getHibernateTemplate().find("from User as user where user.email = ?", email.getBytes());
+//        if(getHibernateTemplate().find("from User as user where user.email = ?", email.getBytes()).size() == 0)
+//            return null;
+//        else
+//            return (User)getHibernateTemplate().find("from User as user where user.email = ?", email.getBytes()).get(0);
     }
 
     @Override

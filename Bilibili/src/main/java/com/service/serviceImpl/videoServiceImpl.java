@@ -7,6 +7,8 @@ import com.pojo.Video;
 import com.pojo.VideoReport;
 import com.pojo.VideoUper;
 import com.service.videoService;
+import com.sun.net.httpserver.Authenticator;
+import org.omg.PortableInterceptor.SUCCESSFUL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ public class videoServiceImpl implements videoService {
     private categoryDAO categoryDAO;
     private videoReportDAO videoReportDAO;
     private videoUperDAO videoUperDAO;
+    private List<Video> videoList;
 
     @Override
     public void createVideo(Video video) {
@@ -111,10 +114,10 @@ public class videoServiceImpl implements videoService {
         return videoDAO.getAllVideoCount();
     }
 
-    @Override
-    public int findMaxVideoId() {
-        return videoDAO.findMaxVideoId();
-    }
+//    @Override
+//    public int findMaxVideoId() {
+//        return videoDAO.findMaxVideoId();
+//    }
 
     @Override
     public Category findCategoryByName(String categoryName) {
@@ -152,6 +155,11 @@ public class videoServiceImpl implements videoService {
         return videoDAO.findVideoListByUserId(userId);
     }
 
+    @Override
+    public List<Video> findAllVideos() {
+        return videoDAO.findAllVideos();
+    }
+
     public void setVideoDAO(videoDAO videoDAO) {
         this.videoDAO = videoDAO;
     }
@@ -172,19 +180,27 @@ public class videoServiceImpl implements videoService {
         this.videoReportDAO = videoReportDAO;
     }
 
-    public com.dao.userDAO getUserDAO() {
+    public userDAO getUserDAO() {
         return userDAO;
     }
 
-    public void setUserDAO(com.dao.userDAO userDAO) {
+    public void setUserDAO(userDAO userDAO) {
         this.userDAO = userDAO;
     }
 
-    public com.dao.videoUperDAO getVideoUperDAO() {
+    public videoUperDAO getVideoUperDAO() {
         return videoUperDAO;
     }
 
-    public void setVideoUperDAO(com.dao.videoUperDAO videoUperDAO) {
+    public void setVideoUperDAO(videoUperDAO videoUperDAO) {
         this.videoUperDAO = videoUperDAO;
+    }
+
+    public List<Video> getVideoList() {
+        return videoList;
+    }
+
+    public void setVideoList(List<Video> videoList) {
+        this.videoList = videoList;
     }
 }

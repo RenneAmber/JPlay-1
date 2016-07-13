@@ -5,6 +5,7 @@ package com.dao;
  */
 
 import com.pojo.Post;
+import javafx.util.Pair;
 
 import java.util.List;
 
@@ -40,4 +41,6 @@ public interface postDAO {
     public int findMaxPostId();
 
     public List<Post> findPostsByGroupId(int groupId);
+
+    public List<Post> findAllPosts();
 }

@@ -30,7 +30,7 @@ public class groupPostAction extends baseAction {
         Map Session = ActionContext.getContext().getSession();
         String username = (String)Session.get("username");
         Post post = new Post();
-        post.setPostId(postService.findMaxPostId()+1);
+//        post.setPostId(postService.findMaxPostId() + 1);
         post.setThumbCount(0);
         post.setContent(postContent);
         post.setCreateTime(timeUtil.GetCurrentDatetime());

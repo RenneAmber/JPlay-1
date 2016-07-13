@@ -29,7 +29,7 @@ public class categoryDAOImpl extends HibernateDaoSupport implements categoryDAO 
      */
     @Override
     public void deleteCategory(String categoryName) {
-        getHibernateTemplate().delete((Category)getHibernateTemplate().find("from Category as category where category.categoryName=?",categoryName).get(0));
+        getHibernateTemplate().delete(getHibernateTemplate().find("from Category as category where category.categoryName=?",categoryName).get(0));
         getHibernateTemplate().flush();
     }
 
@@ -50,9 +50,10 @@ public class categoryDAOImpl extends HibernateDaoSupport implements categoryDAO 
      */
     @Override
     public Category findCategoryByName(String categoryName) {
-        if(getHibernateTemplate().find("from Category where Category .categoryName=?",categoryName).size()==0)
-            return null;
-        else
-            return (Category)getHibernateTemplate().find("from Category as category where category.categoryName=?",categoryName).get(0);
+        return (Category) getHibernateTemplate().find("from Category where Category.categoryName = ?", categoryName);
+//        if(getHibernateTemplate().find("from Category where Category .categoryName=?",categoryName).size()==0)
+//            return null;
+//        else
+//            return (Category)getHibernateTemplate().find("from Category as category where category.categoryName=?",categoryName).get(0);
     }
 }

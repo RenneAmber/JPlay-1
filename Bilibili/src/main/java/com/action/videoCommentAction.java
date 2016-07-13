@@ -22,7 +22,7 @@ public class videoCommentAction extends commentAction {
         Map Session = ActionContext.getContext().getSession();
         String username = (String)Session.get("username");
         Comment comment = new Comment();
-        comment.setCommentId(commentService.findMaxCommentId()+1);
+//        comment.setCommentId(commentService.findMaxCommentId()+1);
         comment.setContent(commentContent);
         comment.setThumbCount(0);
         comment.setCreateTime(timeUtil.GetCurrentDatetime());

@@ -35,7 +35,7 @@ public interface commentService {
 
     public int getAllCommentCount();
 
-    public int findMaxCommentId();
+//    public int findMaxCommentId();
 
     public void makeCommentOnVideo(int videoId,String username,Comment comment);
 

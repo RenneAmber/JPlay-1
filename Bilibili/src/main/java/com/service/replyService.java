@@ -33,7 +33,7 @@ public interface replyService {
      */
     public Reply findReplyById(int replyId);
 
-    public int findMaxReplyId();
+//    public int findMaxReplyId();
 
     public void makeReplyOnComment(int commentId,String username,Reply reply);
 
