@@ -17,11 +17,11 @@
         <property name="letterContent">
             <column name="letter_content" sql-type="varchar(500)" length="500"/>
         </property>
-        <!--<many-to-one name="userByReveiverId" class="com.pojo.User">-->
-            <!--<column name="receiver_id"/>-->
-        <!--</many-to-one>-->
-        <!--<many-to-one name="userBySenderId" class="com.pojo.User">-->
-            <!--<column name="sender_id"/>-->
-        <!--</many-to-one>-->
+        <many-to-one name="userByReceiverId" class="com.pojo.User">
+            <column name="receiver_id"/>
+        </many-to-one>
+        <many-to-one name="userBySenderId" class="com.pojo.User">
+            <column name="sender_id"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

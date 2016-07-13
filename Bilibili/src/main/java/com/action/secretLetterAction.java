@@ -5,7 +5,6 @@ import com.pojo.Letter;
 import com.service.userService;
 import net.sf.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +14,8 @@ import java.util.Map;
  */
 public class secretLetterAction extends baseAction {
     private userService userService;
-    private String slettercontent;
-    private String sendee;
+    private String letterContent;
+    private String sender;
     private List<Letter>letterList;
     private JSONObject result;
     private Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -26,7 +25,7 @@ public class secretLetterAction extends baseAction {
     public String sendLetter(){
         Map Session = ActionContext.getContext().getSession();
         String sender = (String)Session.get("username");
-        userService.sendLetter(sender,sendee,slettercontent);
+        userService.sendLetter(sender, this.sender, letterContent);
         return SUCCESS;
     }
 
@@ -51,19 +50,20 @@ public class secretLetterAction extends baseAction {
         return "json";
     }
 
-    public String getSlettercontent() {
-        return slettercontent;
+    public String getLetterContent() {
+        return letterContent;
     }
 
-    public void setSlettercontent(String slettercontent) {
-        this.slettercontent = slettercontent;
+    public void setLetterContent(String letterContent) {
+        this.letterContent = letterContent;
     }
 
-    public String getSendee(){
-        return sendee;
+    public String getSender(){
+        return sender;
     }
-    public void setSendee(String sendee) {
-        this.sendee = sendee;
+
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     public void setUserService(userService userService) {

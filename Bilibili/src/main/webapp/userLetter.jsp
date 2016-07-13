@@ -146,8 +146,8 @@
         <div class="profile-content" >
             <form class="content" action="secretLetter">
                 <i class="icon-bar"></i>
-                <p>发送给：<input type="text" value="qwe" name="sendee" readonly></p>
-                <p>内容：<textarea value="" name="slettercontent"></textarea></p>
+                <p>发送给：<input type="text" value="qwe" name="sender" readonly></p>
+                <p>内容：<textarea value="" name="letterContent"></textarea></p>
                 <button type="reset" id="reset_button">清 除</button>
                 <button type="submit" id="submit_button" >提 交</button>
                 <p>&nbsp;</p>
