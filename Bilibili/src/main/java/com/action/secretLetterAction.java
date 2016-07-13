@@ -26,7 +26,9 @@ public class secretLetterAction extends baseAction {
     public String sendLetter(){
         Map Session = ActionContext.getContext().getSession();
         String sender = (String)Session.get("username");
+        System.out.println("SE"+sendee);
         userService.sendLetter(sender,sendee,slettercontent);
+
         return SUCCESS;
     }
 
@@ -38,16 +40,12 @@ public class secretLetterAction extends baseAction {
     public String listLetter()
     {
         dataMap.clear();
-        //System.out.println("in list letter");
         Map Session = ActionContext.getContext().getSession();
         String user=(String)Session.get("username");
-        //System.out.println(user);
         letterList=userService.showLetterByUser(user);
         System.out.println(letterList.size());
-//        Session.put("letterList",letterList);
         dataMap.put("letterList", letterList);
         System.out.println("success");
-        //result = JSONObject.fromObject(letterList);
         return "json";
     }
 

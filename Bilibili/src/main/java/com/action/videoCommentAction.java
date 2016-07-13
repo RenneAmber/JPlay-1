@@ -39,7 +39,9 @@ public class videoCommentAction extends commentAction {
     public String report(){
         Map Session = ActionContext.getContext().getSession();
         String username = (String)Session.get("username");
+        System.out.println(commentId+":"+username+":"+reason);
         commentService.reportComment(commentId,username,reason);
+        System.out.println("suc");
         return SUCCESS;
     }
 

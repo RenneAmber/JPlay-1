@@ -4,6 +4,8 @@ import com.dao.userDAO;
 import com.pojo.User;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import java.util.List;
+
 /**
  * Created by Admin on 2016/6/27.
  */
@@ -72,5 +74,11 @@ public class userDAOImpl extends HibernateDaoSupport implements userDAO {
             return null;
         else
             return (User)getHibernateTemplate().find("from User as user where user.email = ?",email).get(0);
+    }
+
+    @Override
+    public List<User> findUpersByVideoId(int videoId) {
+        List<User>result = null;
+        return result;
     }
 }

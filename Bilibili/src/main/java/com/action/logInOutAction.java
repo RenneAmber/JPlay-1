@@ -24,9 +24,6 @@ public class logInOutAction extends baseAction {
             return ERROR;
         }
         Map Session = ActionContext.getContext().getSession();
-//        String md5 = (String)Session.get("md5RandomKey");
-//        System.out.println(password);
-//        System.out.println(md5);
         Session.put("username", username);
         if (ret.equals("N")){
             return "user";
@@ -37,7 +34,6 @@ public class logInOutAction extends baseAction {
 
     public String logOut(){
         Map Session = ActionContext.getContext().getSession();
-//        Session.remove("username");
         Session.clear();
         return SUCCESS;
     }

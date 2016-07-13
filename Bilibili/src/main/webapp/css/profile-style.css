@@ -540,3 +540,36 @@ a.search-submit-button {
 .add_group{
     border: none;background-color: #0abe8c;color:white;border-radius: 10px;font-size: 110%;
 }
+/* ---------------------------------------------------------------------------- */
+/* ------------------------------ reply letter  ------------------------------- */
+/* ---------------------------------------------------------------------------- */
+.reply_letter{
+    background-color: #0abe8c;color:white;border-radius: 10px;font-size: 110%;
+    border: none;
+    width: auto;
+}
+
+.reply_letter:hover{
+    background-color: #75dda1;color:black;border-radius: 10px;font-size: 110%;
+    width: auto;
+}
+.delete_letter{
+    display: none;
+}
+.tr:hover .delete_letter{
+    background-color: lightgrey;
+    color: gray;
+    border: none;
+    border-radius: 10px;
+    font-size: 110%;
+    display: inline;
+}
+ .tr:hover .delete_letter:hover
+{
+    background-color: grey;
+    color: whitesmoke;
+     border: none;
+    border-radius: 10px;
+    font-size: 110%;
+     display: inline;
+}

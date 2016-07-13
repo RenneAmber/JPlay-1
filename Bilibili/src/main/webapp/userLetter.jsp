@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: slt
@@ -139,14 +140,13 @@
                 <li><a href="#"><i class="fa fa-tags" style="color:red;"></i>&nbsp;我的订阅</a></li>
                 <li><a href="#"><i class="fa fa-comment" style="color:dodgerblue"></i>&nbsp;我的私信</a></li>
                 <li><a href="#"><i class="fa fa-home" style="color:skyblue"></i>&nbsp;兴趣部落</a></li>
-                <li><a href="myupload.action"><i class="fa fa-apple" style="color: #ff72c4"></i>&nbsp;我的上传</a></li>
             </ul>
         </div>
 
         <div class="profile-content" >
             <form class="content" action="secretLetter">
                 <i class="icon-bar"></i>
-                <p>发送给：<input type="text" value="qwe" name="sendee" readonly></p>
+                <p>发送给：<input type="text" value="<s:property value="sendee"/>" name="sendee" readonly></p>
                 <p>内容：<textarea value="" name="slettercontent"></textarea></p>
                 <button type="reset" id="reset_button">清 除</button>
                 <button type="submit" id="submit_button" >提 交</button>

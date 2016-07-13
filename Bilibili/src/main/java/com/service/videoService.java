@@ -1,6 +1,7 @@
 package com.service;
 
 import com.pojo.Category;
+import com.pojo.User;
 import com.pojo.Video;
 
 import java.util.List;
@@ -63,5 +64,6 @@ public interface videoService {
     public void addVideoUper(String username,int videoId);
 
     public List<Video>showVideoByUper(String username);
+
 
 }

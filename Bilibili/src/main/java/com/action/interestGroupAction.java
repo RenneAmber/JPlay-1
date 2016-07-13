@@ -33,23 +33,19 @@ public class interestGroupAction extends baseAction {
 
     public String listInterestGroup()
     {
-         //Map Session = ActionContext.getContext().getSession();
         groupList=userService.showGroupsAll();
         dataMap.put("groupList",groupList);
-        //Session.put("groupList",groupList);
-        System.out.println(groupList.size());
         return SUCCESS;
     }
 
     public String listInterestGroupByUser()
     {
-        //dataMap.clear();
+        dataMap.clear();
         Map Session = ActionContext.getContext().getSession();
         String user=(String)Session.get("username");
         myGroupList=userService.showGroupsByUsername(user);
         dataMap.put("myGroupList",myGroupList);
         listInterestGroup();
-        System.out.println(myGroupList.size());
         return SUCCESS;
     }
 

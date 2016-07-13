@@ -12,7 +12,7 @@ public class commentReportDAOImpl extends HibernateDaoSupport implements comment
     @Override
     public void createCommentReport(CommentReport commentReport) {
         getHibernateTemplate().save(commentReport);
-        getHibernateTemplate().flush();
+       // getHibernateTemplate().flush();
     }
 
     @Override

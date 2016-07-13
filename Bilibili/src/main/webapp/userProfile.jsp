@@ -102,6 +102,10 @@
   --%>
     <!-- 页面ajax -->
     <script language="javascript">
+
+
+
+
         function show_UI(message)
         {
             var content=document.getElementById("profile-content");
@@ -216,8 +220,9 @@
                         content.innerHTML='<h2><i class="fa fa-comment" style="color: palevioletred"></i>&nbsp;我的私信</h2><div class="content"> <table id="cmt-tb"class="table table-responsive">';
                         for(var i in dataMap["letterList"])
                         {
-                            document.getElementById("cmt-tb").innerHTML+='<tr><td width="10%" class="td_white">'+dataMap["letterList"][i].senderId+'</td><td width="70%" class="td_white_blue">'+ dataMap["letterList"][i].letterContent+
-                                    '</td><td width="20%" class="td_blue"><button class="add_group">回复</button></td></tr>';
+                            document.getElementById("cmt-tb").innerHTML+='<tr class="tr"><td width="10%" class="td_white">'+dataMap["letterList"][i].senderId+'</td><td width="70%" class="td_white_blue">'+ dataMap["letterList"][i].letterContent+
+                                    '</td><td width="20%" class="td_blue"><button  onclick="reply_letter('+dataMap["letterList"][i].senderId +')" class="reply_letter">回复</button>'+
+                                    '<button class="delete_letter">删除</button></td></tr>';
                         }
                         content.innerHTML+='</table></div><h2><i class="fa fa-user-md" style="color: palevioletred"></i>&nbsp;好友列表</h2><div class="content">'+
                                         document.getElementById("friend-list").innerHTML+"</div>"
@@ -368,6 +373,22 @@
                 }
             });
 
+        }
+    </script>
+    <!-- 发送私信 -->
+    <script>
+        function reply_letter(sendee)
+        {
+        var content=document.getElementById("profile-content");
+            content.innerHTML='<h2><i class="fa fa-leaf" style="color: palevioletred"></i>&nbsp;发送私信</h2><div class="content">'+
+                '<form class="content" action="sendSecretLetter.action">'+
+                '<i class="icon-bar"></i>'+
+                '<p>发送给：<input type="text" style="border: none" value="'+sendee+'" name="sendee" readonly></p>'+
+                '<p>内容：<textarea value="" name="slettercontent"></textarea></p>'+
+                '<button type="reset" id="reset_button">清 除</button>'+
+                '<button type="submit" id="submit_button" >提 交</button>'+
+                '<p>&nbsp;</p>'+
+                '</form></div>';
         }
     </script>
     <!-- Opacity -->

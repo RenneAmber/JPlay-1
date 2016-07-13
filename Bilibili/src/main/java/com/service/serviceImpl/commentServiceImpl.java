@@ -71,6 +71,7 @@ public class commentServiceImpl implements commentService {
         commentReport.setCommentId(commentId);
         commentReport.setUserId(userId);
         commentReport.setReason(reason);
+        System.out.println(commentReport.getCommentId()+":"+commentReport.getUserId()+":"+commentReport.getReason());
         commentReportDAO.createCommentReport(commentReport);
     }
 

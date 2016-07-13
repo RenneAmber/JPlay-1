@@ -51,7 +51,7 @@ public class groupPostAction extends baseAction {
         return SUCCESS;
     }
 
-    public String enterPost(){
+    public String viewPost(){
         postBean = postService.findPostById(postId);
         replyListBean = replyService.showRepliesByPostId(postId);
         return SUCCESS;

@@ -81,6 +81,7 @@ public class userServiceImpl implements userService {
         letter.setLetterContent(lettercontent);
         letter.setSenderId(findUserByUsername(sender).getUserId());
         letter.setReceiverId(findUserByUsername(sendee).getUserId());
+        System.out.println(letter.getLetterContent());
         letterDAO.createLetter(letter);
     }
 

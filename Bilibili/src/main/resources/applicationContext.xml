@@ -186,7 +186,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
         <property name="url" value="jdbc:mysql://localhost:3306/bilibili"></property>
         <property name="username" value="root"></property>
-        <property name="password" value="xuqiufang123xsb"></property>
+        <property name="password" value="slt0.142857"></property>
         <property name="maxActive" value="100"></property>
         <property name="defaultAutoCommit" value="true"></property>
     </bean>
