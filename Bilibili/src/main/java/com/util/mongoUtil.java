@@ -23,7 +23,7 @@ import java.util.List;
 public class mongoUtil {
     private static GridFS gridFS = null;
     public static void StoreImage(String mediaPicPath, int videoId) throws IOException {
-        ApplicationContext ctx = new GenericXmlApplicationContext("mongoConfig.xml");
+        ApplicationContext ctx = new GenericXmlApplicationContext("applicationContext-mongodb.xml");
         GridFsOperations gridFsOperations = (GridFsOperations) ctx.getBean("gridFsTemplate");
 
         DBObject metaData = new BasicDBObject();
@@ -49,7 +49,7 @@ public class mongoUtil {
     }
 
     public static String GetVideoImage(int videoId) throws IOException {
-        ApplicationContext ctx = new GenericXmlApplicationContext("mongoConfig.xml");
+        ApplicationContext ctx = new GenericXmlApplicationContext("applicationContext-mongodb.xml");
         GridFsOperations gridFsOperations = (GridFsOperations) ctx.getBean("gridFsTemplate");
 
         List<GridFSDBFile> gridFsdbFiles = gridFsOperations.find(

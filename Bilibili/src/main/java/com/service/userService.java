@@ -22,7 +22,7 @@ public interface userService {
     public boolean validateRegister(String username, String password, String email);
     public void sendLetter(String senderEmail,String receiverEmail, String letterContent);
     public void viewLetter(int letterId);
-    public void addInterestGroup(String email,int interestgroupId);
+    public void addInterestGroup(String email,int interestGroupId);
     public void subscribeSeries(String email, String seriesName);
     public void addFavouriteGroup(String email,String groupName);
     public void addVideoToFavouriteGroup(int videoId,int groupId);
