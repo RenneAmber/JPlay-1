@@ -20,7 +20,6 @@ public class userAction extends baseAction {
     private userService userService;
     private videoService videoService;
     private List<Video> videoBeanList;
-    private int userId;
     private User userBean;
     private List<User> userList;
     private int userId;
@@ -35,10 +34,10 @@ public class userAction extends baseAction {
     private Map<String, Object> dataMap = new HashMap<String, Object>();
 
     /** For Administrator **/
-//    public String deleteUser() throws Exception {
-//        userService.deleteUser(userId);
-//        return SUCCESS;
-//    }
+    public String deleteUser() throws Exception {
+        userService.deleteUser(userId);
+        return SUCCESS;
+    }
 
     public String listUsers() throws Exception {
         userList = userService.findAllUser();
