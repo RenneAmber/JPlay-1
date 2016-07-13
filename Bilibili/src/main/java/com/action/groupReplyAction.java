@@ -16,21 +16,21 @@ public class groupReplyAction extends replyAction {
 
     public String reply(){
         Map Session = ActionContext.getContext().getSession();
-        String username = (String)Session.get("username");
+        String email = (String)Session.get("email");
         Reply reply = new Reply();
         reply.setContent(replyContent);
         reply.setThumbCount(0);
 //        reply.setReplyId(replyService.findMaxReplyId() + 1);
-        reply.setReplyPusher(username);
-        replyService.makeReplyOnPost(postId, username, reply);
+        reply.setReplyPusher(email);
+        replyService.makeReplyOnPost(postId, email, reply);
         return SUCCESS;
     }
 
-    public com.service.replyService getReplyService() {
+    public replyService getReplyService() {
         return replyService;
     }
 
-    public void setReplyService(com.service.replyService replyService) {
+    public void setReplyService(replyService replyService) {
         this.replyService = replyService;
     }
 

@@ -15,8 +15,8 @@ public class seriesSubscribeAction extends baseAction{
     @Override
     public String execute() throws Exception{
         Map Session = ActionContext.getContext().getSession();
-        String username = (String)Session.get("username");
-        userService.subscribeSeries(username,seriesName);
+        String email = (String)Session.get("email");
+        userService.subscribeSeries(email, seriesName);
         return SUCCESS;
     }
 

@@ -83,6 +83,11 @@ public class replyServiceImpl implements replyService {
     }
 
     @Override
+    public List<Reply> findAllReplies() {
+        return replyDAO.findAllReplies();
+    }
+
+    @Override
     public void reportReply(int replyId, String email, String reason) {
         int userId = userDAO.findUserByEmail(email).getUserId();
         ReplyReport replyReport = new ReplyReport();

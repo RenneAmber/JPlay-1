@@ -9,7 +9,7 @@ public class Reply {
     private int replyId;
     private String content;
     private int thumbCount;
-    private String replyPusher;
+    private String replyPusher; /** Reply pusher's email **/
     private Collection<CommentReply> commentRepliesByReplyId;
     private Collection<PostReply> postRepliesByReplyId;
     private Collection<ReplyReport> replyReportsByReplyId;

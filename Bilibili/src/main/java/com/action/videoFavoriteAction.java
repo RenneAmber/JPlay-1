@@ -18,13 +18,13 @@ public class videoFavoriteAction extends baseAction {
 
     public String createFile()throws Exception{
         Map Session = ActionContext.getContext().getSession();
-        String username = (String)Session.get("username");
-        userService.addFavouriteGroup(username,groupName);
+        String email = (String) Session.get("email");
+        userService.addFavouriteGroup(email, groupName);
         return SUCCESS;
     }
 
     public String addVideo()throws Exception{
-        userService.addVideoToFavouriteGroup(videoId,groupId);
+        userService.addVideoToFavouriteGroup(videoId, groupId);
         return SUCCESS;
     }
 

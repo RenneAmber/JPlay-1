@@ -4,8 +4,8 @@
     <data-source name="MySQL - bilibili@localhost" uuid="fff3ac8a-3d0d-4de3-94bf-51471130b1c3">
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <schema-pattern>bilibili.*</schema-pattern>
-      <default-schemas>bilibili.*</default-schemas>
+      <introspection-scope>bilibili:*</introspection-scope>
+      <resolve-scope>bilibili:*</resolve-scope>
     </data-source>
   </component>
 </project>

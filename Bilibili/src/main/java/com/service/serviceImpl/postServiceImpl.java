@@ -71,13 +71,18 @@ public class postServiceImpl implements postService {
     @Override
     public void postThumbCount(int postId) {
         Post post = postDAO.findPostById(postId);
-        post.setThumbCount(post.getThumbCount()+1);
+        post.setThumbCount(post.getThumbCount() + 1);
         postDAO.updatePost(post);
     }
 
     @Override
     public List<Post> showPostsByGroupId(int groupId) {
         return postDAO.findPostsByGroupId(groupId);
+    }
+
+    @Override
+    public List<Post> findAllPosts() {
+        return postDAO.findAllPosts();
     }
 
 

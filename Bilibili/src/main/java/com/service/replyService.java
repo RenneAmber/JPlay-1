@@ -35,15 +35,17 @@ public interface replyService {
 
 //    public int findMaxReplyId();
 
-    public void makeReplyOnComment(int commentId,String username,Reply reply);
+    public void makeReplyOnComment(int commentId,String email, Reply reply);
 
-    public void makeReplyOnPost(int postId,String username,Reply reply);
+    public void makeReplyOnPost(int postId,String email, Reply reply);
 
-    public void reportReply(int replyId,String username,String reason);
+    public void reportReply(int replyId, String email, String reason);
 
     public void replyThumbCount(int replyId);
 
     public List<Reply> showRepliesByCommentId(int commentId);
 
     public List<Reply> showRepliesByPostId(int postId);
+
+    public List<Reply> findAllReplies();
 }

@@ -22,17 +22,16 @@ public class interestGroupAction extends baseAction {
     private Map<String, Object> dataMap = new HashMap<String, Object>();
 
     private int groupId;
-    private List<Post>postListBean;
+    private List<Post> postListBean;
 
-    public String addInterestGroup(){
+    public String addInterestGroup() {
         Map Session = ActionContext.getContext().getSession();
-        String username = (String)Session.get("username");
-        userService.addInterestGroup(username,interestGroupId);
+        String email = (String)Session.get("email");
+        userService.addInterestGroup(email, interestGroupId);
         return SUCCESS;
     }
 
-    public String listInterestGroup()
-    {
+    public String listInterestGroup() {
          //Map Session = ActionContext.getContext().getSession();
         groupList=userService.showGroupsAll();
         dataMap.put("groupList",groupList);
@@ -41,19 +40,18 @@ public class interestGroupAction extends baseAction {
         return SUCCESS;
     }
 
-    public String listInterestGroupByUser()
-    {
+    public String listInterestGroupByUser() {
         //dataMap.clear();
         Map Session = ActionContext.getContext().getSession();
-        String user=(String)Session.get("username");
-        myGroupList=userService.showGroupsByUsername(user);
-        dataMap.put("myGroupList",myGroupList);
+        String email = (String) Session.get("email");
+        myGroupList = userService.showGroupsByEmail(email);
+        dataMap.put("myGroupList", myGroupList);
         listInterestGroup();
         System.out.println(myGroupList.size());
         return SUCCESS;
     }
 
-    public String enterGroup(){
+    public String enterGroup() {
         postListBean = postService.showPostsByGroupId(groupId);
         return SUCCESS;
     }

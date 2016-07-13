@@ -17,7 +17,7 @@ public class Jdbc_Util {
     private static final String URL = "jdbc:mysql://127.0.0.1/bilibili?autoReconnect=true&characterEncoding=utf8";
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final String USER_NAME = "root";
-    private static final String PASSWORD = "xuqiufang123xsb";
+    private static final String PASSWORD = "";
 
     public static Connection getConnection() {
         try {

@@ -86,6 +86,11 @@ public class commentServiceImpl implements commentService {
         return commentDAO.findCommentsByVideoId(videoId);
     }
 
+    @Override
+    public List<Comment> findAllComments() {
+        return commentDAO.findAllComments();
+    }
+
     public com.dao.commentDAO getCommentDAO() {
         return commentDAO;
     }

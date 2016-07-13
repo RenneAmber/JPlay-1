@@ -37,11 +37,13 @@ public interface commentService {
 
 //    public int findMaxCommentId();
 
-    public void makeCommentOnVideo(int videoId,String username,Comment comment);
+    public void makeCommentOnVideo(int videoId, String email, Comment comment);
 
-    public void reportComment(int commentId,String username,String reason);
+    public void reportComment(int commentId, String email, String reason);
 
     public void commentThumbCount(int commentId);
 
-    public List<Comment>showCommentsByVideoId(int videoId);
+    public List<Comment> showCommentsByVideoId(int videoId);
+
+    public List<Comment> findAllComments();
 }

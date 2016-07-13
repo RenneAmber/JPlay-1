@@ -89,8 +89,7 @@ public class videoDAOImpl extends HibernateDaoSupport implements videoDAO {
         String hql = "select videoId as vid from VideoUper where userId=?";
         if(getHibernateTemplate().find(hql,userId).size()==0)
         return null;
-        else
-        {
+        else {
             List<Video>result = new ArrayList<Video>();
             List<Integer>videoIdList= (List<Integer>) getHibernateTemplate().find(hql,userId);
             for(int i=0;i<videoIdList.size();i++){

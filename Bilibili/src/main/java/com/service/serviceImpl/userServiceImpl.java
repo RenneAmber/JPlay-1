@@ -81,11 +81,11 @@ public class userServiceImpl implements userService {
     }
 
     @Override
-    public void sendLetter(String sender, String sendee, String letterContent) {
+    public void sendLetter(String senderEmail, String receiverEmail, String letterContent) {
         Letter letter = new Letter();
         letter.setLetterContent(letterContent);
-        letter.setSenderId(findUserByUsername(sender).getUserId());
-        letter.setReceiverId(findUserByUsername(sendee).getUserId());
+        letter.setSenderId(findUserByEmail(senderEmail).getUserId());
+        letter.setReceiverId(findUserByEmail(receiverEmail).getUserId());
         letterDAO.createLetter(letter);
     }
 
@@ -97,8 +97,8 @@ public class userServiceImpl implements userService {
     }
 
     @Override
-    public void addInterestGroup(String username, int interestGroupId) {
-        int userId = findUserByUsername(username).getUserId();
+    public void addInterestGroup(String email, int interestGroupId) {
+        int userId = findUserByEmail(email).getUserId();
         InterestGroupUser interestGroupUser = new InterestGroupUser();
         interestGroupUser.setInterestGroupId(interestGroupId);
         interestGroupUser.setUserId(userId);
@@ -186,7 +186,7 @@ public class userServiceImpl implements userService {
         return letterDAO.listLetter(userId);
     }
 
-    public List<InterestGroup> showGroupsByUsername(String email) {
+    public List<InterestGroup> showGroupsByEmail(String email) {
         int userId = userDAO.findUserByEmail(email).getUserId();
         return interestGroupUserDAO.listMyGroups(userId);
     }
