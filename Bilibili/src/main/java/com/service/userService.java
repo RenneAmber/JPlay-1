@@ -28,4 +28,5 @@ public interface userService {
     public List<Letter> showLetterByUser(String username);
     public List<InterestGroup> showGroupsByUsername(String username);
     public List<InterestGroup> showGroupsAll();
+    public List<User> getAllUser();
 }

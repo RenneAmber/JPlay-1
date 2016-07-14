@@ -6,6 +6,8 @@ package com.dao;
 
 import com.pojo.User;
 
+import java.util.List;
+
 /**
  * userDAO接口 提供了对user进行增删改查功能的接口，将在daoImpl包中进行具体的实现。
  */
@@ -43,4 +45,6 @@ public interface userDAO {
     public User findUserByUsername(String username);
 
     public User findUserByEmail(String email);
+
+    public List<User> getAllUser();
 }
