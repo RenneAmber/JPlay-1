@@ -30,5 +30,4 @@ public interface userService {
     public List<Letter> showLetterByUser(String email);
     public List<InterestGroup> showGroupsByEmail(String email);
     public List<InterestGroup> showGroupsAll();
-    public List<User> getAllUser();
 }

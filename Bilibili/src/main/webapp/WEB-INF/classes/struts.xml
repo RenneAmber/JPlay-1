@@ -33,9 +33,9 @@
             <result name="success">index.jsp</result>
         </action>
 
-        <action name="getAllUser" class="com.action.userAction" method="getAllUser">
+        <action name="getAllUser" class="com.action.userAction" method="listUsers">
             <result name="success" type="json">
-                <param name="root">all</param>
+                <param name="root">userList</param>
             </result>
         </action>
         <!-- 上传视频信息 -->
