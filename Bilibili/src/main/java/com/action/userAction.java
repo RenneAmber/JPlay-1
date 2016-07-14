@@ -20,6 +20,11 @@ public class userAction extends baseAction {
     private userService userService;
     private videoService videoService;
     private List<Video> videoBeanList;
+<<<<<<< HEAD
+=======
+    private List<User> all;
+    private int userId;
+>>>>>>> 359bd080132ad7a750832e6f9421f6f2dd012831
     private User userBean;
     private List<User> userList;
     private int userId;
@@ -61,13 +66,17 @@ public class userAction extends baseAction {
         return SUCCESS;
     }
 
+
     public String updatePersonalInfo() throws Exception {
         userBean.setLastUpdate(timeUtil.GetCurrentDatetime());
         System.out.println("User update " + userBean.getUserId());
         userService.updateUser(userBean);
         return SUCCESS;
     }
-
+    public String getAllUser() throws Exception{
+        all = userService.getAllUser();
+        return SUCCESS;
+    }
     public com.service.videoService getVideoService() {
         return videoService;
     }
@@ -180,11 +189,20 @@ public class userAction extends baseAction {
         this.userId = userId;
     }
 
+<<<<<<< HEAD
     public List<User> getUserList() {
         return userList;
     }
 
     public void setUserList(List<User> userList) {
         this.userList = userList;
+=======
+    public List<User> getAll() {
+        return all;
+    }
+
+    public void setAll(List<User> all) {
+        this.all = all;
+>>>>>>> 359bd080132ad7a750832e6f9421f6f2dd012831
     }
 }

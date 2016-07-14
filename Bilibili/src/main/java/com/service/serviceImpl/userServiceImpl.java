@@ -141,6 +141,11 @@ public class userServiceImpl implements userService {
         userRoleDAO.createUserRole(userRole);
     }
 
+    @Override
+    public  List<User> getAllUser(){
+        return this.userDAO.getAllUser();
+    }
+
     public void setLetterDAO(com.dao.letterDAO letterDAO) {
         this.letterDAO = letterDAO;
     }

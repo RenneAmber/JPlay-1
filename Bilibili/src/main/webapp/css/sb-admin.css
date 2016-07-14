@@ -123,10 +123,14 @@ ul.alert-dropdown {
         border-radius: 0;
         overflow-y: auto;
 <<<<<<< HEAD
+<<<<<<< HEAD
         background-color: #ecf6ff;
 =======
         background-color: #222;
 >>>>>>> 02a065b2525a4dfb6e58fe988f69a637148f7012
+=======
+        background-color: #ecf6ff;
+>>>>>>> 359bd080132ad7a750832e6f9421f6f2dd012831
         bottom: 0;
         overflow-x: hidden;
         padding-bottom: 40px;

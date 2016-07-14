@@ -88,4 +88,16 @@ public class userDAOImpl extends HibernateDaoSupport implements userDAO {
         List<User>result = null;
         return result;
     }
+
+    @Override
+    public List<User> getAllUser(){
+        String hql = "from User";
+        List<User> res;
+
+        if ((res = (List) getHibernateTemplate().find(hql)) != null){
+            return res;
+        } else {
+            return null;
+        }
+    }
 }

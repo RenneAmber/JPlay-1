@@ -46,7 +46,11 @@ public interface userDAO {
 
     public User findUserByEmail(String email);
 
+<<<<<<< HEAD
     public List<User> findAllUsers();
 
     public List<User> findUpersByVideoId(int videoId);
+=======
+    public List<User> getAllUser();
+>>>>>>> 359bd080132ad7a750832e6f9421f6f2dd012831
 }
