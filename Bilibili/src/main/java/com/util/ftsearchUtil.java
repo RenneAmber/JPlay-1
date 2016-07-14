@@ -47,29 +47,9 @@ public class ftsearchUtil {
      */
     public List<Video>getResult(String queryStr) throws Exception {
         List<Video> result = null;
-//        conn = Jdbc_Util.getConnection();
-//        if(conn == null) {
-//            throw new Exception("数据库连接失败！");
-//        }
-//        String sql = "select adminID, username, password from admins";
-//        try {
-//            stmt = conn.createStatement();
-//            rs = stmt.executeQuery(sql);
-//            this.createIndex(rs);   //给数据库创建索引,此处执行一次，不要每次运行都创建索引，以后数据有更新可以后台调用更新索引
-
         TopDocs topDocs = this.search(queryStr);
         ScoreDoc[] scoreDocs = topDocs.scoreDocs;
         result = this.addHits2List(scoreDocs);
-        //   }
-//        } catch(Exception e) {
-//            e.printStackTrace();
-//            throw new Exception("数据库查询sql出错！ sql : " + sql);
-//
-//        }//   finally {
-//            if(rs != null) rs.close();
-//            if(stmt != null) stmt.close();
-//            if(conn != null) conn.close();
-//        }
         return result;
     }
 
@@ -158,26 +138,4 @@ public class ftsearchUtil {
         }
         return listBean;
     }
-
-//    public static void main(String[] args) {
-//        ftsearchUtil logic = new ftsearchUtil();
-//        try {
-//            Long startTime = System.currentTimeMillis();
-//            List<SearchBean> result = logic.getResult("g");
-//            int i = 0;
-//            for(SearchBean bean : result) {
-//                if(i == 10)
-//                    break;
-//                System.out.println("bean.name " + bean.getClass().getName() + " : bean.adminID " + bean.getAdminID()+ " : bean.username " + bean.getUsername());
-//                i++;
-//            }
-//
-//            System.out.println("searchBean.result.size : " + result.size());
-//            Long endTime = System.currentTimeMillis();
-//            System.out.println("查询所花费的时间为：" + (endTime-startTime)/1000);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            System.out.println(e.getMessage());
-//        }
-//    }
 }

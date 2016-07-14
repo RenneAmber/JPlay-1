@@ -1,6 +1,7 @@
 package com.service;
 
 import com.pojo.Category;
+import com.pojo.User;
 import com.pojo.Video;
 
 import java.util.List;
@@ -65,5 +66,6 @@ public interface videoService {
     public List<Video> showVideoByUper(String email);
 
     public List<Video> findAllVideos();
+
 
 }

@@ -74,17 +74,17 @@ public class commentDAOImpl extends HibernateDaoSupport implements commentDAO {
 
     @Override
     public List<Comment> findCommentsByVideoId(int videoId) {
-        String hql = "select commentId as cid from VideoComment where videoId = ?";
-        List<Integer> commentIdList = (List<Integer>) getHibernateTemplate().find(hql, videoId);
-        if (commentIdList.size() == 0)
-            return null;
-        else {
-            List<Comment>result = new ArrayList<Comment>();
-            for(int i = 0; i < commentIdList.size(); i++){
+        String hql = "select commentId as cid from VideoComment where videoId=? order by commentId desc";
+        List<Comment> result = new ArrayList<Comment>();
+        if(getHibernateTemplate().find(hql, videoId).size() != 0){
+
+            List<Integer> commentIdList = (List<Integer>) getHibernateTemplate().find(hql, videoId);
+            for (int i = 0; i < commentIdList.size(); i++){
                 result.add((Comment)getHibernateTemplate().find("from Comment as comment where comment.commentId=?",commentIdList.get(i)).get(0));
             }
-            return result;
+
         }
+        return result;
     }
 
     @Override
