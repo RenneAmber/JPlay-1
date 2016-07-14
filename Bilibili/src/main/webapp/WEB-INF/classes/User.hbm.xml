@@ -7,6 +7,7 @@
     <class name="com.pojo.User" table="user" schema="bilibili">
         <id name="userId">
             <column name="user_id" sql-type="int(10)"/>
+            <generator class="increment"></generator>
         </id>
         <property name="username">
             <column name="username" sql-type="varchar(50)" length="50"/>

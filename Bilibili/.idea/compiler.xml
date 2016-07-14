@@ -29,8 +29,14 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="anti-chemical" />
-        <module name="Bilibili" />
         <module name="FrameModel" />
+      </profile>
+      <profile default="false" name="Annotation profile for Bilibili" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="Bilibili" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

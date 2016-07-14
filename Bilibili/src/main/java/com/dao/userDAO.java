@@ -42,9 +42,11 @@ public interface userDAO {
      * @param username 传入username作为查找因子
      * @return 返回需要查找的User类的对象
      */
-    public User findUserByUsername(String username);
+    public List<User> findUserByUsername(String username);
 
     public User findUserByEmail(String email);
 
     public List<User> findAllUsers();
+
+    public List<User> findUpersByVideoId(int videoId);
 }

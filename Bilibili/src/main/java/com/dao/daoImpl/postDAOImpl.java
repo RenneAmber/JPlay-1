@@ -23,6 +23,7 @@ public class postDAOImpl extends HibernateDaoSupport implements postDAO{
     @Override
     public void createPost(Post post) {
         getHibernateTemplate().save(post);
+        System.out.println(post.getContent());
         getHibernateTemplate().flush();
     }
 
@@ -67,17 +68,26 @@ public class postDAOImpl extends HibernateDaoSupport implements postDAO{
 
     @Override
     public List<Post> findPostsByGroupId(int groupId) {
-        String hql = "select postId as pid from GroupPost where interestGroupId=?";
-        if(getHibernateTemplate().find(hql,groupId).size()==0)
+        String hql = "select postId as pid from GroupPost where interestGroupId = ?";
+        List<Integer> postIdList = (List<Integer>) getHibernateTemplate().find(hql, groupId);
+        if (postIdList.size() == 0)
             return null;
-        else
-        {
-            List<Post>result = new ArrayList<Post>();
-            List<Integer>postIdList= (List<Integer>)getHibernateTemplate().find(hql,groupId);
-            for(int i=0;i<postIdList.size();i++){
-                result.add((Post)getHibernateTemplate().find("from Post as post where post.postId=?",postIdList.get(i)).get(0));
+        else {
+            List<Post> result = new ArrayList<Post>();
+            for (int i = 0; i < postIdList.size(); i++){
+                result.add((Post) getHibernateTemplate().find("from Post as post where post.postId = ?", postIdList.get(i)).get(0));
             }
             return result;
         }
+//        if(getHibernateTemplate().find(hql,groupId).size()==0)
+//            return null;
+//        else {
+//
+//        }
+    }
+
+    @Override
+    public List<Post> findAllPosts() {
+        return (List<Post>) getHibernateTemplate().find("from Post ");
     }
 }

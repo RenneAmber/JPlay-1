@@ -33,7 +33,6 @@
 	<link rel="stylesheet" href="css/zerogrid.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/menu.css">
-	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
 	<!-- Owl Carousel Assets -->
 	<link href="css/owl.carousel.css" rel="stylesheet">
 	<link href="css/owl.theme.css" rel="stylesheet">
@@ -43,7 +42,7 @@
 
 	<!-- 评论功能的ajax-->
 	<script>
-		 	
+
 		var now=new Date(); //创建Date对象
 		var year=now.getFullYear(); //获取年份
 		var month=now.getMonth(); //获取月份
@@ -81,29 +80,38 @@
 			var btn=document.getElementById('comment-btn');
 			var text = document.getElementById('comment-text');
 			var content = document.getElementById('comment-field');
-			var param={"videoId":id,"commentContent":text.value};
+			if(text.value=='')
+			{
+				alert("评论不能为空！")
+			}
+			else {
+				var param = {"videoId": id, "commentContent": text.value};
 
-			$.ajax({
-				url: "commentAction.action",
-				// 数据发送方式
-				type: "post",
-				// 接受数据格式
-				/*dataType: "json",*/
-				// 要传递的数据
-				data:param,
-				// 回调函数，接受服务器端返回给客户端的值，即result值(在这里是点赞数tn)
-				beforeSend:function() {},
-				success : function() {content.innerHTML = '<li class="comment_add"><img src="images/10.jpg" alt="image"/><div class="user_info"><div class="user_name"><h4><b>'+username+
-						'</b></h4></div><div class="comment">'+text.value+'</div>'+
-						'<div class="bottom-function"><label>#'+count+'</label></div></div></li>'+
-						content.innerHTML;
-					text.value = '';
-					// 内容过多时,将滚动条放置到最底端
-					content.scrollTop=content.scrollHeight;},
-				error: function(XMLHttpRequest, textStatus, errorThrown) {
-					alert("你只有登陆以后才能发表评论");
-				}
-			});
+				$.ajax({
+					url: "commentAction.action",
+					// 数据发送方式
+					type: "post",
+					// 接受数据格式
+					/*dataType: "json",*/
+					// 要传递的数据
+					data: param,
+					// 回调函数，接受服务器端返回给客户端的值，即result值(在这里是点赞数tn)
+					beforeSend: function () {
+					},
+					success: function () {
+						content.innerHTML = '<li class="comment_add"><img src="images/10.jpg" alt="image"/><div class="user_info"><div class="user_name"><h4><b>' + username +
+								'</b><span class="date_time">'+complete_time+'</span></h4></div><div class="comment">' + text.value + '</div>' +
+								'<div class="bottom-function"><label>#' + count + '</label></div></div></li>' +
+								content.innerHTML;
+						text.value = '';
+						// 内容过多时,将滚动条放置到最底端
+						content.scrollTop = content.scrollHeight;
+					},
+					error: function (XMLHttpRequest, textStatus, errorThrown) {
+						alert("你只有登陆以后才能发表评论");
+					}
+				});
+			}
 		}
 		/*评论点赞*/
 		function commentThumb(comment_id,thumbCount)
@@ -142,7 +150,7 @@
 			var btn=document.getElementById(btid);
 			btn.removeAttribute("onclick");
 			content.innerHTML+= '<div class="comment_reply" id="div'+comment_id+'">'+
-					'<input type="text" id="reply-text'+comment_id+'"placeholder="请输入你的回复">'+
+					'<input required="true" type="text" id="reply-text'+comment_id+'" placeholder="请输入你的回复">'+
 					'<button onclick="commentReply('+comment_id+',\''+username+'\')">回复评论</button></div>';
 		}
 		/*评论回复*/
@@ -152,33 +160,39 @@
 			var id="reply"+comment_id;
 			var content=document.getElementById(id);
 			var text=document.getElementById("reply-text"+comment_id);
-
-			var param={"commentId":comment_id,"replyContent":text.value};
-			$.ajax({
-				url: "replyComment.action",
-				// 数据发送方式
-				type: "post",
-				// 接受数据格式
-				/*dataType: "json",*/
-				// 要传递的数据
-				data:param,
-				// 回调函数，接受服务器端返回给客户端的值，即result值(在这里是点赞数tn)
-				beforeSend:function() {},
-				success : function() {
-					document.getElementById("div"+comment_id).className="comment_reply hidden";
-					/*content.innerHTML-= '<div class="comment_reply">'+
-					 '<input type="text" id="reply-text'+comment_id+'"placeholder="请输入你的回复">'+
-					 '<button onclick="commentReply('+comment_id+',\''+username+'\')">回复评论</button></div>';*/
-					content.innerHTML+= '<li class="comment_add"><img src="images/11.jpg" alt="image"/><div class="user_info"><div class="user_name"><h4><b>'+username+
-							'</b></h4></div><div class="comment">'+text.value+'</div>'+
-							'</div></li>';
-					text.value = '';
-					// 内容过多时,将滚动条放置到最底端
-					content.scrollTop=content.scrollHeight;},
-				error: function(XMLHttpRequest, textStatus, errorThrown) {
-					alert("你只有登陆以后才能发表评论");
-				}
-			});
+			if(text.value=='')
+			{
+				alert("回复不能为空！");
+			}
+			else {
+				var param = {"commentId": comment_id, "replyContent": text.value};
+				$.ajax({
+					url: "replyComment.action",
+					// 数据发送方式
+					type: "post",
+					// 接受数据格式
+					/*dataType: "json",*/
+					// 要传递的数据
+					data: param,
+					// 回调函数，接受服务器端返回给客户端的值，即result值(在这里是点赞数tn)
+					beforeSend: function () {
+					},
+					success: function () {
+						document.getElementById("div" + comment_id).className = "comment_reply hidden";
+						/*content.innerHTML-= '<div class="comment_reply">'+
+						 '<input type="text" id="reply-text'+comment_id+'"placeholder="请输入你的回复">'+
+						 '<button onclick="commentReply('+comment_id+',\''+username+'\')">回复评论</button></div>';*/
+						content.innerHTML += '<li class="comment_add"><img src="images/11.jpg" alt="image"/><div class="user_info"><div class="user_name"><h4><b>'+ username+
+								'</b></h4></div><div class="comment">'+text.value+'</div>'+
+								'</div></li>';
+						text.value = '';
+						// 内容过多时,将滚动条放置到最底端
+						content.scrollTop=content.scrollHeight;},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						alert("你只有登陆以后才能发表评论");
+					}
+				});
+			}
 		}
 
 		/*回复点赞*/
@@ -216,9 +230,9 @@
 			/*content.innerHTML+=document.getElementById("commentModal").innerHTML;*/
 			var btn=document.getElementById(btid);
 			btn.removeAttribute("onclick");
-				content.innerHTML+= '<div class="comment_reply" id="div'+comment_id+'">'+
-						'<input type="text" id="reply-text'+comment_id+'"placeholder="请输入你的回复" value="回复 @'+comment_user +':">'+
-						'<button onclick="commentReply('+comment_id+',\''+username+'\')">回复评论</button></div>';
+			content.innerHTML+= '<div class="comment_reply" id="div'+comment_id+'">'+
+					'<input required="true"  type="text" id="reply-text'+comment_id+'" placeholder="请输入你的回复" value="回复 @'+comment_user +':">'+
+					'<button onclick="commentReply('+comment_id+',\''+username+'\')">回复评论</button></div>';
 
 
 
@@ -315,6 +329,90 @@
 
 	</script>
 
+	<!-- 举报评论弹出框 -->
+	<!-- jQuery -->
+	<<script src="jquery-3.0.0/jquery-3.0.0.min.js"></script>
+	<!-- BS JavaScript -->
+	<script type="text/javascript" src="bootstrap-3.3.5-dist/js/bootstrap.js"></script>
+	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
+	<script type="text/javascript">
+		function report_comment(commentId)
+		{
+			var cmtId=document.getElementById("commentId");
+			$("#report_modal").modal(show);
+			cmtId.value=commentId;
+		}
+
+		function report_reply(replyId)
+		{
+			var rplId=document.getElementById("replyId");
+			$("#report_modal_2").modal(show);
+			rplId.value=replyId;
+		}
+
+		function submit_report_comment()
+		{
+			var reason=document.getElementById("report_main_reason");
+			var commentId=document.getElementById("commentId");
+			var param={"commentId":commentId.value,"reason":reason.value};
+
+			$.ajax({
+				url: "reportComment.action",
+				// 数据发送方式
+				type: "post",
+				// 接受数据格式
+				/*dataType: "json",*/
+				// 要传递的数据
+				data: param,
+				// 回调函数，接受服务器端返回给客户端的值，即result值(在这里是点赞数tn)
+				beforeSend: function () {
+				},
+				success: function () {
+					reason.value = '';
+
+					$('#success_modal').modal("show");
+					setTimeout(function(){$("#success_modal").modal("hide")},1000);
+
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					alert("您只能举报一次！");
+				}
+			});
+
+		}
+
+		function submit_report_reply()
+		{
+			var reason=document.getElementById("report_main_reason_2");
+			var replyId=document.getElementById("replyId");
+			var param={"replyId":replyId.value,"reason":reason.value};
+
+			$.ajax({
+				url: "reportReply.action",
+				// 数据发送方式
+				type: "post",
+				// 接受数据格式
+				/*dataType: "json",*/
+				// 要传递的数据
+				data: param,
+				// 回调函数，接受服务器端返回给客户端的值，即result值(在这里是点赞数tn)
+				beforeSend: function () {
+				},
+				success: function () {
+					reason.value = '';
+
+					$('#success_modal').modal("show");
+					setTimeout(function(){$("#success_modal").modal("hide")},1000);
+
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					alert("你只有登陆以后才能发表评论");
+				}
+			});
+
+		}
+	</script>
+
 
 </head>
 <body id="wrapper" >
@@ -368,8 +466,6 @@
 			</div>
 		</div>
 	</div>
-
-
 
 	<script>
 		function send(){
@@ -646,52 +742,50 @@
 							<h2>评论专区</h2>
 						</div>
 						<ul class="comment" id="comment-field" height="100px">
-							<% int count=0;int max_count=0;%>
-							<s:iterator value="commentListBean" var="commentList">
-								<% count++;max_count++;%>
-							</s:iterator>
-							<s:iterator value="commentListBean" var="commentList" status="st">
-									<li class="comment_add"  >
-										<img src="images/10.jpg" alt="image"/>
-										<div class="user_info" id="reply${commentList.commentId}"	>
-											<div class="user_name">
-												<h4><b>${commentList.commentPusher}</b>
-													<span class="date_time">${commentList.createTime}</span>
-												</h4>
-											</div>
-											<div class="comment">${commentList.content}</div>
-											<div class="bottom-function">
-												<label>#<%=count%> </label>
-												<button id="thumb${commentList.commentId}" onclick="commentThumb(${commentList.commentId},${commentList.thumbCount})" >赞(${commentList.thumbCount})</button>
-												<button id="btn${commentList.commentId}" onclick="commentModal(${commentList.commentId},'<%=session.getAttribute("username")%>')">回复</button>
-												<button>举报</button>
-													<%--<s:if test="${commentList.commentPusher}==<%=session.getAttribute("username")%>">
-                                                        <button style="float: right;">删除</button>
-                                                    </s:if>--%>
-											</div>
-											<s:iterator value="replyListBean[#st.index]" var="replyList">
-
-												<img src="images/10.jpg" alt="image"/>
-												<div class="user_info" id="reply${commentList.commentId}"	>
-													<div class="user_name">
-														<h4><b>${replyList.replyPusher}</b>
-														</h4>
-													</div>
-													<div class="comment">${replyList.content}</div>
-													<div class="bottom-function">
-														<button id="thumbR${replyList.replyId}" onclick="replyThumb(${replyList.replyId},${replyList.thumbCount})" >赞(${replyList.thumbCount})</button>
-														<button id="btnR${replyList.replyId}" onclick="replyModal(${commentList.commentId},${replyList.replyId},
-																'<%=session.getAttribute("username")%>','${commentList.commentPusher}')">回复</button>
-														<button>举报</button>
-															<%--<s:if test="${commentList.commentPusher}==<%=session.getAttribute("username")%>">
-                                                                <button style="float: right;">删除</button>
-                                                            </s:if>--%>
-													</div>
-												</div>
-											</s:iterator>
+							<% int count=0;%>
+							<s:iterator value="commentListBean" var="comment" status="st">
+								<li class="comment_add"  >
+									<img src="images/10.jpg" alt="image"/>
+									<div class="user_info" id="reply${comment.commentId}"	>
+										<div class="user_name">
+											<h4><b>${comment.commentPusher}</b>
+												<span class="date_time">${comment.createTime}</span>
+											</h4>
 										</div>
-									</li>
-									<% count=count-1;%>
+										<div class="comment">${comment.content}</div>
+										<div class="bottom-function">
+											<label>#<s:property value="commentListBean.size-#st.index"/> </label>
+											<button id="thumb${comment.commentId}" onclick="commentThumb(${comment.commentId},${comment.thumbCount})" >赞(${comment.thumbCount})</button>
+											<button id="btn${comment.commentId}" onclick="commentModal(${comment.commentId},'<%=session.getAttribute("username")%>')">回复</button>
+											<button onclick="report_comment(${comment.commentId})">举报</button>
+												<%--<s:if test="${comment.commentPusher}==<%=session.getAttribute("username")%>">
+                                                    <button style="float: right;">删除</button>
+                                                </s:if>--%>
+										</div>
+										<s:iterator value="replyListBean[#st.index]" var="replyList">
+
+											<img src="images/10.jpg" alt="image"/>
+											<div class="user_info" id="reply${comment.commentId}"	>
+												<div class="user_name">
+													<h4><b>${replyList.replyPusher}</b>
+														<!-- rr[#st.index-->
+													</h4>
+												</div>
+												<div class="comment">${replyList.content}</div>
+												<div class="bottom-function">
+													<button id="thumbR${replyList.replyId}" onclick="replyThumb(${replyList.replyId},${replyList.thumbCount})" >赞(${replyList.thumbCount})</button>
+													<button id="btnR${replyList.replyId}" onclick="replyModal(${comment.commentId},${replyList.replyId},
+															'<%=session.getAttribute("username")%>','${comment.commentPusher}')">回复</button>
+													<button onclick="report_reply(${replyList.replyId})">举报</button>
+														<%--<s:if test="${comment.commentPusher}==<%=session.getAttribute("username")%>">
+                                                            <button style="float: right;">删除</button>
+                                                        </s:if>--%>
+												</div>
+											</div>
+										</s:iterator>
+									</div>
+								</li>
+								<% count=count+1;%>
 							</s:iterator>
 
 						</ul>
@@ -751,19 +845,99 @@
 							</div>
 							<div id="dlg-comment">
 								<div class="modal-body" style="padding-left: 2%" >
-									<p>视频编号：<input type="text" readonly value="1" name="videoId" id="videoId" style="border:none"></p>
+									<p>视频编号：<input type="text" readonly value="<s:property value="videoBean.videoId"/>" name="videoId" id="videoId" style="border:none"></p>
 									<p>我的评论：
-										<textarea id="comment-text" name="commentContent" placeholder="在这里发表我的评论..." required ></textarea></p>
+										<textarea required="true"  id="comment-text" name="commentContent" placeholder="在这里发表我的评论..." required ></textarea></p>
 								</div>
 								<div class="modal-footer">
 									<button type="reset" class="btn btn-default"
 											data-dismiss="modal">关闭
 									</button>
-									<button class="btn btn-primary" onclick="comment('<%=session.getAttribute("username")%>',<%=++max_count%>,<s:property value="videoBean.videoId"/>)" id="comment-btn" data-dismiss="modal">
+									<button class="btn btn-primary" onclick="comment('<%=session.getAttribute("username")%>',<%=++count%>,<s:property value="videoBean.videoId"/>)" id="comment-btn" data-dismiss="modal">
 										提交
 									</button>
 								</div>
 							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal -->
+				</div>
+
+				<!-- 举报专用模态框（Modal） -->
+				<div class="modal fade" id="report_modal" tabindex="-1" role="dialog" style="width:100%"
+					 aria-labelledby="myModalLabel" aria-hidden="true" >
+					<div class="modal-dialog" id="report_dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close"
+										data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<h4 class="modal-title">
+									举报评论
+								</h4>
+							</div>
+							<div id="report_reason">
+								<div class="modal-body" style="padding-left: 2%" >
+									<p>评论编号：<input type="text" readonly value="" name="commentId" id="commentId" style="border:none"></p>
+									<p><textarea  id="report_main_reason" name="commentContent" placeholder="在这里写出你的理由..." required ></textarea></p>
+								</div>
+								<div class="modal-footer">
+									<button type="reset" class="btn btn-default"
+											data-dismiss="modal">关闭
+									</button>
+									<button class="btn btn-primary" onclick="submit_report_comment()"  data-dismiss="modal">
+										举报
+									</button>
+								</div>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal -->
+				</div>
+
+				<!-- 举报专用模态框（Modal） -->
+				<div class="modal fade" id="report_modal_2" tabindex="-1" role="dialog" style="width:100%"
+					 aria-labelledby="myModalLabel" aria-hidden="true" >
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close"
+										data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<h4 class="modal-title">
+									举报评论
+								</h4>
+							</div>
+							<div>
+								<div class="modal-body" style="padding-left: 2%" >
+									<p>评论编号：<input type="text" readonly value="" name="replyId" id="replyId" style="border:none"></p>
+									<p><textarea  id="report_main_reason_2" name="commentContent" placeholder="在这里写出你的理由..." required ></textarea></p>
+								</div>
+								<div class="modal-footer">
+									<button type="reset" class="btn btn-default"
+											data-dismiss="modal">关闭
+									</button>
+									<button class="btn btn-primary" onclick="submit_report_reply()"  data-dismiss="modal">
+										举报
+									</button>
+								</div>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal -->
+				</div>
+				<!-- 发送成功模态框-->
+				<div class="modal fade" id="success_modal" tabindex="-1" role="dialog"
+					 aria-labelledby="myModalLabel" aria-hidden="true" >
+					<div class="modal-dialog" id="success_dialog">
+						<div class="modal-content" style="width: 30%">
+								<div class="modal-header" style="align-content: center" >
+									<p><i class="fa fa-star"></i>发送成功</p>
+								</div>
+								<div class="modal-footer">
+									<button type="reset" class="btn btn-default"
+											data-dismiss="modal">关闭
+									</button>
+								</div>
 						</div><!-- /.modal-content -->
 					</div><!-- /.modal -->
 				</div>
@@ -780,9 +954,9 @@
 
 <!-- Slider -->
 <!-- Slider -->
-<script src="js/jquery.min.js"></script>
+<%--<script src="js/jquery.min.js"></script>
 <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-<script src="js/jquery-2.1.1.js"></script>
+<script src="js/jquery-2.1.1.js"></script>--%>
 <script src="js/demo.js"></script>
 <!-- Search -->
 <script src="js/modernizr.custom.js"></script>

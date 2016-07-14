@@ -14,8 +14,8 @@ import java.util.Map;
  * Created by Admin on 2016/6/27.
  */
 public class groupPostAction extends baseAction {
-    private com.service.postService postService;
-    private com.service.replyService replyService;
+    private postService postService;
+    private replyService replyService;
     private int interestsGroupId;
     private String postContent;
 
@@ -24,25 +24,37 @@ public class groupPostAction extends baseAction {
 
     private int groupId;
     private Post postBean;
+    private List<Post> postList;
     private List<Reply> replyListBean;
+
+    public String delete() throws Exception {
+        postService.deletePost(postId);
+        return SUCCESS;
+    }
+
+    public String listPosts() throws Exception {
+        postList = postService.findAllPosts();
+        return SUCCESS;
+    }
 
     public String publish(){
         Map Session = ActionContext.getContext().getSession();
-        String username = (String)Session.get("username");
+        String email = (String)Session.get("email");
         Post post = new Post();
-        post.setPostId(postService.findMaxPostId()+1);
+//        post.setPostId(999);
         post.setThumbCount(0);
         post.setContent(postContent);
         post.setCreateTime(timeUtil.GetCurrentDatetime());
-        post.setPostPusher(username);
-        postService.postPublish(username,interestsGroupId,post);
+        post.setPostPusher(email);
+        System.out.println(interestsGroupId);
+        postService.postPublish(email, interestsGroupId, post);
         return SUCCESS;
     }
 
     public String report(){
         Map Session = ActionContext.getContext().getSession();
-        String username = (String)Session.get("username");
-        postService.reportPost(postId,username,reason);
+        String email = (String)Session.get("email");
+        postService.reportPost(postId, email, reason);
         return SUCCESS;
     }
 
@@ -51,17 +63,17 @@ public class groupPostAction extends baseAction {
         return SUCCESS;
     }
 
-    public String enterPost(){
+    public String viewPost(){
         postBean = postService.findPostById(postId);
         replyListBean = replyService.showRepliesByPostId(postId);
         return SUCCESS;
     }
 
-    public com.service.postService getPostService() {
+    public postService getPostService() {
         return postService;
     }
 
-    public void setPostService(com.service.postService postService) {
+    public void setPostService(postService postService) {
         this.postService = postService;
     }
 
@@ -113,11 +125,11 @@ public class groupPostAction extends baseAction {
         this.groupId = groupId;
     }
 
-    public com.service.replyService getReplyService() {
+    public replyService getReplyService() {
         return replyService;
     }
 
-    public void setReplyService(com.service.replyService replyService) {
+    public void setReplyService(replyService replyService) {
         this.replyService = replyService;
     }
 
@@ -127,5 +139,13 @@ public class groupPostAction extends baseAction {
 
     public void setReplyListBean(List<Reply> replyListBean) {
         this.replyListBean = replyListBean;
+    }
+
+    public List<Post> getPostList() {
+        return postList;
+    }
+
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
     }
 }

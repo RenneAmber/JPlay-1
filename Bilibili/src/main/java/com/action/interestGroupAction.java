@@ -21,40 +21,39 @@ public class interestGroupAction extends baseAction {
     private List<InterestGroup> groupList;
     private Map<String, Object> dataMap = new HashMap<String, Object>();
 
-    private int groupId;
-    private List<Post>postListBean;
+    public int getGroupId() {
+        return groupId;
+    }
 
-    public String addInterestGroup(){
+    private int groupId;
+    private List<Post> postListBean;
+
+    public String addInterestGroup() {
         Map Session = ActionContext.getContext().getSession();
-        String username = (String)Session.get("username");
-        userService.addInterestGroup(username,interestGroupId);
+        String email = (String)Session.get("email");
+        userService.addInterestGroup(email, interestGroupId);
         return SUCCESS;
     }
 
-    public String listInterestGroup()
-    {
-         //Map Session = ActionContext.getContext().getSession();
+    public String listInterestGroup() {
         groupList=userService.showGroupsAll();
         dataMap.put("groupList",groupList);
-        //Session.put("groupList",groupList);
-        System.out.println(groupList.size());
         return SUCCESS;
     }
 
-    public String listInterestGroupByUser()
-    {
-        //dataMap.clear();
+    public String listInterestGroupByUser() {
+        dataMap.clear();
         Map Session = ActionContext.getContext().getSession();
-        String user=(String)Session.get("username");
-        myGroupList=userService.showGroupsByUsername(user);
-        dataMap.put("myGroupList",myGroupList);
+        String email = (String) Session.get("email");
+        myGroupList = userService.showGroupsByEmail(email);
+        dataMap.put("myGroupList", myGroupList);
         listInterestGroup();
-        System.out.println(myGroupList.size());
         return SUCCESS;
     }
 
-    public String enterGroup(){
+    public String enterGroup() {
         postListBean = postService.showPostsByGroupId(groupId);
+
         return SUCCESS;
     }
 

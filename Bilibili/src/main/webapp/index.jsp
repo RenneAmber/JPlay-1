@@ -605,7 +605,7 @@
                             <i class="fa fa-search"></i>
                         </a>
                         <div id="searchtext">
-                            <input type="text" id="search-text" name="keyword" placeholder="查找..." accept-charset="gbk">
+                            <input type="text" id="search-text" name="keyword" placeholder="查找...">
                         </div>
 
                     </form>
@@ -737,105 +737,6 @@
             </div>
         </div>
     </section>
-
-    <!--////////////////////////////////////Footer-->
-    <%--<footer>--%>
-        <%--<div class="zerogrid top-footer">--%>
-            <%--<div class="row">--%>
-                <%--<div class="col-1-5">--%>
-                    <%--<a href="#"><img src="images/15.jpg" /></a>--%>
-                <%--</div>--%>
-                <%--<div class="col-1-5">--%>
-                    <%--<a href="#"><img src="images/16.jpg" /></a>--%>
-                <%--</div>--%>
-                <%--<div class="col-1-5">--%>
-                    <%--<a href="#"><img src="images/17.jpg" /></a>--%>
-                <%--</div>--%>
-                <%--<div class="col-1-5">--%>
-                    <%--<a href="#"><img src="images/18.jpg" /></a>--%>
-                <%--</div>--%>
-                <%--<div class="col-1-5">--%>
-                    <%--<a href="#"><img src="images/19.jpg" /></a>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="zerogrid wrap-footer">--%>
-            <%--<div class="row">--%>
-                <%--<div class="col-1-4 col-footer-1">--%>
-                    <%--<div class="wrap-col">--%>
-                        <%--<a href="index.html" class="logo"><img src="images/logo.png" /></a>--%>
-                        <%--<p>Ut volutpat consectetur aliquam. Curabitur auctor in nis ulum ornare. Sed consequat, augue condimentum fermentum gravida, metus elit vehicula dui.</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="col-1-4 col-footer-2">--%>
-                    <%--<div class="wrap-col">--%>
-                        <%--<h3>Categories</h3>--%>
-                        <%--<ul>--%>
-                            <%--<li><a href="#">Action</a></li>--%>
-                            <%--<li><a href="#">Romantic</a></li>--%>
-                            <%--<li><a href="#">Cartoon</a></li>--%>
-                            <%--<li><a href="#">Zombies</a></li>--%>
-                        <%--</ul>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="col-1-4 col-footer-3">--%>
-                    <%--<div class="wrap-col">--%>
-                        <%--<h3>Recent Posts</h3>--%>
-                        <%--<ul>--%>
-                            <%--<li><a href="#">New Videos</a></li>--%>
-                            <%--<li><a href="#">Featured Videos</a></li>--%>
-                            <%--<li><a href="#">Most Viewed Videos</a></li>--%>
-                            <%--<li><a href="#">Sports Videos</a></li>--%>
-                        <%--</ul>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="col-1-4 col-footer-4">--%>
-                    <%--<div class="wrap-col">--%>
-                        <%--<h3>Flickr Photos</h3>--%>
-                        <%--<div class="row">--%>
-                            <%--<div class="col-1-4">--%>
-                                <%--<div class="wrap-col">--%>
-                                    <%--<a href="#"><img src="images/6.jpg" /></a>--%>
-                                    <%--<a href="#"><img src="images/10.jpg" /></a>--%>
-                                    <%--<a href="#"><img src="images/13.jpg" /></a>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                            <%--<div class="col-1-4">--%>
-                                <%--<div class="wrap-col">--%>
-                                    <%--<a href="#"><img src="images/7.jpg" /></a>--%>
-                                    <%--<a href="#"><img src="images/11.jpg" /></a>--%>
-                                    <%--<a href="#"><img src="images/6.jpg" /></a>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                            <%--<div class="col-1-4">--%>
-                                <%--<div class="wrap-col">--%>
-                                    <%--<a href="#"><img src="images/8.jpg" /></a>--%>
-                                    <%--<a href="#"><img src="images/12.jpg" /></a>--%>
-                                    <%--<a href="#"><img src="images/10.jpg" /></a>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                            <%--<div class="col-1-4">--%>
-                                <%--<div class="wrap-col">--%>
-                                    <%--<a href="#"><img src="images/9.jpg" /></a>--%>
-                                    <%--<a href="#"><img src="images/13.jpg" /></a>--%>
-                                    <%--<a href="#"><img src="images/8.jpg" /></a>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <div class="zerogrid copyright">
-            <div class="wrapper">
-                <%--Copyright 2015 - More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>--%>
-                <ul class="quick-link f-right">
-                    <li><a href="#">Right Reserved</a></li>
-                    <li><a href="#">Connect Us</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
 
     <!-- Slider -->
     <script src="js/jquery-2.1.1.js"></script>

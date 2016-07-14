@@ -11,7 +11,7 @@ public class Post {
     private String content;
     private String createTime;
     private int thumbCount;
-    private String postPusher;
+    private String postPusher;  /** post pusher's email **/
     private Collection<GroupPost> groupPostsByPostId;
     private Collection<PostReply> postRepliesByPostId;
     private Collection<PostReport> postReportsByPostId;

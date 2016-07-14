@@ -17,13 +17,13 @@ public class videoCommentReplyAction extends replyAction {
 
     public String replyComment() throws Exception{
         Map Session = ActionContext.getContext().getSession();
-        String username = (String)Session.get("username");
+        String email = (String)Session.get("email");
         Reply reply = new Reply();
-        reply.setReplyId(replyService.findMaxReplyId()+1);
+//        reply.setReplyId(replyService.findMaxReplyId() + 1);
         reply.setContent(replyContent);
         reply.setThumbCount(0);
-        reply.setReplyPusher(username);
-        replyService.makeReplyOnComment(commentId,username,reply);
+        reply.setReplyPusher(email);
+        replyService.makeReplyOnComment(commentId, email, reply);
         return SUCCESS;
     }
 

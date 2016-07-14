@@ -7,6 +7,7 @@
     <class name="com.pojo.Authority" table="authority" schema="bilibili">
         <id name="authId">
             <column name="auth_id" sql-type="int(10)"/>
+            <generator class="increment"></generator>
         </id>
         <property name="authName">
             <column name="auth_name" sql-type="varchar(50)" length="50"/>

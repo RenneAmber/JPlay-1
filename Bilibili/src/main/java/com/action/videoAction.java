@@ -10,18 +10,15 @@ import com.service.commentService;
 import com.service.replyService;
 import com.service.userService;
 import com.service.videoService;
+import com.util.ftsearchUtil;
 import com.util.mongoUtil;
 import com.util.timeUtil;
-import com.util.ftsearchUtil;
 
-
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 
 import static org.apache.struts2.ServletActionContext.getServletContext;
 
@@ -46,6 +43,18 @@ public class videoAction extends baseAction {
     private List<Video> videoBeanList;
     private String keyword;
 
+    /** For Administrator **/
+    public String deleteVideo() {
+        videoService.deleteVideo(videoId);
+        return SUCCESS;
+    }
+
+    public String listVideos() {
+        videoBeanList = videoService.findAllVideos();
+        return SUCCESS;
+    }
+
+    /** For User **/
     public String upload() throws Exception  {
         System.out.println("Start uploading...");
         try {
@@ -54,12 +63,13 @@ public class videoAction extends baseAction {
                 message = "100";
                 return ERROR;
             }
-            String username = (String)Session.get("username");
+            String email = (String)Session.get("email");
             //转码成功与否的标记
             boolean flag = false;
 
             //获得保存文件的路径
 //            ServletContext sctx = getServletContext();
+
             //获得文件名
             String basePath = getServletContext().getRealPath("videos");
             //待转码的文件
@@ -75,29 +85,32 @@ public class videoAction extends baseAction {
 
             //设置video初始属性
             Video video = new Video();
-            video.setVideoId(videoService.findMaxVideoId()+1);
+//            video.setVideoId(videoService.findMaxVideoId()+1);
             video.setTitle(title);
             video.setContent(content);
-            video.setLink("videos/"+serialName + ".mp4");
+
+            video.setLink("videos/" + serialName + ".mp4");
+
             video.setIsPass(new Byte("0"));
             video.setTopic("unknown");
             video.setCreateTime(timeUtil.GetCurrentTime());
             video.setLastUpdate(timeUtil.GetCurrentTime());
             video.setClickCount(0);
             video.setThumbCount(0);
-            video.setUper(username);
+            video.setUper(email);
 
             //video.setPicture("videos/images/" + serialName + ".jpg");
 
+            System.out.println("Video Insert!");
             //转码
-            flag = videoService.executeCodecs(ffmpegPath,(String)Session.get("videoName") , codcFilePath, mediaPicPath);
+            flag = videoService.executeCodecs(ffmpegPath,(String)Session.get("videoName"), codcFilePath, mediaPicPath);
 
             if (flag) {
                 //转码成功,向数据表中添加该视频信息
                 videoService.createVideo(video);
-                videoService.addVideoUper(username,video.getVideoId());
+                videoService.addVideoUper(email, video.getVideoId());
                 //利用mongoDB工具存储截图
-                mongoUtil.StoreImage(mediaPicPath,video.getVideoId());
+                 mongoUtil.StoreImage(mediaPicPath,video.getVideoId());
                 Session.remove("videoName");
                 message = "上传成功!";
                 return SUCCESS;
@@ -110,22 +123,55 @@ public class videoAction extends baseAction {
         }
     }
 
-    public String thumbCount(){
+    public String delete() throws Exception {
+        try{
+            videoService.deleteVideo(videoId);
+            return SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return ERROR;
+        }
+    }
+
+    public String update() throws Exception {
+        try{
+            Video video = videoService.findVideoById(videoId);
+
+            if(content != null && content.length() !=0) {
+                video.setContent(content);
+            }
+
+            video.setLastUpdate(timeUtil.GetCurrentTime());
+
+            if(title != null && title.length() !=0){
+                video.setTitle(title);
+            }
+
+            return SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            return ERROR;
+        }
+    }
+
+    public String thumbCount() {
         videoService.videoThumbCount(videoId);
         return SUCCESS;
     }
 
-    public String report(){
+    public String report() {
         Map Session = ActionContext.getContext().getSession();
-        String username = (String)Session.get("username");
-        videoService.videoReport(username,videoId);
+        String email = (String)Session.get("email");
+        videoService.videoReport(email, videoId);
         return SUCCESS;
     }
 
-    public String autoPlay(){
+    public String autoPlay() {
         replyListBean = new ArrayList<List<Reply>>();
         videoBean = videoService.findVideoById(videoId);
+        commentListBean=new ArrayList<Comment>();
         commentListBean = commentService.showCommentsByVideoId(videoId);
+
         for(int i = 0; i < commentListBean.size(); i++){
             replyListBean.add(replyService.showRepliesByCommentId(commentListBean.get(i).getCommentId()));
         }
@@ -202,11 +248,11 @@ public class videoAction extends baseAction {
         this.commentListBean = commentListBean;
     }
 
-    public com.service.commentService getCommentService() {
+    public commentService getCommentService() {
         return commentService;
     }
 
-    public void setCommentService(com.service.commentService commentService) {
+    public void setCommentService(commentService commentService) {
         this.commentService = commentService;
     }
 
@@ -218,11 +264,11 @@ public class videoAction extends baseAction {
         this.replyListBean = replyListBean;
     }
 
-    public com.service.replyService getReplyService() {
+    public replyService getReplyService() {
         return replyService;
     }
 
-    public void setReplyService(com.service.replyService replyService) {
+    public void setReplyService(replyService replyService) {
         this.replyService = replyService;
     }
 

@@ -7,6 +7,7 @@
     <class name="com.pojo.Video" table="video" schema="bilibili">
         <id name="videoId">
             <column name="video_id" sql-type="int(10)"/>
+            <generator class="increment"></generator>
         </id>
         <property name="uper">
             <column name="uper" sql-type="varchar(50)" length="50"/>

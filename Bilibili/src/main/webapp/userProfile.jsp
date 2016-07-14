@@ -102,6 +102,10 @@
   --%>
     <!-- 页面ajax -->
     <script language="javascript">
+
+
+
+
         function show_UI(message)
         {
             var content=document.getElementById("profile-content");
@@ -212,15 +216,16 @@
                     // 回调函数，接受服务器端返回给客户端的值，即result值
                     beforeSend:function() {},
                     success : function(dataMap) {
-                     /*   content.innerHTML =document.getElementById("mySecretLetter").innerHTML;*/
+                        /*   content.innerHTML =document.getElementById("mySecretLetter").innerHTML;*/
                         content.innerHTML='<h2><i class="fa fa-comment" style="color: palevioletred"></i>&nbsp;我的私信</h2><div class="content"> <table id="cmt-tb"class="table table-responsive">';
                         for(var i in dataMap["letterList"])
                         {
-                            document.getElementById("cmt-tb").innerHTML+='<tr><td width="10%" class="td_white">'+dataMap["letterList"][i].senderId+'</td><td width="70%" class="td_white_blue">'+ dataMap["letterList"][i].letterContent+
-                                    '</td><td width="20%" class="td_blue"><button class="add_group">回复</button></td></tr>';
+                            document.getElementById("cmt-tb").innerHTML+='<tr class="tr"><td width="10%" class="td_white">'+dataMap["letterList"][i].senderId+'</td><td width="70%" class="td_white_blue">'+ dataMap["letterList"][i].letterContent+
+                                    '</td><td width="20%" class="td_blue"><button  onclick="reply_letter('+dataMap["letterList"][i].senderId +')" class="reply_letter">回复</button>'+
+                                    '<button class="delete_letter">删除</button></td></tr>';
                         }
                         content.innerHTML+='</table></div><h2><i class="fa fa-user-md" style="color: palevioletred"></i>&nbsp;好友列表</h2><div class="content">'+
-                                        document.getElementById("friend-list").innerHTML+"</div>"
+                                document.getElementById("friend-list").innerHTML+"</div>"
 
 
 
@@ -267,13 +272,13 @@
                                 '<table id="IG-tb-all"class="table table-responsive"><thead><tr><td>部落ID</td><td>部落名称</td></tr></thead></table></div>';
                         for(var i in lgroup)
                         {
-
                             document.getElementById("IG-tb-all").innerHTML+='<tr><td width="10%" class="td_white">'+
-                                    lgroup[i].interestGroupId+'</td><td width="60%" class="td_white_blue">'+
-                                    lgroup[i].interestGroupName+'</td>'+
-                                ' <td width="25%"  class="td_blue">'+
+                                    lgroup[i].interestGroupId+'</td><td width="60%" class="td_white_blue"><a class="IGlink" target="_blank" href="postList.action?groupId='+
+                                    lgroup[i].interestGroupId+'">'+
+                                    lgroup[i].interestGroupName+'</a></td>'+
+                                    ' <td width="25%"  class="td_blue">'+
                                     '<button  class="add_group" id="btnIG'+lgroup[i].interestGroupId+'" onclick="addGroup('+lgroup[i].interestGroupId+',\''+ lgroup[i].interestGroupName+'\')">加入</button>'+
-                                '</td></tr>';
+                                    '</td></tr>';
                         }
 
                         for(i in mygroup)
@@ -325,7 +330,7 @@
                         for(var i in myUpload)
                         {
                             document.getElementById("UL-tb").innerHTML+='<tr><td width="10%" class="td_white">'+
-                                  myUpload[i].videoId+'</td><td width="30%" class="td_white_blue">'+
+                                    myUpload[i].videoId+'</td><td width="30%" class="td_white_blue">'+
                                     myUpload[i].title+'</td>'+ ' <td width="50%"  class="td_blue">'+
                                     myUpload[i].content+'</td></tr>';
                         }
@@ -356,18 +361,34 @@
                 // 回调函数，接受服务器端返回给客户端的值，即result值
                 beforeSend:function() {},
                 success : function() {
-                   btn.removeAttribute("onclick");
+                    btn.removeAttribute("onclick");
                     btn.className="after_add_fav";
                     btn.innerHTML="√ 已加入";
                     document.getElementById("IG-tb").innerHTML+='<tr><td width="10%" class="td_white">'+
-                        groupId+'</td><td width="70" class="td_white_blue">'+
-                        groupName+'</td></tr>';
+                            groupId+'</td><td width="70" class="td_white_blue">'+
+                            groupName+'</td></tr>';
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alert("您已加入该部落，请不要重复添加");
                 }
             });
 
+        }
+    </script>
+    <!-- 发送私信 -->
+    <script>
+        function reply_letter(sendee)
+        {
+            var content=document.getElementById("profile-content");
+            content.innerHTML='<h2><i class="fa fa-leaf" style="color: palevioletred"></i>&nbsp;发送私信</h2><div class="content">'+
+                    '<form class="content" action="sendSecretLetter.action">'+
+                    '<i class="icon-bar"></i>'+
+                    '<p>发送给：<input type="text" style="border: none" value="'+sendee+'" name="sendee" readonly></p>'+
+                    '<p>内容：<textarea value="" name="slettercontent"></textarea></p>'+
+                    '<button type="reset" id="reset_button">清 除</button>'+
+                    '<button type="submit" id="submit_button" >提 交</button>'+
+                    '<p>&nbsp;</p>'+
+                    '</form></div>';
         }
     </script>
     <!-- Opacity -->
@@ -439,7 +460,7 @@
     </div>
 </div>
 
-  <!-- 显示用户的收藏视频 -->
+<!-- 显示用户的收藏视频 -->
 <div id="myCollection" hidden>
     <h2><i class="fa fa-video-camera" style="color: palevioletred"></i>&nbsp;我的收藏</h2>
     <div class="content zerogrid" style="width: 100%">
@@ -591,9 +612,9 @@
                     <div class="wrap-vid">
                         <div class="zoom-container">
                             <a href="single.jsp">
-                                                       <span class="zoom-caption">
-                                                           <i class="icon-play fa fa-play"></i>
-                                                       </span>
+                               <span class="zoom-caption">
+                                   <i class="icon-play fa fa-play"></i>
+                               </span>
                                 <img src="images/4.jpg" />
                             </a>
                         </div>
@@ -617,25 +638,25 @@
     <div class="content">
         <table class="table table-responsive">
             <s:iterator value="letterList" var="letter">
-            <%--<% int i=0;
-                List<Letter> letterList=(List<Letter>)session.getAttribute("letterList");
-                for(Letter letter:letterList){
-            %>--%>
+                <%--<% int i=0;
+                    List<Letter> letterList=(List<Letter>)session.getAttribute("letterList");
+                    for(Letter letter:letterList){
+                %>--%>
                 <tr>
                     <td width="10%" class="td_white">
                         <div>
-                           <%-- <%=letter.getSenderId()%>--%>
+                                <%-- <%=letter.getSenderId()%>--%>
                             666
                         </div>
                     </td>
                     <td width="70%" class="td_white_blue">
                         777
-                       <%-- <%=letter.getLetterContent()%>--%>
+                            <%-- <%=letter.getLetterContent()%>--%>
                     </td>
                     <td width="20%"  id="clock" class="td_blue">
                     </td>
                 </tr>
-             <%-- <%}%>--%>
+                <%-- <%}%>--%>
             </s:iterator>
 
         </table>
@@ -645,13 +666,13 @@
     <div class="content" id="friend-list">
         <table class="table table-responsive">
             <%
-              int i;  for(i=0;i<3;i++){
+                int i;  for(i=0;i<3;i++){
             %>
 
             <tr>
                 <td width="10%" class="td_white">
                     <div class="user_face_icon">
-                        <a href="userLetter.jsp">
+                        <a href="javascipt:;">
                             <img src="images/<%=i+10%>.jpg">
                         </a>
                     </div>

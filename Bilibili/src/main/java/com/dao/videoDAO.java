@@ -45,8 +45,9 @@ public interface videoDAO {
      */
     public int getAllVideoCount();
 
-    public int findMaxVideoId();
+//    public int findMaxVideoId();
 
     public List<Video> findVideoListByUserId(int userId);
 
+    public List<Video> findAllVideos();
 }

@@ -7,6 +7,7 @@
     <class name="com.pojo.FavoriteGroup" table="favorite_group" schema="bilibili">
         <id name="groupId">
             <column name="group_id" sql-type="int(10)"/>
+            <generator class="increment"></generator>
         </id>
         <property name="userId" insert="false" update="false">
             <column name="user_id" sql-type="int(10)"/>

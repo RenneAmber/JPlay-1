@@ -1,6 +1,6 @@
 package com.dao;
 
-import com.pojo.FavoriteGroup;
+        import com.pojo.FavoriteGroup;
 
 /**
  * Created by frank_xiang on 2016/7/5.

@@ -106,7 +106,7 @@
                             <div id="login-user-name">
 
                                 <input required autofocus type="text" style="width:80%"
-                                       name="username" ng-model="username" placeholder="用户名/邮箱/已验证手机" id="username"/>
+                                       name="email" ng-model="email" placeholder="用户名/邮箱/已验证手机" id="email"/>
                                 <i class="fa fa-envelope-o"></i>
                             </div>
                             <br/>

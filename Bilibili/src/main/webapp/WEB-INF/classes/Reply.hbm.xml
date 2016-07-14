@@ -7,6 +7,7 @@
     <class name="com.pojo.Reply" table="reply" schema="bilibili">
         <id name="replyId">
             <column name="reply_id" sql-type="int(10)"/>
+            <generator class="increment"></generator>
         </id>
         <property name="content">
             <column name="content" sql-type="varchar(200)" length="200"/>

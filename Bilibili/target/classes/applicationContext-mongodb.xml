@@ -12,9 +12,14 @@
 
     <mongo:mongo host="localhost" port="27017" />
     <mongo:db-factory dbname="JPlay" />
+    <mongo:mapping-converter id="mongoConverter"/>
 
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
     </bean>
 
+    <bean id="gridFsTemplate" class="org.springframework.data.mongodb.gridfs.GridFsTemplate">
+        <constructor-arg ref="mongoDbFactory" />
+        <constructor-arg ref="mongoConverter" />
+    </bean>
 </beans>

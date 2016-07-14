@@ -4,6 +4,7 @@ import com.dao.videoDAO;
 import com.pojo.Video;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +33,15 @@ public class videoDAOImpl extends HibernateDaoSupport implements videoDAO {
      */
     @Override
     public void deleteVideo(int videoId) {
-        getHibernateTemplate().delete(getHibernateTemplate().load(Video.class, videoId));
+        Video vdo = getHibernateTemplate().load(Video.class, videoId);
+        getHibernateTemplate().delete(vdo);
         getHibernateTemplate().flush();
+
+
+        File f = new File(vdo.getLink());
+        if(f.exists()) {
+            f.delete();
+        }
     }
 
     /**
@@ -67,22 +75,21 @@ public class videoDAOImpl extends HibernateDaoSupport implements videoDAO {
         return Integer.parseInt(String.valueOf(getHibernateTemplate().find(hql).get(0)));
     }
 
-    @Override
-    public int findMaxVideoId() {
-        String hql = "select max(video.videoId) as maxinum from Video as video";
-        if(getHibernateTemplate().find(hql).get(0)==null)
-            return 0;
-        else
-        return Integer.parseInt(String.valueOf(getHibernateTemplate().find(hql).get(0)));
-    }
+//    @Override
+//    public int findMaxVideoId() {
+//        String hql = "select max(video.videoId) as maxinum from Video as video";
+//        if(getHibernateTemplate().find(hql).get(0)==null)
+//            return 0;
+//        else
+//        return Integer.parseInt(String.valueOf(getHibernateTemplate().find(hql).get(0)));
+//    }
 
     @Override
     public List<Video> findVideoListByUserId(int userId) {
         String hql = "select videoId as vid from VideoUper where userId=?";
         if(getHibernateTemplate().find(hql,userId).size()==0)
         return null;
-        else
-        {
+        else {
             List<Video>result = new ArrayList<Video>();
             List<Integer>videoIdList= (List<Integer>) getHibernateTemplate().find(hql,userId);
             for(int i=0;i<videoIdList.size();i++){
@@ -90,6 +97,11 @@ public class videoDAOImpl extends HibernateDaoSupport implements videoDAO {
             }
             return result;
         }
+    }
+
+    @Override
+    public List<Video> findAllVideos() {
+        return (List<Video>) getHibernateTemplate().find("from Video ");
     }
 
 

@@ -38,29 +38,31 @@ public class postServiceImpl implements postService {
         return postDAO.findPostById(postId);
     }
 
-    @Override
-    public int findMaxPostId() {
-        return postDAO.findMaxPostId();
-    }
+//    @Override
+//    public int findMaxPostId() {
+//        return postDAO.findMaxPostId();
+//    }
 
     @Override
-    public void postPublish(String username, int groupId, Post post) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public void postPublish(String email, int groupId, Post post) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         createPost(post);
         GroupPost groupPost = new GroupPost();
         groupPost.setInterestGroupId(groupId);
         groupPost.setPostId(post.getPostId());
+//        System.out.println("321:"+groupPost.getPostId());
         groupPostDAO.createGroupPost(groupPost);
         UserPost userPost = new UserPost();
         userPost.setUserId(userId);
         userPost.setPostId(post.getPostId());
         userPost.setIsThumb(new Byte("0"));
+//        System.out.println("123");
         userPostDAO.createUserPost(userPost);
     }
 
     @Override
-    public void reportPost(int postId, String username, String reason) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public void reportPost(int postId, String email, String reason) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         PostReport postReport = new PostReport();
         postReport.setPostId(postId);
         postReport.setUserId(userId);
@@ -71,13 +73,18 @@ public class postServiceImpl implements postService {
     @Override
     public void postThumbCount(int postId) {
         Post post = postDAO.findPostById(postId);
-        post.setThumbCount(post.getThumbCount()+1);
+        post.setThumbCount(post.getThumbCount() + 1);
         postDAO.updatePost(post);
     }
 
     @Override
     public List<Post> showPostsByGroupId(int groupId) {
         return postDAO.findPostsByGroupId(groupId);
+    }
+
+    @Override
+    public List<Post> findAllPosts() {
+        return postDAO.findAllPosts();
     }
 
 

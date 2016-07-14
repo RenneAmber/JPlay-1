@@ -41,5 +41,4 @@ public interface interestGroupDAO {
     * @return 返回需要查找的List<Interestsgroup>类的对象
     */
     public List<InterestGroup> listGroups();
-
 }

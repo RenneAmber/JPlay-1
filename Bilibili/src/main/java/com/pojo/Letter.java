@@ -8,7 +8,7 @@ public class Letter {
     private int senderId;
     private int receiverId;
     private String letterContent;
-    private User userByReveiverId;
+    private User userByReceiverId;
     private User userBySenderId;
 
     public int getLetterId() {
@@ -68,12 +68,12 @@ public class Letter {
         return result;
     }
 
-    public User getUserByReveiverId() {
-        return userByReveiverId;
+    public User getUserByReceiverId() {
+        return userByReceiverId;
     }
 
-    public void setUserByReveiverId(User userByReveiverId) {
-        this.userByReveiverId = userByReveiverId;
+    public void setUserByReceiverId(User userByReveiverId) {
+        this.userByReceiverId = userByReveiverId;
     }
 
     public User getUserBySenderId() {

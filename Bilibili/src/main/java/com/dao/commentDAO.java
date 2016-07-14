@@ -44,7 +44,9 @@ public interface commentDAO {
      */
     public int getAllCommentCount();
 
-    public int findMaxCommentId();
+//    public int findMaxCommentId();
 
     public List<Comment> findCommentsByVideoId(int videoId);
+
+    public List<Comment> findAllComments();
 }

@@ -1,8 +1,10 @@
 package com.action;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.pojo.Reply;
 import com.service.replyService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,11 +14,22 @@ public class replyAction extends baseAction {
     private replyService replyService;
     private int replyId;
     private String reason;
+    private List<Reply> replyList;
+
+    public String listReplies() throws Exception {
+        replyList = replyService.findAllReplies();
+        return SUCCESS;
+    }
+
+    public String deleteReply() throws Exception {
+        replyService.deleteReply(replyId);
+        return SUCCESS;
+    }
 
     public String report(){
         Map Session = ActionContext.getContext().getSession();
-        String username = (String)Session.get("username");
-        replyService.reportReply(replyId,username,reason);
+        String email = (String)Session.get("email");
+        replyService.reportReply(replyId, email, reason);
         return SUCCESS;
     }
 
@@ -25,11 +38,11 @@ public class replyAction extends baseAction {
         return SUCCESS;
     }
 
-    public com.service.replyService getReplyService() {
+    public replyService getReplyService() {
         return replyService;
     }
 
-    public void setReplyService(com.service.replyService replyService) {
+    public void setReplyService(replyService replyService) {
         this.replyService = replyService;
     }
 
@@ -47,5 +60,13 @@ public class replyAction extends baseAction {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public List<Reply> getReplyList() {
+        return replyList;
+    }
+
+    public void setReplyList(List<Reply> replyList) {
+        this.replyList = replyList;
     }
 }

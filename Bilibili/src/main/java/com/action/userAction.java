@@ -46,8 +46,9 @@ public class userAction extends baseAction {
 
     public String updateUser() throws Exception {
         userBean.setLastUpdate(timeUtil.GetCurrentDatetime());
-        System.out.println("Admin update " + userBean.getEmail());
+        System.out.println("Admin update id" + userBean.getUserId());
         userService.updateUser(userBean);
+        return SUCCESS;
     }
 
     /** For User **/
@@ -62,7 +63,7 @@ public class userAction extends baseAction {
 
     public String updatePersonalInfo() throws Exception {
         userBean.setLastUpdate(timeUtil.GetCurrentDatetime());
-        System.out.println("User update " + userBean.getEmail());
+        System.out.println("User update " + userBean.getUserId());
         userService.updateUser(userBean);
         return SUCCESS;
     }

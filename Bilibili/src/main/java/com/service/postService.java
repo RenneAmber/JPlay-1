@@ -33,13 +33,15 @@ public interface postService {
      */
     public Post findPostById(int postId);
 
-    public int findMaxPostId();
+//    public int findMaxPostId();
 
-    public void postPublish(String username,int groupId, Post post);
+    public void postPublish(String email, int groupId, Post post);
 
-    public void reportPost(int postId,String username,String reason);
+    public void reportPost(int postId, String email, String reason);
 
     public void postThumbCount(int postId);
 
     public List<Post> showPostsByGroupId(int groupId);
+
+    public List<Post> findAllPosts();
 }

@@ -19,15 +19,15 @@ public interface userService {
     public User findUserByUsername(String username);
     public User findUserByEmail(String email);
     public boolean validateUser(String email, String password);
-    public boolean validateRegister(String username,String password,String email);
-    public void sendLetter(String sender,String sendee, String letterContent);
+    public boolean validateRegister(String username, String password, String email);
+    public void sendLetter(String senderEmail,String receiverEmail, String letterContent);
     public void viewLetter(int letterId);
-    public void addInterestGroup(String username,int interestgroupId);
-    public void subscribeSeries(String username, String seriesName);
-    public void addFavouriteGroup(String username,String groupName);
+    public void addInterestGroup(String email,int interestGroupId);
+    public void subscribeSeries(String email, String seriesName);
+    public void addFavouriteGroup(String email,String groupName);
     public void addVideoToFavouriteGroup(int videoId,int groupId);
-    public void giveUserRole(String username, int roleId);
-    public List<Letter> showLetterByUser(String username);
-    public List<InterestGroup> showGroupsByUsername(String username);
+    public void giveUserRole(String email, int roleId);
+    public List<Letter> showLetterByUser(String email);
+    public List<InterestGroup> showGroupsByEmail(String email);
     public List<InterestGroup> showGroupsAll();
 }

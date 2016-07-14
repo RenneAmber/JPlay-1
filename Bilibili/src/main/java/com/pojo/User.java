@@ -1,6 +1,5 @@
 package com.pojo;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,7 +18,7 @@ public class User {
     private Date birthday;
     private String created;
     private String lastUpdate;
-    private String realname;
+    private String realName;
     private String university;
     private Integer experience;
     private Collection<CommentReport> commentReportsByUserId;
@@ -119,12 +118,12 @@ public class User {
         this.lastUpdate = lastUpdate;
     }
 
-    public String getRealname() {
-        return realname;
+    public String getRealName() {
+        return realName;
     }
 
-    public void setRealname(String realname) {
-        this.realname = realname;
+    public void setRealName(String realname) {
+        this.realName = realname;
     }
 
     public String getUniversity() {
@@ -160,7 +159,7 @@ public class User {
         if (birthday != null ? !birthday.equals(user.birthday) : user.birthday != null) return false;
         if (created != null ? !created.equals(user.created) : user.created != null) return false;
         if (lastUpdate != null ? !lastUpdate.equals(user.lastUpdate) : user.lastUpdate != null) return false;
-        if (realname != null ? !realname.equals(user.realname) : user.realname != null) return false;
+        if (realName != null ? !realName.equals(user.realName) : user.realName != null) return false;
         if (university != null ? !university.equals(user.university) : user.university != null) return false;
         if (experience != null ? !experience.equals(user.experience) : user.experience != null) return false;
 
@@ -179,7 +178,7 @@ public class User {
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (created != null ? created.hashCode() : 0);
         result = 31 * result + (lastUpdate != null ? lastUpdate.hashCode() : 0);
-        result = 31 * result + (realname != null ? realname.hashCode() : 0);
+        result = 31 * result + (realName != null ? realName.hashCode() : 0);
         result = 31 * result + (university != null ? university.hashCode() : 0);
         result = 31 * result + (experience != null ? experience.hashCode() : 0);
         return result;

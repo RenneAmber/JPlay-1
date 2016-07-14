@@ -5,7 +5,6 @@ import com.pojo.Letter;
 import com.service.userService;
 import net.sf.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,55 +14,44 @@ import java.util.Map;
  */
 public class secretLetterAction extends baseAction {
     private userService userService;
-    private String slettercontent;
-    private String sendee;
+    private String letterContent;
+    private String receiverEmail;
     private List<Letter>letterList;
     private JSONObject result;
     private Map<String, Object> dataMap = new HashMap<String, Object>();
 
     private int letterId;
 
-    public String sendLetter(){
+    public String sendLetter() {
         Map Session = ActionContext.getContext().getSession();
-        String sender = (String)Session.get("username");
-        userService.sendLetter(sender,sendee,slettercontent);
+        String senderEmail = (String)Session.get("email");
+        userService.sendLetter(senderEmail, receiverEmail, letterContent);
         return SUCCESS;
     }
 
-    public String viewLetter(){
+    public String viewLetter() {
         userService.viewLetter(letterId);
         return SUCCESS;
     }
 
-    public String listLetter()
-    {
+    public String listLetter() {
         dataMap.clear();
-        //System.out.println("in list letter");
         Map Session = ActionContext.getContext().getSession();
-        String user=(String)Session.get("username");
+        String email = (String)Session.get("email");
         //System.out.println(user);
-        letterList=userService.showLetterByUser(user);
+        letterList=userService.showLetterByUser(email);
         System.out.println(letterList.size());
-//        Session.put("letterList",letterList);
         dataMap.put("letterList", letterList);
         System.out.println("success");
-        //result = JSONObject.fromObject(letterList);
         return "json";
     }
 
-    public String getSlettercontent() {
-        return slettercontent;
+    public String getLetterContent() {
+        return letterContent;
     }
 
-    public void setSlettercontent(String slettercontent) {
-        this.slettercontent = slettercontent;
-    }
-
-    public String getSendee(){
-        return sendee;
-    }
-    public void setSendee(String sendee) {
-        this.sendee = sendee;
+    public void setLetterContent(String letterContent) {
+        this.letterContent = letterContent;
     }
 
     public void setUserService(userService userService) {
@@ -105,4 +93,20 @@ public class secretLetterAction extends baseAction {
     public void setDataMap(Map<String, Object> dataMap) {
         this.dataMap = dataMap;
     }
+
+    public String getReceiverEmail(){
+        return receiverEmail;
+    }
+
+    public void setReceiverEmail(String receiverEmail) {
+        this.receiverEmail = receiverEmail;
+    }
+
+//    public String getSender(){
+//        return sender;
+//    }
+//
+//    public void setSender(String sender) {
+//        this.sender = sender;
+//    }
 }

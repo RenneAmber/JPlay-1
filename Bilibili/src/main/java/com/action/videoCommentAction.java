@@ -5,6 +5,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.pojo.Comment;
 import com.util.timeUtil;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,6 +14,7 @@ import java.util.Map;
 public class videoCommentAction extends commentAction {
     private commentService commentService;
     private int videoId;
+    private List<Comment> commentList;
     protected String commentContent;
 
     private int commentId;
@@ -20,14 +22,19 @@ public class videoCommentAction extends commentAction {
 
     public String commentVideo(){
         Map Session = ActionContext.getContext().getSession();
-        String username = (String)Session.get("username");
+        String email = (String)Session.get("email");
         Comment comment = new Comment();
-        comment.setCommentId(commentService.findMaxCommentId()+1);
+//        comment.setCommentId(commentService.findMaxCommentId()+1);
         comment.setContent(commentContent);
         comment.setThumbCount(0);
         comment.setCreateTime(timeUtil.GetCurrentDatetime());
-        comment.setCommentPusher(username);
-        commentService.makeCommentOnVideo(videoId,username,comment);
+        comment.setCommentPusher(email);
+        commentService.makeCommentOnVideo(videoId, email, comment);
+        return SUCCESS;
+    }
+
+    public String listComments() {
+        commentList = commentService.findAllComments();
         return SUCCESS;
     }
 
@@ -38,8 +45,8 @@ public class videoCommentAction extends commentAction {
 
     public String report(){
         Map Session = ActionContext.getContext().getSession();
-        String username = (String)Session.get("username");
-        commentService.reportComment(commentId,username,reason);
+        String email = (String) Session.get("email");
+        commentService.reportComment(commentId, email, reason);
         return SUCCESS;
     }
 
@@ -64,11 +71,11 @@ public class videoCommentAction extends commentAction {
         this.videoId = videoId;
     }
 
-    public com.service.commentService getCommentService() {
+    public commentService getCommentService() {
         return commentService;
     }
 
-    public void setCommentService(com.service.commentService commentService) {
+    public void setCommentService(commentService commentService) {
         this.commentService = commentService;
     }
 
@@ -86,5 +93,13 @@ public class videoCommentAction extends commentAction {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 }

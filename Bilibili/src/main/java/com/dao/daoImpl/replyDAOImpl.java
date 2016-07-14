@@ -1,6 +1,7 @@
 package com.dao.daoImpl;
 
 import com.dao.replyDAO;
+import com.pojo.Comment;
 import com.pojo.Reply;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -56,26 +57,25 @@ public class replyDAOImpl extends HibernateDaoSupport implements replyDAO {
         return getHibernateTemplate().load(Reply.class,replyId);
     }
 
-    @Override
-    public int findMaxReplyId() {
-        String hql = "select max(reply.replyId) as maxinum from Reply as reply";
-        if( getHibernateTemplate().find(hql).get(0)==null)
-            return 0;
-        else
-        return Integer.parseInt(String.valueOf(getHibernateTemplate().find(hql).get(0)));
-    }
+//    @Override
+//    public int findMaxReplyId() {
+//        String hql = "select max(reply.replyId) as maxinum from Reply as reply";
+//        if( getHibernateTemplate().find(hql).get(0) == null)
+//            return 0;
+//        else
+//            return Integer.parseInt(String.valueOf(getHibernateTemplate().find(hql).get(0)));
+//    }
 
     @Override
     public List<Reply> findRepliesByCommentId(int commentId) {
-        String hql = "select replyId as rid from CommentReply where commentId=?";
-        if(getHibernateTemplate().find(hql,commentId).size()==0)
+        String hql = "select replyId as rid from CommentReply where commentId = ?";
+        List<Integer> replyIdList = (List<Integer>) getHibernateTemplate().find(hql, commentId);
+        if (replyIdList.size() == 0)
             return null;
-        else
-        {
-            List<Reply>result = new ArrayList<Reply>();
-            List<Integer>replyIdList= (List<Integer>) getHibernateTemplate().find(hql,commentId);
-            for(int i=0;i<replyIdList.size();i++){
-                result.add((Reply)getHibernateTemplate().find("from Reply as reply where reply.replyId=?",replyIdList.get(i)).get(0));
+        else {
+            List<Reply> result = new ArrayList<Reply>();
+            for(int i = 0; i < replyIdList.size(); i++){
+                result.add((Reply) getHibernateTemplate().find("from Reply as reply where reply.replyId = ?", replyIdList.get(i)).get(0));
             }
             return result;
         }
@@ -83,17 +83,21 @@ public class replyDAOImpl extends HibernateDaoSupport implements replyDAO {
 
     @Override
     public List<Reply> findRepliesByPostId(int postId) {
-        String hql = "select replyId as rid from PostReply where postId=?";
-        if(getHibernateTemplate().find(hql,postId).size()==0)
+        String hql = "select replyId as rid from PostReply where postId = ?";
+        List<Integer> replyIdList = (List<Integer>) getHibernateTemplate().find(hql, postId);
+        if (replyIdList.size() == 0)
             return null;
-        else
-        {
-            List<Reply>result = new ArrayList<Reply>();
-            List<Integer>replyIdList= (List<Integer>) getHibernateTemplate().find(hql,postId);
-            for(int i=0;i<replyIdList.size();i++){
-                result.add((Reply)getHibernateTemplate().find("from Reply as reply where reply.replyId=?",replyIdList.get(i)).get(0));
+        else {
+            List<Reply> result = new ArrayList<Reply>();
+            for(int i = 0; i < replyIdList.size(); i++){
+                result.add((Reply)getHibernateTemplate().find("from Reply as reply where reply.replyId = ?", replyIdList.get(i)).get(0));
             }
             return result;
         }
+    }
+
+    @Override
+    public List<Reply> findAllReplies() {
+        return (List<Reply>) getHibernateTemplate().find("from Reply ");
     }
 }
