@@ -36,16 +36,13 @@ public class secretLetterAction extends baseAction {
 
     public String listLetter() {
         dataMap.clear();
-        //System.out.println("in list letter");
         Map Session = ActionContext.getContext().getSession();
         String email = (String)Session.get("email");
         //System.out.println(user);
         letterList=userService.showLetterByUser(email);
         System.out.println(letterList.size());
-//        Session.put("letterList",letterList);
         dataMap.put("letterList", letterList);
         System.out.println("success");
-        //result = JSONObject.fromObject(letterList);
         return "json";
     }
 

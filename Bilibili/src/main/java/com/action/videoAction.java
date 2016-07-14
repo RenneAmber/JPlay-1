@@ -69,6 +69,7 @@ public class videoAction extends baseAction {
 
             //获得保存文件的路径
 //            ServletContext sctx = getServletContext();
+
             //获得文件名
             String basePath = getServletContext().getRealPath("videos");
             //待转码的文件
@@ -87,7 +88,9 @@ public class videoAction extends baseAction {
 //            video.setVideoId(videoService.findMaxVideoId()+1);
             video.setTitle(title);
             video.setContent(content);
+
             video.setLink("videos/" + serialName + ".mp4");
+
             video.setIsPass(new Byte("0"));
             video.setTopic("unknown");
             video.setCreateTime(timeUtil.GetCurrentTime());
@@ -98,6 +101,7 @@ public class videoAction extends baseAction {
 
             //video.setPicture("videos/images/" + serialName + ".jpg");
 
+            System.out.println("Video Insert!");
             //转码
             flag = videoService.executeCodecs(ffmpegPath,(String)Session.get("videoName"), codcFilePath, mediaPicPath);
 
@@ -165,7 +169,9 @@ public class videoAction extends baseAction {
     public String autoPlay() {
         replyListBean = new ArrayList<List<Reply>>();
         videoBean = videoService.findVideoById(videoId);
+        commentListBean=new ArrayList<Comment>();
         commentListBean = commentService.showCommentsByVideoId(videoId);
+
         for(int i = 0; i < commentListBean.size(); i++){
             replyListBean.add(replyService.showRepliesByCommentId(commentListBean.get(i).getCommentId()));
         }

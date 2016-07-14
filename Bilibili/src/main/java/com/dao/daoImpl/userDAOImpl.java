@@ -82,4 +82,10 @@ public class userDAOImpl extends HibernateDaoSupport implements userDAO {
     public List<User> findAllUsers() {
         return (List<User>) getHibernateTemplate().find("from User ");
     }
+
+    @Override
+    public List<User> findUpersByVideoId(int videoId) {
+        List<User>result = null;
+        return result;
+    }
 }

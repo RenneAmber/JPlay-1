@@ -48,11 +48,11 @@
         </action>
 
         <!-- 私信 -->
-        <action name="secretLetter" class="com.action.secretLetterAction" method="sendLetter">
-            <result name="success">/index.jsp</result>
-            <result name="error">/userLetter.jsp</result>
+            <!-- 发送私信-->
+        <action name="sendSecretLetter" class="com.action.secretLetterAction" method="sendLetter">
+            <result name="success">/userLetter.jsp</result>
         </action>
-
+            <!-- 私信列表 -->
         <action name="letterList" class="com.action.secretLetterAction" method="listLetter">
             <result name="json" type="json">
                 <param name="root">dataMap</param>
@@ -104,7 +104,14 @@
             <result name="success">single.jsp</result>
         </action>
 
-
+        <!-- 评论举报功能-->
+        <action name="reportComment" class="com.action.videoCommentAction" method="report">
+            <result name="success">single.jsp</result>
+        </action>
+        <!--回复举报功能-->
+        <action name="reportReply" class="com.action.replyAction" method="report">
+            <result name="success">single.jsp</result>
+        </action>
         <!-- 全文搜索功能(index)-->
         <action name="searchAction" class="com.action.videoAction" method="search">
             <result name="success">index.jsp</result>
