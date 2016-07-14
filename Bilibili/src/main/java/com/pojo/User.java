@@ -3,6 +3,7 @@ package com.pojo;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * Created by Admin on 2016/7/12.
@@ -25,7 +26,7 @@ public class User {
     private Collection<FavoriteGroup> favoriteGroupsByUserId;
     private Collection<Follow> followsByUserId;
     private Collection<Follow> followsByUserId_0;
-    private Collection<InterestGroupUser> interestgroupUsersByUserId;
+//    private Collection<InterestGroupUser> interestGroupUsersByUserId;
     private Collection<Letter> lettersByUserId;
     private Collection<Letter> lettersByUserId_0;
     private Collection<PostReport> postReportsByUserId;
@@ -37,6 +38,15 @@ public class User {
     private Collection<UserRole> userRolesByUserId;
     private Collection<VideoReport> videoReportsByUserId;
     private Collection<VideoUper> videoUpersByUserId;
+    private Set<InterestGroupUser> getInterestGroupUsersByUserId;
+
+    public Set<InterestGroupUser> getGetInterestGroupUsersByUserId() {
+        return getInterestGroupUsersByUserId;
+    }
+
+    public void setGetInterestGroupUsersByUserId(Set<InterestGroupUser> getInterestGroupUsersByUserId) {
+        this.getInterestGroupUsersByUserId = getInterestGroupUsersByUserId;
+    }
 
     public int getUserId() {
         return userId;
@@ -216,13 +226,13 @@ public class User {
         this.followsByUserId_0 = followsByUserId_0;
     }
 
-    public Collection<InterestGroupUser> getInterestgroupUsersByUserId() {
-        return interestgroupUsersByUserId;
-    }
-
-    public void setInterestgroupUsersByUserId(Collection<InterestGroupUser> interestgroupUsersByUserId) {
-        this.interestgroupUsersByUserId = interestgroupUsersByUserId;
-    }
+//    public Collection<InterestGroupUser> getInterestGroupUsersByUserId() {
+//        return interestGroupUsersByUserId;
+//    }
+//
+//    public void setInterestGroupUsersByUserId(Collection<InterestGroupUser> interestGroupUsersByUserId) {
+//        this.interestGroupUsersByUserId = interestGroupUsersByUserId;
+//    }
 
     public Collection<Letter> getLettersByUserId() {
         return lettersByUserId;
