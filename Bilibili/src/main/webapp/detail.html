@@ -11,18 +11,18 @@
 
     <title>Jplay</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="bootstrap-table-master/dist/bootstrap-table.min.css" rel="stylesheet">
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+   
+    <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+   	 	<link href="bootstrap-table-master/dist/bootstrap-table.min.css" rel="stylesheet">
+   		 <script type="text/javascript" src="jQuery/jquery-2.2.4.min.js"></script>
+   		 <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    	<script src="bootstrap-table-master/dist/bootstrap-table.min.js" ></script>
  
     <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="myCss/sb-admin.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="myCss/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -219,27 +219,9 @@
                     <div class="col-lg-6">
                         <h2>注册用户</h2>
                         <div class="table-responsive">
-                            <table data-toggle="table"
-                                style="width:100%;height:350px"
-                                data-url="/Users/apple/Download/data.json"
-                                data-row-style="rowStyle"
-                                data-classes="table table-hover table-condensed"
-                                data-striped="true"
-                                data-search="true"
-                                data-show-columns="true">
-                                <thead>
-                                    <tr >
-                                        <th data-formatter="runningFormatter">Index</th>
-                                        <th data-field="ISBN" data-visible="ture">ISBN</th>
-                                        <th data-field="author" >User</th>
-                                        <th data-field="bookName" >Number</th>
-                                        <th data-field="cateID" >Category</th>
-                                        <th data-field="cataname" >Date</th>
-                                        <th data-field="price" >Price</th>
-                                        
-                                    </tr>
-                                </thead>
-                            </table>
+                            <table 	id="dg_buslist"
+									data-show-columns="true">
+							</table>
                         </div>
                     </div>
                 </div>
@@ -251,7 +233,119 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
 </body>
-
+<script type="text/javascript">
+		  function initData(){
+			  var data;
+			  $.ajax({
+				  url:'/SSHMaven/listOrder.action',
+				  dataType:'json',
+				  type:'POST',
+				  data:data,
+				  success:function(data){
+					  var total = 7;
+					  
+						$('#dg_buslist').bootstrapTable({
+							data:data,
+							search:true,
+							pagination:true,
+							pageList:[5,10,20],
+							pageSize:5,
+							pageNumber:1,
+							columns:[{
+								title: 'hahaha',
+			                      field: 'ID',
+			                      align: 'center',
+			                      valign: 'middle'
+							},
+							{
+								title: 'hahaha',
+			                      field: 'ISBN',
+			                      align: 'center',
+			                      valign: 'middle'
+							},
+							{
+								title: 'hahaha',
+			                      field: 'author',
+			                      align: 'center',
+			                      valign: 'middle'
+							},
+							{
+								title: 'hahaha',
+			                      field: 'bookName',
+			                      align: 'center',
+			                      valign: 'middle'
+							},
+							{
+								title: 'hahaha',
+			                      field: 'cate',
+			                      align: 'center',
+			                      valign: 'middle'
+							},
+							{
+								title: 'hahaha',
+			                      field: 'date',
+			                      align: 'center',
+			                      valign: 'middle'
+							},
+							{
+								title: 'hahaha',
+			                      field: 'price',
+			                      align: 'center',
+			                      valign: 'middle'
+							},
+							{
+								title: 'hahaha',
+			                      field: 'number',
+			                      align: 'center',
+			                      valign: 'middle'
+							},
+							{
+								title: 'hahaha',
+			                      field: 'userName',
+			                      align: 'center',
+			                      valign: 'middle'
+							}, {
+			                      title: '操作',
+			                      field: 'id',
+			                      align: 'center',
+			                      formatter:function(value,row,index){  
+			                   var e = '<a href="#" mce_href="#" onclick="alert(\''+ row.ID + '\')">编辑</a> ';  
+			                   var d = '<a href="#" mce_href="#" onclick="alert(\''+ row.ID +'\')">删除</a> ';  
+			                        return e+d;  
+			                    }}]
+						});
+			
+				  }
+			  });
+			  
+		  } 
+		  function buttonCancel()
+			{
+				window.location.href="listOrderBy.jsp";
+			}
+		  
+		function rowStyle(row, index) {
+		    var classes = ['active', 'active', 'active', 'active', 'active'];
+		    
+		    if (index % 2 === 0 && index / 2 < classes.length) {
+		        return {
+		            classes: classes[index / 2]
+		        };
+		    }
+		    return {};
+		}
+		function runningFormatter(value, row, index) {
+		    return index;
+		}
+		/* $.post("/SSHMaven/listOrder.action", function(result){
+			$("#xg").text(JSON.stringify(result));
+		}); */
+		</script>
+	<script type="text/javascript">
+	
+	//alert("uhwhhw");
+	initData();
+	
+	</script>
 </html>
