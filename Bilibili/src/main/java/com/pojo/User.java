@@ -1,6 +1,5 @@
 package com.pojo;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,7 +14,7 @@ public class User {
     private byte status;
     private Byte gender;
     private String signature;
-    private byte[] email;
+    private String email;
     private Date birthday;
     private String created;
     private String lastUpdate;
@@ -87,13 +86,13 @@ public class User {
         this.signature = signature;
     }
 
-    public byte[] getEmail() {
+    public String getEmail() {
         return email;
     }
-
-    public void setEmail(byte[] email) {
+    public void setEmail(String email) {
         this.email = email;
     }
+
 
     public Date getBirthday() {
         return birthday;
@@ -156,7 +155,7 @@ public class User {
         if (!Arrays.equals(pwdhash, user.pwdhash)) return false;
         if (gender != null ? !gender.equals(user.gender) : user.gender != null) return false;
         if (signature != null ? !signature.equals(user.signature) : user.signature != null) return false;
-        if (!Arrays.equals(email, user.email)) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (birthday != null ? !birthday.equals(user.birthday) : user.birthday != null) return false;
         if (created != null ? !created.equals(user.created) : user.created != null) return false;
         if (lastUpdate != null ? !lastUpdate.equals(user.lastUpdate) : user.lastUpdate != null) return false;
@@ -175,7 +174,7 @@ public class User {
         result = 31 * result + (int) status;
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
         result = 31 * result + (signature != null ? signature.hashCode() : 0);
-        result = 31 * result + Arrays.hashCode(email);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (created != null ? created.hashCode() : 0);
         result = 31 * result + (lastUpdate != null ? lastUpdate.hashCode() : 0);
