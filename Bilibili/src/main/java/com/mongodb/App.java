@@ -35,9 +35,9 @@
 //        File file = new File("");    // Absolute path, i.e. "C:\\Users\\Admin\\Images\\foo.jpg"
 //        Query query = new Query;   // Find by videoID
 //        Update update = new Update().set("picture", FileToByte.getBytesFromFile(file));
-//        // TODO: Read MongoOperations (Spring Data MongoDB 1.9.1.RELEASE API)
+//        // REF: Read MongoOperations (Spring Data MongoDB 1.9.1.RELEASE API)
 //        // href: http://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/core/MongoOperations.html
-//        mongoOperations.findAndModify(query, update, ScreenShot.class); // TODO: Create a ScreenShot Class
+//        mongoOperations.findAndModify(query, update, ScreenShot.class); // REF: Create a ScreenShot Class
 //        mongoOperations.save(bookProfile);  // save: create (C in CRUD)
 //        mongoOperations.upsert(query, update, ScreenShot.class);  // upsert: if exists then update else create. (CU in CRUD)
 //    }

@@ -4,12 +4,7 @@ import com.mongodb.pojo.userBehavior;
 import com.pojo.User;
 import com.service.userService;
 import com.service.videoService;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
+import com.mongodb.service.userBehaviorService;
 
 /**
  * Created by Admin on 2016/7/14.
@@ -20,18 +15,25 @@ public class userBehaviorRecord extends baseAction {
     private static final int watchedIncrement = 5;
     private userService userService;
     private videoService videoService;
+    private userBehaviorService userBehaviorService;
     private String email;
     private int videoId;
 
     public String favoriteBehavior() {
-        ApplicationContext ctx = new GenericXmlApplicationContext("applicationContext-mongodb.xml");
-        MongoOperations mongoOperations = (MongoOperations)ctx.getBean("mongoTemplate");
         User user = userService.findUserByEmail(email);
-        Query query = new Query(Criteria.where("userId").is(user.getUserId()));
-        query.addCriteria(Criteria.where("videoId").is(videoId));
-        Update update = new Update().inc("likeDegree", favoriteIncrement);
-        mongoOperations.findAndModify(query, update, userBehavior.class);
+        userBehaviorService.increaseRating(user.getUserId(), videoId, favoriteIncrement);
+        return SUCCESS;
+    }
 
+    public String thumbBehavior() {
+        User user = userService.findUserByEmail(email);
+        userBehaviorService.increaseRating(user.getUserId(), videoId, thumbIncrement);
+        return SUCCESS;
+    }
+
+    public String watchedBehavior() {
+        User user = userService.findUserByEmail(email);
+        userBehaviorService.increaseRating(user.getUserId(), videoId, watchedIncrement);
         return SUCCESS;
     }
 
@@ -65,5 +67,13 @@ public class userBehaviorRecord extends baseAction {
 
     public void setVideoService(com.service.videoService videoService) {
         this.videoService = videoService;
+    }
+
+    public userBehaviorService getUserBehaviorService() {
+        return userBehaviorService;
+    }
+
+    public void setUserBehaviorService(userBehaviorService userBehaviorService) {
+        this.userBehaviorService = userBehaviorService;
     }
 }

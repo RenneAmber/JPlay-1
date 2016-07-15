@@ -3,6 +3,19 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- Recommendation -->
+    <bean name="userBehaviorDAO" class="com.mongodb.dao.impl.userBehaviorDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean name="userBehaviorService" class="com.mongodb.service.impl.userBehaviorServiceImpl">
+        <property name="userBehaviorDAO" ref="userBehaviorDAO"/>
+    </bean>
+    
+    <bean name="userBehaviorRecord" class="com.action.userBehaviorRecord">
+        <property name="userBehaviorService" ref="userBehaviorService"/>
+    </bean>
+
     <!-- File Upload-->
     <bean name="uploadTestAction" class="com.util.uploadHandler" scope="prototype"></bean>
 
@@ -58,11 +71,7 @@
         <property name="interestGroupDAO" ref="interestGroupDAO"/>
     </bean>
 
-    <bean name="logInAction" class="com.action.logInOutAction" scope="prototype">
-        <property name="userService" ref="userService"/>
-    </bean>
-
-    <bean name="logOutAction" class="com.action.logInOutAction" scope="prototype">
+    <bean name="logInOutAction" class="com.action.logInOutAction" scope="prototype">
         <property name="userService" ref="userService"/>
     </bean>
 

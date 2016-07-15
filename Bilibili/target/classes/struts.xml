@@ -15,6 +15,27 @@
         </interceptors>
         <default-interceptor-ref name="myStack"></default-interceptor-ref>
 
+        <action name="favoriteRecord" class="userBehaviorRecord" method="favoriteBehavior">
+            <result name="success" type="json">
+                <param name="root">userId</param>
+                <param name="root">videoId</param>
+            </result>
+        </action>
+
+        <action name="thumbRecord" class="userBehaviorRecord" method="thumbBehavior">
+            <result name="success" type="json">
+                <param name="root">userId</param>
+                <param name="root">videoId</param>
+            </result>
+        </action>
+
+        <action name="watchedRecord" class="userBehaviorRecord" method="watchedBehavior">
+            <result name="success" type="json">
+                <param name="root">userId</param>
+                <param name="root">videoId</param>
+            </result>
+        </action>
+
         <!-- File Upload -->
         <action name="uploadTestAction" class="uploadTestAction" method="execute">
             <result name="json"></result>
@@ -28,18 +49,18 @@
         </action>
 
         <!-- User -->
-        <action name="registerAction" class="com.action.registerAction" method="execute">
+        <action name="registerAction" class="registerAction" method="execute">
             <result name="success">index.jsp</result>
         </action>
 
-        <action name="logInAction" class="com.action.logInOutAction" method="logIn">
+        <action name="logInAction" class="logInOutAction" method="logIn">
             <result name="success">index.jsp</result>
             <result name="user">index.jsp</result>
             <result name="admin">index.jsp</result>
             <result name="error">login.jsp</result>
         </action>
 
-        <action name="logOutAction" class="com.action.logInOutAction" method="logOut">
+        <action name="logOutAction" class="logInOutAction" method="logOut">
             <result name="success">index.jsp</result>
         </action>
 

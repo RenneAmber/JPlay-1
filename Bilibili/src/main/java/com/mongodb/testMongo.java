@@ -1,4 +1,3 @@
-/*
 package com.mongodb;
 
 import com.mongodb.client.MongoDatabase;
@@ -11,12 +10,10 @@ public class testMongo{
 
             MongoDatabase mongoDatabase = mongoClient.getDatabase("JPlay");
             System.out.println("Connect to database successfully");
-            mongoDatabase.createCollection("userImage");
-            mongoDatabase.createCollection("videoShot");
+            mongoDatabase.createCollection("userBehavior");
             System.out.println("Create collection successfully.");
         } catch(Exception e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
         }
     }
 }
-*/
