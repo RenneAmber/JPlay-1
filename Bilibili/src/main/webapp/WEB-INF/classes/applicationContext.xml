@@ -70,6 +70,10 @@
         <property name="userService" ref="userService"/>
     </bean>
 
+    <bean name="userAction" class="com.action.userAction" scope="prototype">
+        <property name="userService" ref="userService"/>
+    </bean>
+
     <!--Category -->
     <bean name="categoryDAO" class="com.dao.daoImpl.categoryDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>

@@ -245,28 +245,28 @@
                 <div class="modal-body">
                     <form method="post" class="form" role="form" >
                         <div class="form-group  required"><label class="control-label" for="userId">userId</label>
-                            <input class="form-control" placeholder="" id="ID" name="ID" disabled="disabled">
+                            <input class="form-control" id="ID" name="ID" disabled="disabled">
                         </div>
                         <div class="form-group  required"><label class="control-label" for="username">user name</label>
-                            <input class="form-control" placeholder="input to modify" id="username" name="username" required type="text" value="">
+                            <input class="form-control" id="username" name="username" required type="text" value="">
                         </div>
                         <div class="form-group  required"><label class="control-label" for="password">password</label>
-                            <input class="form-control" placeholder="input to modify" id="password" name="password" required type="text" value="">
+                            <input class="form-control" placeholder="******" id="password" name="password" required type="text" value="">
                         </div>
                         <div class="form-group  required"><label class="control-label" for="signature">signature</label>
-                            <input class="form-control" placeholder="input to modify" id="signature" name="signature" required type="text" value="">
+                            <input class="form-control" id="signature" name="signature" required type="text" value="">
                         </div>
                         <div class="form-group  required"><label class="control-label" for="email">email</label>
-                            <input class="form-control" placeholder="input to modify" id="email" name="email" required type="text" value="">
+                            <input class="form-control" id="email" name="email" required type="text" value="">
                         </div>
                         <div class="form-group  required"><label class="control-label" for="realName">realName</label>
-                            <input class="form-control" placeholder="input to modify" id="realName" name="realName" required type="text" value="">
+                            <input class="form-control" id="realName" name="realName" required type="text" value="">
                         </div>
                         <div class="form-group  required"><label class="control-label" for="experience">experience</label>
-                            <input class="form-control" placeholder="input to modify" id="experience" name="experience" required type="text" value="">
+                            <input class="form-control" id="experience" name="experience" required type="text" value="">
                         </div>
                         <div class="form-group  required"><label class="control-label" for="birthday">birthday</label>
-                            <input type="date" id="birthday" name="birthday" value="">
+                            <input class="form-control" id="birthday" name="birthday" type="date" value="">
                         </div>
                         <div class="form-group  required"><label class="control-label">gender</label>
                             <label class="checkbox-inline">
@@ -293,82 +293,99 @@
         </div>
 </body>
 <script type="text/javascript">
+    function removeAllSpace(str) {
+        return str.replace(/\s+/g, "");
+    }
+
     function initData(){
-        $('#dg_buslist').bootstrapTable({
-            url:'/Bilibili/getAllUser.action',
-//            data:$.parseJSON(JSON.stringify(data)),
-            dataType:'json',
-            search:true,
-            pagination:true,
-            pageList:[5,10,20],
-            pageSize:5,
-            pageNumber:1,
-            columns:[{
-                title: 'ID',
-                field: 'userId',
-                align: 'center',
-                valign: 'middle',
+        var data = "";
+        $.ajax({
+            url: '/Bilibili/getAllUser.action',
+            dataType: 'json',
+            type: 'POST',
+            data: data,
+            success:function (data) {
+                console.log(data);
+                $('#dg_buslist').bootstrapTable({
+//                    url:'/Bilibili/getAllUser.action',
+                    data: data,
+                    dataType:'json',
+                    search:true,
+                    pagination:true,
+                    pageList:[5,10,20],
+                    pageSize:5,
+                    pageNumber:1,
+                    columns:[
+                        {
+                            title: 'ID',
+                            field: 'userId',
+                            align: 'center',
+                            valign: 'middle',
+                        },
+                        {
+                            title: 'name',
+                            field: 'username',
+                            align: 'center',
+                            valign: 'middle',
+                        },
+                        {
+                            title: 'birthday',
+                            field: 'birthday',
+                            align: 'center',
+                            valign: 'middle'
+                        },
+                        {
+                            title: 'gender',
+                            field: 'gender',
+                            align: 'center',
+                            valign: 'middle'
+                        },
+                        {
+                            title: 'email',
+                            field: 'email',
+                            align: 'center',
+                            valign: 'middle'
+                        },
+                        {
+                            title: 'real name',
+                            field: 'realname',
+                            align: 'center',
+                            valign: 'middle'
+                        },
+                        {
+                            title: 'last update',
+                            field: 'lastUpdate',
+                            align: 'center',
+                            valign: 'middle'
+                        },
+                        {
+                            title: 'created',
+                            field: 'created',
+                            align: 'center',
+                            valign: 'middle'
+                        },
+                        {
+                            title: 'university',
+                            field: 'university',
+                            align: 'center',
+                            valign: 'middle'
+                        }, {
+                            title: '操作',
+                            field: 'id',
+                            align: 'center',
+                            formatter:function(value,row,index){
+                                //  alert(row.birthday);
+                                var json = row.userId + " " + row.username + " " + row.birthday + " " + row.gender +
+                                        " " + row.email + " " + removeAllSpace(row.realname) + " " + row.experience + " " + removeAllSpace(row.signature) + " ";
+                                var e = '<a href="#" mce_href="#" onclick="modal(\''+ json + '\')">编辑</a> ';
+                                var d = '<a href="javascript:;" mce_href="#" onclick="removeUser(\''+ row.userId + '\')">删除</a> ';
+                                return e+d;
+                            }
+                        }]
+                });
             },
-                {
-                    title: 'name',
-                    field: 'username',
-                    align: 'center',
-                    valign: 'middle',
-                },
-                {
-                    title: 'birthday',
-                    field: 'birthday',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: 'gender',
-                    field: 'gender',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: 'email',
-                    field: 'email',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: 'real name',
-                    field: 'realname',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: 'last update',
-                    field: 'lastUpdate',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: 'created',
-                    field: 'created',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: 'university',
-                    field: 'university',
-                    align: 'center',
-                    valign: 'middle'
-                }, {
-                    title: '操作',
-                    field: 'id',
-                    align: 'center',
-                    formatter:function(value,row,index){
-                        var json = JSON.stringify(row);
-                        console.log(typeof json);
-                        var e = '<a href="#" mce_href="#" onclick="modal('+json+')">编辑</a> ';
-                        var d = '<a href="javascript:;" mce_href="#" onclick="removeUser(\''+ row.userId + '\')">删除</a> ';
-                        return e+d;
-                    }
-                }]
         });
+
 
     }
 
@@ -394,13 +411,71 @@
     var Id;
     function modal(ID){
         console.log(ID);
-//        $('#myModal').modal('show');
-//        var id = document.getElementById("ID");
-//        id.value=ID;
-//        Id = ID;
+        var info = "";
+        var flag = 0;
+        $('#myModal').modal('show');
+      //  alert(ID.length);
+        for(var i = 0;i< ID.length; i++){
+            if(ID[i] != " "){
+                info+=ID[i];
+            }else{
+                switch (flag){
+                    case 0:
+                        document.getElementById("ID").value=info;
+                            //alert(info);
+                        info = "";
+                        flag ++;
+                        break;
+                    case 1:
+                        document.getElementById("username").value=info;
+                        info = "";
+                        flag ++;
+                        break;
+                    case 2:
+                        document.getElementById("birthday").value=info;
+                        info = "";
+                        flag ++;
+                        break;
+                    case 3:
+                        if(info == "1") {
+                            document.getElementById("optionsRadios3").checked = true;
+                            document.getElementById("optionsRadios4").checked = false;
+                        }else{
+                            document.getElementById("optionsRadios4").checked = true;
+                            document.getElementById("optionsRadios3").checked = false;
+                        }
+                        info = "";
+                        flag ++;
+                        break;
+                    case 4:
+                        document.getElementById("email").value=info;
+                        info = "";
+                        flag ++;
+                        break;
+                    case 5:
+                        document.getElementById("realName").value=info;
+                        info = "";
+                        flag ++;
+                        break;
+                    case 6:
+                        document.getElementById("experience").value=info;
+                        info = "";
+                        flag ++;
+                        break;
+                    case 7:
+                        document.getElementById("signature").value=info;
+                        info = "";
+                        flag ++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 
     function edit(){
+        var userId = document.getElementById("ID");
         var username = document.getElementById("username");
         var password = document.getElementById("password");
         var signature = document.getElementById("signature");
@@ -409,20 +484,21 @@
         var realName = document.getElementById("realName");
         var experience = document.getElementById("experience");
         var isMale = document.getElementById("optionsRadios3").checked ? 1 : 0;
-
+       // alert(birthday.value);
         $.ajax({
-            data:{"user_id":Id,"username":username.value,"password":password.value,"signature":signature.value,
-                    "email":email.value,"brithday":birthday.value,"realName":realName.value,"experience":experience.value,"gender":isMale},
+            data:{"userId":userId.value,"username":username.value,"password":password.value,"signature":signature.value,
+                    "email":email.value,"birthday":birthday.value,"realname":realName.value,"experience":experience.value,"gender":isMale},
             dataType:'JSON',
             type:'POST',
-            url:"updateXXX.action",
+            url:"/Bilibili/updateUser.action",
             timeout:3000,
             cache:false,
             success:function(){
                 document.getElementById("message").innerHTML="<center><b>修改成功</b></center>";
+                initData();
             },
             error:function(){
-                document.getElementById("message").innerHTML="<center><b>改你麻痹</b></center>";
+                document.getElementById("message").innerHTML="<center><b>修改失败</b></center>";
             }
         })
     }
@@ -436,7 +512,8 @@
             timeout:3000,
             cache:false,
             success:function(){
-//                initData();
+                alert("删除成功");
+                initData();
             },
             error:function(){
                 window.location.href = "error.jsp";
@@ -445,8 +522,13 @@
     }
     function cancel(){
         document.getElementById("message").innerHTML="";
-        username.value="";
-        email.value="";
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("signature").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("birthday").value = "";
+        document.getElementById("realName").value = "";
+        document.getElementById("experience").value = "";
     }
 </script>
 <div id="xg"></div>
