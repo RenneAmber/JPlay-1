@@ -244,16 +244,40 @@
                 </div>
                 <div class="modal-body">
                     <form method="post" class="form" role="form" >
-                        <div class="form-group  required"><label class="control-label" for="password">ID</label>
+                        <div class="form-group  required"><label class="control-label" for="userId">userId</label>
                             <input class="form-control" placeholder="" id="ID" name="ID" disabled="disabled">
                         </div>
-                        <div class="form-group  required"><label class="control-label" for="phone">phone</label>
-                            <input class="form-control" placeholder="input to modify" id="phone" name="phone" required type="text" value="">
+                        <div class="form-group  required"><label class="control-label" for="username">user name</label>
+                            <input class="form-control" placeholder="input to modify" id="username" name="username" required type="text" value="">
+                        </div>
+                        <div class="form-group  required"><label class="control-label" for="password">password</label>
+                            <input class="form-control" placeholder="input to modify" id="password" name="password" required type="text" value="">
+                        </div>
+                        <div class="form-group  required"><label class="control-label" for="signature">signature</label>
+                            <input class="form-control" placeholder="input to modify" id="signature" name="signature" required type="text" value="">
                         </div>
                         <div class="form-group  required"><label class="control-label" for="email">email</label>
                             <input class="form-control" placeholder="input to modify" id="email" name="email" required type="text" value="">
                         </div>
-
+                        <div class="form-group  required"><label class="control-label" for="realName">realName</label>
+                            <input class="form-control" placeholder="input to modify" id="realName" name="realName" required type="text" value="">
+                        </div>
+                        <div class="form-group  required"><label class="control-label" for="experience">experience</label>
+                            <input class="form-control" placeholder="input to modify" id="experience" name="experience" required type="text" value="">
+                        </div>
+                        <div class="form-group  required"><label class="control-label" for="birthday">birthday</label>
+                            <input type="date" id="birthday" name="birthday" value="">
+                        </div>
+                        <div class="form-group  required"><label class="control-label">gender</label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="optionsRadiosinline" id="optionsRadios3"
+                                       value="1" checked="checked"> Male
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="optionsRadiosinline" id="optionsRadios4"
+                                       value="0"> Female
+                            </label>
+                        </div>
                     </form>
                     <div id="message"></div>
                 </div>
@@ -270,9 +294,6 @@
 </body>
 <script type="text/javascript">
     function initData(){
-        var data;
-        data=[{"userID":0,"username":"Catherine","birthday":"1996-1-1","gender":1,"email":"casualxg@gmail.com","realname":"Yin Lu","lastupdate":"2016-7-14","created":"2016-7-14","university":"SJTU"}];
-
         $('#dg_buslist').bootstrapTable({
             url:'/Bilibili/getAllUser.action',
 //            data:$.parseJSON(JSON.stringify(data)),
@@ -286,13 +307,13 @@
                 title: 'ID',
                 field: 'userId',
                 align: 'center',
-                valign: 'middle'
+                valign: 'middle',
             },
                 {
                     title: 'name',
                     field: 'username',
                     align: 'center',
-                    valign: 'middle'
+                    valign: 'middle',
                 },
                 {
                     title: 'birthday',
@@ -340,17 +361,15 @@
                     field: 'id',
                     align: 'center',
                     formatter:function(value,row,index){
-                        var e = '<a href="#" mce_href="#" onclick="modal(\''+ row.ID + '\')">编辑</a> ';
-                        var d = '<a href="#" mce_href="#" onclick="remove(\''+ row.ID +'\')">删除</a> ';
+                        var json = JSON.stringify(row);
+                        console.log(typeof json);
+                        var e = '<a href="#" mce_href="#" onclick="modal('+json+')">编辑</a> ';
+                        var d = '<a href="javascript:;" mce_href="#" onclick="removeUser(\''+ row.userId + '\')">删除</a> ';
                         return e+d;
                     }
                 }]
         });
 
-    }
-    function buttonCancel()
-    {
-        window.location.href="listOrderBy.jsp";
     }
 
     function rowStyle(row, index) {
@@ -369,19 +388,31 @@
     initData();
 </script>
 <script type="text/javascript">
-    var phone = document.getElementById("phone");
-    var email = document.getElementById("email");
+
+
+
     var Id;
     function modal(ID){
-        $('#myModal').modal('show');
-        var id = document.getElementById("ID");
-        id.value=ID;
-        Id = ID;
+        console.log(ID);
+//        $('#myModal').modal('show');
+//        var id = document.getElementById("ID");
+//        id.value=ID;
+//        Id = ID;
     }
 
     function edit(){
+        var username = document.getElementById("username");
+        var password = document.getElementById("password");
+        var signature = document.getElementById("signature");
+        var email = document.getElementById("email");
+        var birthday = document.getElementById("birthday");
+        var realName = document.getElementById("realName");
+        var experience = document.getElementById("experience");
+        var isMale = document.getElementById("optionsRadios3").checked ? 1 : 0;
+
         $.ajax({
-            data:{"ID":Id,"phone":phone.value,"email":email.value},
+            data:{"user_id":Id,"username":username.value,"password":password.value,"signature":signature.value,
+                    "email":email.value,"brithday":birthday.value,"realName":realName.value,"experience":experience.value,"gender":isMale},
             dataType:'JSON',
             type:'POST',
             url:"updateXXX.action",
@@ -395,30 +426,28 @@
             }
         })
     }
-    function remove(ID) {
+
+    function removeUser(ID) {
         $.ajax({
-            data:{"ID":ID},
+            data:"userId="+ID,
             dataType:'JSON',
             type:'POST',
-            url:'deleteXXX.action',
+            url:'/Bilibili/deleteUser.action',
             timeout:3000,
             cache:false,
             success:function(){
-                alert("删除成功");
+//                initData();
             },
             error:function(){
-                alert("删除失败");
+                window.location.href = "error.jsp";
             }
         })
     }
     function cancel(){
         document.getElementById("message").innerHTML="";
-        phone.value="";
+        username.value="";
         email.value="";
     }
-        $.post("/Bilibili/getAllUser.action", function(result){
-          console.log(result);
-        });
 </script>
 <div id="xg"></div>
 </html>

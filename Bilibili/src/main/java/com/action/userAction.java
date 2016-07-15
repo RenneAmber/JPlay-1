@@ -32,8 +32,17 @@ public class userAction extends baseAction {
     private Map<String, Object> dataMap = new HashMap<String, Object>();
 
     public String deleteUser() throws Exception {
-        userService.deleteUser(userId);
-        return SUCCESS;
+        try {
+            System.out.println(userId + "ahhahahaha");
+            userService.deleteUser(userId);
+            System.out.println(userId + "lalalala");
+            return SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            Map session = ActionContext.getContext().getSession();
+            session.put("message","User deletion failed!");
+            return  ERROR;
+        }
     }
 
     public String listMyVideo() throws Exception {
