@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="MySQL - bilibili@localhost" uuid="fff3ac8a-3d0d-4de3-94bf-51471130b1c3">
+    <data-source name="MySQL - bilibili@localhost" uuid="eb230b1d-6895-40c4-b6f1-85f64ec16c34">
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <introspection-scope>bilibili:*</introspection-scope>
-      <resolve-scope>bilibili:*</resolve-scope>
+      <introspection-scope>bilibili:</introspection-scope>
+      <resolve-scope>bilibili:</resolve-scope>
     </data-source>
   </component>
 </project>

@@ -5,6 +5,16 @@
     <constant name="struts.multipart.maxSize" value="1073741824"/>
 
     <package name="Bilibili" extends="struts-default, json-default" >
+        <!-- Interceptor -->
+        <interceptors>
+            <interceptor name="auth" class="com.interceptor.LoginIntercepter" />
+            <interceptor-stack name="myStack">
+                <interceptor-ref name="auth"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="myStack"></default-interceptor-ref>
+
         <!-- File Upload -->
         <action name="uploadTestAction" class="uploadTestAction" method="execute">
             <result name="json"></result>

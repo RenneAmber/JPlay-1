@@ -12,6 +12,6 @@
         </ServerConfiguration>
       </list>
     </option>
-    <option name="shellPath" value="D:\mongodb\bin\mongod.exe" />
+    <option name="shellPath" value="D:\mongodb\bin\mongo.exe" />
   </component>
 </project>
