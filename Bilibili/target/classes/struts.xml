@@ -64,12 +64,22 @@
             <result name="success">index.jsp</result>
         </action>
 
+<<<<<<< HEAD
         <action name="getAllUser" class="com.action.userAction" method="listUsers">
+=======
+        <action name="getAllUser" class="userAction" method="getAllUser">
+>>>>>>> 7a954562786d02a43201f5bda7757ec5fbb008cd
             <result name="success" type="json">
                 <param name="root">userList</param>
             </result>
         </action>
-        <action name="deleteUser" class="com.action.userAction" method="deleteUser">
+        <action name="deleteUser" class="userAction" method="deleteUser">
+            <result name = "success" type="json">
+                <param name="root">userId</param>
+            </result>
+        </action>
+
+        <action name="updateUser" class="userAction" method="updateUser">
             <result name = "success" type="json">
                 <param name="root">userId</param>
             </result>
