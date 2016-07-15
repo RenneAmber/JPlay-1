@@ -5,6 +5,37 @@
     <constant name="struts.multipart.maxSize" value="1073741824"/>
 
     <package name="Bilibili" extends="struts-default, json-default" >
+        <!-- Interceptor -->
+        <interceptors>
+            <interceptor name="auth" class="com.interceptor.LoginIntercepter" />
+            <interceptor-stack name="myStack">
+                <interceptor-ref name="auth"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="myStack"></default-interceptor-ref>
+
+        <action name="favoriteRecord" class="userBehaviorRecord" method="favoriteBehavior">
+            <result name="success" type="json">
+                <param name="root">userId</param>
+                <param name="root">videoId</param>
+            </result>
+        </action>
+
+        <action name="thumbRecord" class="userBehaviorRecord" method="thumbBehavior">
+            <result name="success" type="json">
+                <param name="root">userId</param>
+                <param name="root">videoId</param>
+            </result>
+        </action>
+
+        <action name="watchedRecord" class="userBehaviorRecord" method="watchedBehavior">
+            <result name="success" type="json">
+                <param name="root">userId</param>
+                <param name="root">videoId</param>
+            </result>
+        </action>
+
         <!-- File Upload -->
         <action name="uploadTestAction" class="uploadTestAction" method="execute">
             <result name="json"></result>
@@ -18,21 +49,41 @@
         </action>
 
         <!-- User -->
-        <action name="registerAction" class="com.action.registerAction" method="execute">
+        <action name="registerAction" class="registerAction" method="execute">
             <result name="success">index.jsp</result>
         </action>
 
-        <action name="logInAction" class="com.action.logInOutAction" method="logIn">
+        <action name="logInAction" class="logInOutAction" method="logIn">
             <result name="success">index.jsp</result>
             <result name="user">index.jsp</result>
             <result name="admin">index.jsp</result>
             <result name="error">login.jsp</result>
         </action>
 
-        <action name="logOutAction" class="com.action.logInOutAction" method="logOut">
+        <action name="logOutAction" class="logInOutAction" method="logOut">
             <result name="success">index.jsp</result>
         </action>
 
+<<<<<<< HEAD
+        <action name="getAllUser" class="com.action.userAction" method="listUsers">
+=======
+        <action name="getAllUser" class="userAction" method="getAllUser">
+>>>>>>> 7a954562786d02a43201f5bda7757ec5fbb008cd
+            <result name="success" type="json">
+                <param name="root">userList</param>
+            </result>
+        </action>
+        <action name="deleteUser" class="userAction" method="deleteUser">
+            <result name = "success" type="json">
+                <param name="root">userId</param>
+            </result>
+        </action>
+
+        <action name="updateUser" class="userAction" method="updateUser">
+            <result name = "success" type="json">
+                <param name="root">userId</param>
+            </result>
+        </action>
         <!-- 上传视频信息 -->
         <action name="*VideoInfo" class="com.action.videoAction" method = "{1}">
             <result name="success">/index.jsp</result>

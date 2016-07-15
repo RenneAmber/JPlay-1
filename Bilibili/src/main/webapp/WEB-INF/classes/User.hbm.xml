@@ -3,7 +3,6 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
     <class name="com.pojo.User" table="user" schema="bilibili">
         <id name="userId">
             <column name="user_id" sql-type="int(10)"/>
@@ -25,7 +24,7 @@
             <column name="signature" sql-type="varchar(200)" length="200" not-null="true"/>
         </property>
         <property name="email">
-            <column name="email" sql-type="varbinary(50)" not-null="true"/>
+            <column name="email" sql-type="varchar(50)" not-null="true"/>
         </property>
         <property name="birthday">
             <column name="birthday" sql-type="date" not-null="true"/>
@@ -69,7 +68,7 @@
             </key>
             <one-to-many not-found="ignore" class="com.pojo.Follow"/>
         </set>
-        <set name="interestgroupUsersByUserId" inverse="true">
+        <set name="getInterestGroupUsersByUserId" inverse="true">
             <key>
                 <column name="user_id"/>
             </key>

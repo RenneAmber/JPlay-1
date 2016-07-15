@@ -5,6 +5,16 @@
     <constant name="struts.multipart.maxSize" value="1073741824"/>
 
     <package name="Bilibili" extends="struts-default, json-default" >
+        <!-- Interceptor -->
+        <interceptors>
+            <interceptor name="auth" class="com.interceptor.LoginIntercepter" />
+            <interceptor-stack name="myStack">
+                <interceptor-ref name="auth"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="myStack"></default-interceptor-ref>
+
         <!-- File Upload -->
         <action name="uploadTestAction" class="uploadTestAction" method="execute">
             <result name="json"></result>
@@ -33,6 +43,26 @@
             <result name="success">index.jsp</result>
         </action>
 
+<<<<<<< HEAD
+        <action name="getAllUser" class="com.action.userAction" method="listUsers">
+=======
+        <action name="getAllUser" class="userAction" method="getAllUser">
+>>>>>>> 7a954562786d02a43201f5bda7757ec5fbb008cd
+            <result name="success" type="json">
+                <param name="root">userList</param>
+            </result>
+        </action>
+        <action name="deleteUser" class="userAction" method="deleteUser">
+            <result name = "success" type="json">
+                <param name="root">userId</param>
+            </result>
+        </action>
+
+        <action name="updateUser" class="userAction" method="updateUser">
+            <result name = "success" type="json">
+                <param name="root">userId</param>
+            </result>
+        </action>
         <!-- 上传视频信息 -->
         <action name="*VideoInfo" class="com.action.videoAction" method = "{1}">
             <result name="success">/index.jsp</result>

@@ -39,9 +39,9 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" value="fff3ac8a-3d0d-4de3-94bf-51471130b1c3" />
-          <unit-entry name="sessionFactory" value="fff3ac8a-3d0d-4de3-94bf-51471130b1c3" />
-          <unit-entry name="src:main:webapp:WEB-INF:classes:hibernate.cfg.xml" value="fff3ac8a-3d0d-4de3-94bf-51471130b1c3" />
+          <unit-entry name="hibernate.cfg.xml" value="eb230b1d-6895-40c4-b6f1-85f64ec16c34" />
+          <unit-entry name="sessionFactory" value="eb230b1d-6895-40c4-b6f1-85f64ec16c34" />
+          <unit-entry name="src:main:webapp:WEB-INF:classes:hibernate.cfg.xml" value="eb230b1d-6895-40c4-b6f1-85f64ec16c34" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
