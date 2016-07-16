@@ -33,11 +33,11 @@
 //        ApplicationContext ctx = new GenericXmlApplicationContext("mongoConfig.xml");
 //        MongoOperations mongoOperations = (MongoOperations)ctx.getBean("mongoTemplate");
 //        File file = new File("");    // Absolute path, i.e. "C:\\Users\\Admin\\Images\\foo.jpg"
-//        Query query = new Query;   // Find by videoID
+//        Query query = new Query(Criteria.where("videoId").is(1));   // Find by videoID
 //        Update update = new Update().set("picture", FileToByte.getBytesFromFile(file));
-//        // REF: Read MongoOperations (Spring Data MongoDB 1.9.1.RELEASE API)
+//        // TODO: Read MongoOperations (Spring Data MongoDB 1.9.1.RELEASE API)
 //        // href: http://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/core/MongoOperations.html
-//        mongoOperations.findAndModify(query, update, ScreenShot.class); // REF: Create a ScreenShot Class
+//        mongoOperations.findAndModify(query, update, ScreenShot.class); // TODO: Create a ScreenShot Class
 //        mongoOperations.save(bookProfile);  // save: create (C in CRUD)
 //        mongoOperations.upsert(query, update, ScreenShot.class);  // upsert: if exists then update else create. (CU in CRUD)
 //    }

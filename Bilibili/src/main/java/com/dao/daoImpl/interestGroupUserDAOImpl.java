@@ -47,6 +47,7 @@ public class interestGroupUserDAOImpl extends HibernateDaoSupport implements int
             for (int i = 0;i < groupIdList.size(); i++){
                 result.add((InterestGroup) getHibernateTemplate().find("from InterestGroup as group where group.interestGroupId = ?",groupIdList.get(i)).get(0));
             }
+            System.out.println(result.size()+ " " + result.get(0).getInterestGroupName());
         }
 
         return result;

@@ -1,10 +1,7 @@
 package com.service.serviceImpl;
 
 import com.dao.*;
-import com.pojo.Comment;
-import com.pojo.CommentReport;
-import com.pojo.UserComment;
-import com.pojo.VideoComment;
+import com.pojo.*;
 import com.service.commentService;
 
 import java.util.List;
@@ -71,7 +68,6 @@ public class commentServiceImpl implements commentService {
         commentReport.setCommentId(commentId);
         commentReport.setUserId(userId);
         commentReport.setReason(reason);
-        System.out.println(commentReport.getCommentId()+":"+commentReport.getUserId()+":"+commentReport.getReason());
         commentReportDAO.createCommentReport(commentReport);
     }
 
@@ -83,8 +79,13 @@ public class commentServiceImpl implements commentService {
     }
 
     @Override
-    public List<Comment> showCommentsByVideoId(int videoId) {
+    public List<Comment> findCommentsByVideoId(int videoId) {
         return commentDAO.findCommentsByVideoId(videoId);
+    }
+
+    @Override
+    public List<User> findCommentPushersByCommentList(List<Comment> commentList) {
+        return userDAO.findCommentPushersByCommentList(commentList);
     }
 
     @Override

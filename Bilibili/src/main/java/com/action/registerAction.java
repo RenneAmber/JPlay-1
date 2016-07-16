@@ -18,7 +18,8 @@ public class registerAction extends baseAction {
         user.setUsername(username);
         byte[] pwd = password.getBytes();
         user.setPwdhash(pwd);
-        user.setEmail(email);
+        byte[] eml = email.getBytes();
+        user.setEmail(eml);
         Boolean ret = userService.validateRegister(username, password, email);
         if (ret) {
             user.setStatus(new Byte("0"));

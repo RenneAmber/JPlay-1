@@ -1,10 +1,7 @@
 package com.service.serviceImpl;
 
 import com.dao.*;
-import com.pojo.GroupPost;
-import com.pojo.Post;
-import com.pojo.PostReport;
-import com.pojo.UserPost;
+import com.pojo.*;
 import com.service.postService;
 
 import java.util.List;
@@ -50,13 +47,11 @@ public class postServiceImpl implements postService {
         GroupPost groupPost = new GroupPost();
         groupPost.setInterestGroupId(groupId);
         groupPost.setPostId(post.getPostId());
-//        System.out.println("321:"+groupPost.getPostId());
         groupPostDAO.createGroupPost(groupPost);
         UserPost userPost = new UserPost();
         userPost.setUserId(userId);
         userPost.setPostId(post.getPostId());
         userPost.setIsThumb(new Byte("0"));
-//        System.out.println("123");
         userPostDAO.createUserPost(userPost);
     }
 
@@ -78,8 +73,18 @@ public class postServiceImpl implements postService {
     }
 
     @Override
-    public List<Post> showPostsByGroupId(int groupId) {
+    public List<Post> findPostsByGroupId(int groupId) {
         return postDAO.findPostsByGroupId(groupId);
+    }
+
+    @Override
+    public List<User> findPostPushersByPostList(List<Post> postList) {
+        return userDAO.findPostPushersByPostList(postList);
+    }
+
+    @Override
+    public User findPostPusherByPostId(int postId) {
+        return userDAO.findPostPusherByPostId(postId);
     }
 
     @Override
@@ -120,7 +125,7 @@ public class postServiceImpl implements postService {
         this.userPostDAO = userPostDAO;
     }
 
-    public void setPostReportDAO(com.dao.postReportDAO postReportDAO) {
+    public void setPostReportDAO(postReportDAO postReportDAO) {
         this.postReportDAO = postReportDAO;
     }
 }

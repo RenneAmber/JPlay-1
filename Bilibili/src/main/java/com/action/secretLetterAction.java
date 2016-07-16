@@ -2,6 +2,7 @@ package com.action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.pojo.Letter;
+import com.pojo.User;
 import com.service.userService;
 import net.sf.json.JSONObject;
 
@@ -16,7 +17,8 @@ public class secretLetterAction extends baseAction {
     private userService userService;
     private String letterContent;
     private String receiverEmail;
-    private List<Letter>letterList;
+    private List<Letter> letterList;
+    private List<User> senderList;
     private JSONObject result;
     private Map<String, Object> dataMap = new HashMap<String, Object>();
 
@@ -38,11 +40,8 @@ public class secretLetterAction extends baseAction {
         dataMap.clear();
         Map Session = ActionContext.getContext().getSession();
         String email = (String)Session.get("email");
-        //System.out.println(user);
-        letterList=userService.showLetterByUser(email);
-        System.out.println(letterList.size());
+        letterList = userService.findLettersByUser(email);
         dataMap.put("letterList", letterList);
-        System.out.println("success");
         return "json";
     }
 
@@ -102,11 +101,11 @@ public class secretLetterAction extends baseAction {
         this.receiverEmail = receiverEmail;
     }
 
-//    public String getSender(){
-//        return sender;
-//    }
-//
-//    public void setSender(String sender) {
-//        this.sender = sender;
-//    }
+    public List<User> getSenderList() {
+        return senderList;
+    }
+
+    public void setSenderList(List<User> senderList) {
+        this.senderList = senderList;
+    }
 }

@@ -2,10 +2,7 @@ package com.service.serviceImpl;
 
 
 import com.dao.*;
-import com.pojo.Category;
-import com.pojo.Video;
-import com.pojo.VideoReport;
-import com.pojo.VideoUper;
+import com.pojo.*;
 import com.service.videoService;
 import com.sun.net.httpserver.Authenticator;
 import org.omg.PortableInterceptor.SUCCESSFUL;
@@ -150,9 +147,19 @@ public class videoServiceImpl implements videoService {
     }
 
     @Override
-    public List<Video> showVideoByUper(String email) {
+    public List<Video> findVideosByUper(String email) {
         int userId = userDAO.findUserByEmail(email).getUserId();
         return videoDAO.findVideoListByUserId(userId);
+    }
+
+    @Override
+    public List<User> findUpersByVideoList(List<Video> videoList) {
+        return userDAO.findUpersByVideoList(videoList);
+    }
+
+    @Override
+    public User findUperByVideoId(int videoId) {
+        return userDAO.findUperByVideoId(videoId);
     }
 
     @Override

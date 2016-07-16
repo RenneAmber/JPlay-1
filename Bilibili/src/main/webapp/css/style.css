@@ -1,7 +1,7 @@
 /*
 
 */
-@import url(http://fonts.useso.com/css?family=Libre+Baskerville);
+/*@import url(http://fonts.useso.com/css?family=Libre+Baskerville);*/
 /* ---------------------------------------------------------------------------- */
 /* ------------------------------------Reset----------------------------------- */
 /* ---------------------------------------------------------------------------- */
@@ -535,18 +535,147 @@ textarea {display:block;width:90%;height:200px; border-radius:4px;-webkit-border
 	font-size: 110%;
 }
 /* ---------------------------------------------------------------------------- */
+/* --------------------------------interest group head------------------------- */
+/* ---------------------------------------------------------------------------- */
+.community {
+	width: auto;
+	height: 260px;
+	margin: 20px auto;
+	overflow: hidden;
+	border-radius: 4px;
+}
+.community .left {
+	width: 290px;
+	height: 260px;
+	position: relative;
+	text-align: center;
+	float: left;
+}
+.community .info {
+	padding: 45px 30px 35px;
+	width: 230px;
+	height: 180px;
+	position: absolute;
+	z-index: 10;
+}
+.community .community-name {
+	font-size: 24px;
+	color: #000;
+	display: block;
+	margin-bottom: 12px;
+	line-height: 1;
+}
+.community .community-desc.double {
+	text-align: left;
+	overflow: hidden;
+}
+.community .community-desc {
+	color: #000;
+	line-height: 20px;
+	margin-bottom: 16px;
+	min-height: 20px;
+	max-height: 40px;
+}
+
+.community .community-info {
+	height: 58px;
+	width: 100%;
+	line-height: 1.5;
+	position: relative;
+}
+.community .community-info .border {
+	width: 50%;
+	float: left;
+}
+label {
+	cursor: default;
+}
+.community .community-info span {
+	font-size: 16px;
+	font-weight: 700;
+}
+.community .community-info .split {
+	left: 50%;
+	top: 4px;
+	height: 32px;
+	color: #000;
+	z-index: 10;
+}
+.community .community-join.disable {
+	border: 1px solid #000;
+	background-color: transparent;
+	color: #000;
+	opacity: .9;
+	line-height: 28px;
+}
+.community .overlay {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.community .blur {
+	background-color: hsla(0,20%,100%,0.9);
+	z-index: 1;
+}
+.element.style {
+}
+@media only screen and (min-width: 400px) and (max-width: 500px) {
+	.community .right {
+		width:110px ;
+		height: 260px;
+		display:table-cell;
+		vertical-align:middle;
+		float: left;
+	}
+}
+@media only screen and (min-width: 501px) and (max-width: 650px) {
+	.community .right {
+		width:210px ;
+		height: 260px;
+		display:table-cell;
+		vertical-align:middle;
+		float: left;
+	}
+}
+@media only screen and (min-width: 651px) and (max-width: 780px) {
+	.community .right {
+		width:360px ;
+		height: 260px;
+		display:table-cell;
+		vertical-align:middle;
+		float: left;
+	}
+}
+@media only screen and (min-width: 781px) {
+	.community .right {
+		width:60% ;
+		height: 260px;
+		display:table-cell;
+		vertical-align:middle;
+		float: left;
+	}
+}
+
+
+/* ---------------------------------------------------------------------------- */
 /* --------------------------------interest group post------------------------- */
 /* ---------------------------------------------------------------------------- */
 .IGpost
 {
 	background-color: white;
 }
-.IGpost .header
+.IGpost .left
 {
 	font-family: 幼圆;
 	font-size: 150%;
 	vertical-align: middle;
 }
+.post_head{
+
+}
+
 .IGpost .send_post
 {
 	vertical-align: middle;
@@ -619,5 +748,57 @@ textarea {display:block;width:90%;height:200px; border-radius:4px;-webkit-border
 	color:skyblue;
 }
 
+/* ---------------------------------------------------------------------------- */
+/* --------------------------------interest group reply------------------------ */
+/* ---------------------------------------------------------------------------- */
+
+.IGreply
+{
+	width: 100%;
+	margin: 20px auto 0;
+	display: block;
+	position: relative;
+	text-align: left;
+	zoom: 1;
+	background-color: white;
+}
+.IGreply .left
+{
+	width: 70%;
+	background-color: #fff;
+	margin-right: 4%;
+	float: left;
+}
+.reply_head{
+	border-bottom: 1px solid #e5e9ef;
+	margin-top: -13px;
+	padding-bottom: 17px;
+	height: 36px;
+}
+.reply-head h1 {
+	display: inline-block;
+	font-size: 24px;
+	line-height: 36px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 60%;
+}
+.reply-head button {
+	vertical-align: middle;
+	font-size: 14px;
+	border: none;
+	background-color: #ff709f;
+	color: #fff;
+	width: 80px;
+	height: 36px;
+	line-height: 36px;
+	text-align: center;
+	border-radius: 4px;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	float: right;
+}
 
 

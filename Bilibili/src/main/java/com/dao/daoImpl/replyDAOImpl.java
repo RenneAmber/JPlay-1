@@ -70,15 +70,14 @@ public class replyDAOImpl extends HibernateDaoSupport implements replyDAO {
     public List<Reply> findRepliesByCommentId(int commentId) {
         String hql = "select replyId as rid from CommentReply where commentId = ?";
         List<Integer> replyIdList = (List<Integer>) getHibernateTemplate().find(hql, commentId);
-        if (replyIdList.size() == 0)
-            return null;
-        else {
-            List<Reply> result = new ArrayList<Reply>();
+        List<Reply> result = new ArrayList<Reply>();
+        if (replyIdList.size() !=0) {
             for(int i = 0; i < replyIdList.size(); i++){
                 result.add((Reply) getHibernateTemplate().find("from Reply as reply where reply.replyId = ?", replyIdList.get(i)).get(0));
+                //getHibernateTemplate().flush();
             }
-            return result;
         }
+        return result;
     }
 
     @Override

@@ -11,7 +11,7 @@ public class groupPostDAOImpl extends HibernateDaoSupport implements groupPostDA
     @Override
     public void createGroupPost(GroupPost groupPost) {
         getHibernateTemplate().save(groupPost);
-        //getHibernateTemplate().flush();
+        getHibernateTemplate().flush();
     }
 
     @Override

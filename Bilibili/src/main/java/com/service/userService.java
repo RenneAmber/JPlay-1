@@ -23,11 +23,13 @@ public interface userService {
     public void sendLetter(String senderEmail,String receiverEmail, String letterContent);
     public void viewLetter(int letterId);
     public void addInterestGroup(String email,int interestGroupId);
+    public void quitInterestGroup(String email,int interestGroupId);
+    public boolean isJoinedInterestGroup(String email,int interestGroupId);
     public void subscribeSeries(String email, String seriesName);
     public void addFavouriteGroup(String email,String groupName);
     public void addVideoToFavouriteGroup(int videoId,int groupId);
     public void giveUserRole(String email, int roleId);
-    public List<Letter> showLetterByUser(String email);
-    public List<InterestGroup> showGroupsByEmail(String email);
-    public List<InterestGroup> showGroupsAll();
+    public List<Letter> findLettersByUser(String email);
+    public List<InterestGroup> findGroupsByEmail(String email);
+    public List<InterestGroup> findGroupsAll();
 }

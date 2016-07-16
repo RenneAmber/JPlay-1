@@ -105,6 +105,18 @@ public class userServiceImpl implements userService {
         interestGroupUserDAO.createInterestGroupUser(interestGroupUser);
     }
 
+    @Override
+    public void quitInterestGroup(String email, int interestGroupId) {
+        int userId = findUserByEmail(email).getUserId();
+        interestGroupUserDAO.deleteInterestGroupUser(userId,interestGroupId);
+    }
+
+    @Override
+    public boolean isJoinedInterestGroup(String email, int interestGroupId) {
+        int userId = findUserByEmail(email).getUserId();
+        return !(interestGroupUserDAO.findInterestGroupUserByKeys(userId,interestGroupId)==null);
+    }
+
 
     @Override
     public void subscribeSeries(String email, String seriesName) {
@@ -181,17 +193,17 @@ public class userServiceImpl implements userService {
         this.userRoleDAO = userRoleDAO;
     }
 
-    public List<Letter> showLetterByUser(String email) {
+    public List<Letter> findLettersByUser(String email) {
         int userId = userDAO.findUserByEmail(email).getUserId();
         return letterDAO.listLetter(userId);
     }
 
-    public List<InterestGroup> showGroupsByEmail(String email) {
+    public List<InterestGroup> findGroupsByEmail(String email) {
         int userId = userDAO.findUserByEmail(email).getUserId();
         return interestGroupUserDAO.listMyGroups(userId);
     }
 
-    public List<InterestGroup> showGroupsAll()
+    public List<InterestGroup> findGroupsAll()
     {
         return interestGroupDAO.listGroups();
     }

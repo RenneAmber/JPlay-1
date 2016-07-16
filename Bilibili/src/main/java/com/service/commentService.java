@@ -1,6 +1,7 @@
 package com.service;
 
 import com.pojo.Comment;
+import com.pojo.User;
 
 import java.util.List;
 
@@ -43,7 +44,9 @@ public interface commentService {
 
     public void commentThumbCount(int commentId);
 
-    public List<Comment> showCommentsByVideoId(int videoId);
+    public List<Comment> findCommentsByVideoId(int videoId);
+
+    public List<User> findCommentPushersByCommentList(List<Comment>commentList);
 
     public List<Comment> findAllComments();
 }

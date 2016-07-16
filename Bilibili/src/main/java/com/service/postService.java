@@ -1,6 +1,7 @@
 package com.service;
 
 import com.pojo.Post;
+import com.pojo.User;
 
 import java.util.List;
 
@@ -41,7 +42,11 @@ public interface postService {
 
     public void postThumbCount(int postId);
 
-    public List<Post> showPostsByGroupId(int groupId);
+    public List<Post> findPostsByGroupId(int groupId);
+
+    public List<User> findPostPushersByPostList(List<Post>postList);
+
+    public User findPostPusherByPostId(int postId);
 
     public List<Post> findAllPosts();
 }

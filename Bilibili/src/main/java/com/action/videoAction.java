@@ -5,6 +5,7 @@ package com.action;
 import com.opensymphony.xwork2.ActionContext;
 import com.pojo.Comment;
 import com.pojo.Reply;
+import com.pojo.User;
 import com.pojo.Video;
 import com.service.commentService;
 import com.service.replyService;
@@ -30,17 +31,25 @@ public class videoAction extends baseAction {
     private videoService videoService;
     private commentService commentService;
     private replyService replyService;
+
+    //用于上传视频
     private String title;
     private String content;
     private String message;
 
+    //用于举报
     private int videoId;
     private String reason;
 
+    //用于显示视频upe主信息，评论信息和回复信息，包括了搜索功能
     private Video videoBean;
-    private List<Comment>commentListBean;
-    private List<List<Reply>>replyListBean;
-    private List<Video> videoBeanList;
+    private User userBean;
+    private List<Comment>commentList;
+    private List<User> commentPusherList;
+    private List<List<Reply>>replyList;
+    private List<List<User>> replyPusherList;
+
+    private List<Video> videoList;
     private String keyword;
 
     /** For Administrator **/
@@ -50,7 +59,7 @@ public class videoAction extends baseAction {
     }
 
     public String listVideos() {
-        videoBeanList = videoService.findAllVideos();
+        videoList = videoService.findAllVideos();
         return SUCCESS;
     }
 
@@ -69,7 +78,6 @@ public class videoAction extends baseAction {
 
             //获得保存文件的路径
 //            ServletContext sctx = getServletContext();
-
             //获得文件名
             String basePath = getServletContext().getRealPath("videos");
             //待转码的文件
@@ -88,9 +96,7 @@ public class videoAction extends baseAction {
 //            video.setVideoId(videoService.findMaxVideoId()+1);
             video.setTitle(title);
             video.setContent(content);
-
             video.setLink("videos/" + serialName + ".mp4");
-
             video.setIsPass(new Byte("0"));
             video.setTopic("unknown");
             video.setCreateTime(timeUtil.GetCurrentTime());
@@ -101,7 +107,6 @@ public class videoAction extends baseAction {
 
             //video.setPicture("videos/images/" + serialName + ".jpg");
 
-            System.out.println("Video Insert!");
             //转码
             flag = videoService.executeCodecs(ffmpegPath,(String)Session.get("videoName"), codcFilePath, mediaPicPath);
 
@@ -110,7 +115,7 @@ public class videoAction extends baseAction {
                 videoService.createVideo(video);
                 videoService.addVideoUper(email, video.getVideoId());
                 //利用mongoDB工具存储截图
-                 mongoUtil.StoreImage(mediaPicPath,video.getVideoId());
+                mongoUtil.StoreImage(mediaPicPath,video.getVideoId());
                 Session.remove("videoName");
                 message = "上传成功!";
                 return SUCCESS;
@@ -167,13 +172,19 @@ public class videoAction extends baseAction {
     }
 
     public String autoPlay() {
-        replyListBean = new ArrayList<List<Reply>>();
+        replyList = new ArrayList<List<Reply>>();
+        replyPusherList = new ArrayList<List<User>>();
         videoBean = videoService.findVideoById(videoId);
-        commentListBean=new ArrayList<Comment>();
-        commentListBean = commentService.showCommentsByVideoId(videoId);
+        userBean = videoService.findUperByVideoId(videoId);
+        commentList = commentService.findCommentsByVideoId(videoId);
+        commentPusherList = commentService.findCommentPushersByCommentList(commentList);
+        System.out.println("Pusher name:"+commentPusherList.get(0).getUsername());
 
-        for(int i = 0; i < commentListBean.size(); i++){
-            replyListBean.add(replyService.showRepliesByCommentId(commentListBean.get(i).getCommentId()));
+        List<Reply>temp;
+        for(int i = 0; i < commentList.size(); i++){
+            temp = replyService.findRepliesByCommentId(commentList.get(i).getCommentId());
+            replyService.findReplyPushersByReplyList(temp);
+            replyList.add(temp);
         }
         return SUCCESS;
     }
@@ -181,8 +192,8 @@ public class videoAction extends baseAction {
     public String search() throws Exception {
         ftsearchUtil ftsearchUtil = new ftsearchUtil();
         ftsearchUtil.createIndex();
-        videoBeanList = ftsearchUtil.getResult(keyword);
-        System.out.println(videoBeanList.size());
+        videoList = ftsearchUtil.getResult(keyword);
+        System.out.println(videoList.size());
         System.out.println(keyword);
 //        System.out.println("熊果");
         return SUCCESS;
@@ -240,12 +251,12 @@ public class videoAction extends baseAction {
         this.videoBean = videoBean;
     }
 
-    public List<Comment> getCommentListBean() {
-        return commentListBean;
+    public List<Comment> getCommentList() {
+        return commentList;
     }
 
-    public void setCommentListBean(List<Comment> commentListBean) {
-        this.commentListBean = commentListBean;
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 
     public commentService getCommentService() {
@@ -256,12 +267,12 @@ public class videoAction extends baseAction {
         this.commentService = commentService;
     }
 
-    public List<List<Reply>> getReplyListBean() {
-        return replyListBean;
+    public List<List<Reply>> getReplyList() {
+        return replyList;
     }
 
-    public void setReplyListBean(List<List<Reply>> replyListBean) {
-        this.replyListBean = replyListBean;
+    public void setReplyList(List<List<Reply>> replyList) {
+        this.replyList = replyList;
     }
 
     public replyService getReplyService() {
@@ -272,12 +283,12 @@ public class videoAction extends baseAction {
         this.replyService = replyService;
     }
 
-    public List<Video> getVideoBeanList() {
-        return videoBeanList;
+    public List<Video> getVideoList() {
+        return videoList;
     }
 
-    public void setVideoBeanList(List<Video> videoBeanList) {
-        this.videoBeanList = videoBeanList;
+    public void setVideoList(List<Video> videoList) {
+        this.videoList = videoList;
     }
 
     public String getKeyword() {
@@ -294,5 +305,29 @@ public class videoAction extends baseAction {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public User getUserBean() {
+        return userBean;
+    }
+
+    public void setUserBean(User userBean) {
+        this.userBean = userBean;
+    }
+
+    public List<User> getCommentPusherList() {
+        return commentPusherList;
+    }
+
+    public void setCommentPusherList(List<User> commentPusherList) {
+        this.commentPusherList = commentPusherList;
+    }
+
+    public List<List<User>> getReplyPusherList() {
+        return replyPusherList;
+    }
+
+    public void setReplyPusherList(List<List<User>> replyPusherList) {
+        this.replyPusherList = replyPusherList;
     }
 }

@@ -3,6 +3,7 @@ package com.action;
 import com.opensymphony.xwork2.ActionContext;
 import com.pojo.InterestGroup;
 import com.pojo.Post;
+import com.pojo.User;
 import com.service.postService;
 import com.service.userService;
 
@@ -17,16 +18,17 @@ public class interestGroupAction extends baseAction {
     private int interestGroupId;
     private userService userService;
     private postService postService;
+
+    //用于显示我的兴趣圈功能
     private List<InterestGroup> myGroupList;
     private List<InterestGroup> groupList;
     private Map<String, Object> dataMap = new HashMap<String, Object>();
 
-    public int getGroupId() {
-        return groupId;
-    }
-
+    //用于显示兴趣圈功能
     private int groupId;
-    private List<Post> postListBean;
+    private List<Post> postList;
+    private List<User> postPusherList;
+    private boolean isJoined;
 
     public String addInterestGroup() {
         Map Session = ActionContext.getContext().getSession();
@@ -35,25 +37,39 @@ public class interestGroupAction extends baseAction {
         return SUCCESS;
     }
 
+    public String quitInterestGroup(){
+        Map Session = ActionContext.getContext().getSession();
+        String email = (String)Session.get("email");
+        userService.quitInterestGroup(email,interestGroupId);
+        return SUCCESS;
+    }
+
     public String listInterestGroup() {
-        groupList=userService.showGroupsAll();
+         //Map Session = ActionContext.getContext().getSession();
+        groupList=userService.findGroupsAll();
         dataMap.put("groupList",groupList);
+        //Session.put("groupList",groupList);
+        System.out.println(groupList.size());
         return SUCCESS;
     }
 
     public String listInterestGroupByUser() {
-        dataMap.clear();
+        //dataMap.clear();
         Map Session = ActionContext.getContext().getSession();
         String email = (String) Session.get("email");
-        myGroupList = userService.showGroupsByEmail(email);
+        myGroupList = userService.findGroupsByEmail(email);
         dataMap.put("myGroupList", myGroupList);
         listInterestGroup();
+        System.out.println(myGroupList.size());
         return SUCCESS;
     }
 
     public String enterGroup() {
-        postListBean = postService.showPostsByGroupId(groupId);
-
+        Map Session = ActionContext.getContext().getSession();
+        String email = (String) Session.get("email");
+        isJoined = userService.isJoinedInterestGroup(email,interestGroupId);
+        postList = postService.findPostsByGroupId(groupId);
+        postPusherList = postService.findPostPushersByPostList(postList);
         return SUCCESS;
     }
 
@@ -91,12 +107,12 @@ public class interestGroupAction extends baseAction {
         this.groupId = groupId;
     }
 
-    public List<Post> getPostListBean() {
-        return postListBean;
+    public List<Post> getPostList() {
+        return postList;
     }
 
-    public void setPostListBean(List<Post> postListBean) {
-        this.postListBean = postListBean;
+    public void setPostList(List<Post> postListBean) {
+        this.postList = postListBean;
     }
 
     public Map<String, Object> getDataMap() {
@@ -113,5 +129,21 @@ public class interestGroupAction extends baseAction {
 
     public void setGroupList(List<InterestGroup> groupList) {
         this.groupList = groupList;
+    }
+
+    public boolean isJoined() {
+        return isJoined;
+    }
+
+    public void setJoined(boolean joined) {
+        isJoined = joined;
+    }
+
+    public List<User> getPostPusherList() {
+        return postPusherList;
+    }
+
+    public void setPostPusherList(List<User> postPusherList) {
+        this.postPusherList = postPusherList;
     }
 }

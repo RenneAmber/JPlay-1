@@ -73,13 +73,18 @@ public class replyServiceImpl implements replyService {
     }
 
     @Override
-    public List<Reply> showRepliesByCommentId(int commentId) {
+    public List<Reply> findRepliesByCommentId(int commentId) {
         return replyDAO.findRepliesByCommentId(commentId);
     }
 
     @Override
-    public List<Reply> showRepliesByPostId(int postId) {
+    public List<Reply> findRepliesByPostId(int postId) {
         return replyDAO.findRepliesByPostId(postId);
+    }
+
+    @Override
+    public List<User> findReplyPushersByReplyList(List<Reply> replyList) {
+        return userDAO.findReplyPushersByReplyList(replyList);
     }
 
     @Override

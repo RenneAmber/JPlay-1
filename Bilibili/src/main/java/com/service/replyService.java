@@ -1,6 +1,7 @@
 package com.service;
 
 import com.pojo.Reply;
+import com.pojo.User;
 
 import java.util.List;
 
@@ -43,9 +44,11 @@ public interface replyService {
 
     public void replyThumbCount(int replyId);
 
-    public List<Reply> showRepliesByCommentId(int commentId);
+    public List<Reply> findRepliesByCommentId(int commentId);
 
-    public List<Reply> showRepliesByPostId(int postId);
+    public List<Reply> findRepliesByPostId(int postId);
+
+    public List<User> findReplyPushersByReplyList(List<Reply>replyList);
 
     public List<Reply> findAllReplies();
 }

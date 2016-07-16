@@ -56,6 +56,7 @@ public class letterDAOImpl extends HibernateDaoSupport implements letterDAO {
         String hql = "from Letter as l where l.receiverId=?";
         List<Letter>result = new ArrayList<Letter>();
         result= (List<Letter>) getHibernateTemplate().find(hql,userId);
+        System.out.println(result.size()+ " " + result.get(0).getLetterContent());
         return result;
     }
 }

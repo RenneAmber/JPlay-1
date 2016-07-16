@@ -137,23 +137,21 @@
     <!--////////////////////////////////////Container-->
     <section id="container" class="index-page">
         <div class="wrap-container zerogrid">
-            <!------------------------------------->
-            <div class="row">
-                <div class="col-2-4">
-                    <div class="wrap-col">
-                        <div class="zoom-container">
-                            <img src="images/temp.jpg" />
+            <!-- Title & Post-->
+            <section class="IGreply">
+                <div class="left" style="min-height: 578px;">
+                    <div class="reply-head">
+                        <h1 title=""><s:property value="postList.content"/><!--v-html--></h1>
+                        <button><i class="fa fa-pencil"></i>回复</button>
+                    </div>
+                    <div class="reply-info" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(229, 233, 239);">
+                        <a class="info-avatar" target="_blank" href="http://space.bilibili.com/12874855">
+                            <img src="images/10.jpg"></a>
+                        <div class="info-context">
+                            <a class="info-author" target="_blank" href="http://space.bilibili.com/12874855">葬礼仪、</a>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Title & Post-->
-                    <section class="IGpost">
-                        <div class="header">
-                            <!--  Title (function)-->
-                            <h2><s:property value="#postBean.content"/></h2>
-                        </div>
                         <div class="body">
                             <!-- Post-->
                             <ul id="post-field" height="100px">
@@ -176,7 +174,7 @@
                                 </s:iterator>
                             </ul>
                         </div>
-                    </section>
+            </section>
             <!-- Admin -->
             <div id="sidebar" class="col-1-3">
                 <!---- Start Widget ---->

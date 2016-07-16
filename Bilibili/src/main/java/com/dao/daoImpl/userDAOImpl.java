@@ -1,9 +1,10 @@
 package com.dao.daoImpl;
 
 import com.dao.userDAO;
-import com.pojo.User;
+import com.pojo.*;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -79,15 +80,85 @@ public class userDAOImpl extends HibernateDaoSupport implements userDAO {
             return result.get(0);
     }
 
-
     @Override
     public List<User> findAllUsers() {
         return (List<User>) getHibernateTemplate().find("from User ");
     }
 
+
+
     @Override
-    public List<User> findUpersByVideoId(int videoId) {
-        List<User>result = null;
+    public List<User>findUpersByVideoList(List<Video>videoList) {
+        String hql = "select userId as uid from VideoUper where videoId = ?";
+        List<User> result = new ArrayList<User>();
+        List<Integer> userIdList = new ArrayList<Integer>();
+        for (int i = 0; i < videoList.size(); i++)
+            userIdList.add(((List<Integer>)getHibernateTemplate().find(hql, videoList.get(i).getVideoId())).get(0));
+        for (int i = 0; i < userIdList.size(); i++)
+            result.add(findUserById(userIdList.get(i)));
         return result;
+    }
+
+
+
+    @Override
+    public User findUperByVideoId(int videoId) {
+        String hql = "select userId as uid from VideoUper where videoId = ?";
+        return findUserById(((List<Integer>)getHibernateTemplate().find(hql,videoId)).get(0));
+//        if(userIdList.isEmpty())return null;
+//        else{
+//            return findUserById(userIdList.get(0));
+//        }
+    }
+
+
+    @Override
+    public List<User> findCommentPushersByCommentList(List<Comment> commentList) {
+        String hql = "select userId as uid from UserComment where commentId = ?";
+        List<User> result = new ArrayList<User>();
+        List<Integer> userIdList = new ArrayList<Integer>();
+        for (int i = 0; i < commentList.size(); i++)
+            userIdList.add(((List<Integer>)getHibernateTemplate().find(hql, commentList.get(i).getCommentId())).get(0));
+        for (int i = 0; i < userIdList.size(); i++)
+            result.add(findUserById(userIdList.get(i)));
+        return result;
+    }
+
+    @Override
+    public List<User> findReplyPushersByReplyList(List<Reply> replyList) {
+        String hql = "select userId as uid from UserReply where replyId = ?";
+        List<User> result = new ArrayList<User>();
+        List<Integer> userIdList = new ArrayList<Integer>();
+        for (int i = 0; i < replyList.size(); i++)
+            userIdList.add(((List<Integer>)getHibernateTemplate().find(hql, replyList.get(i).getReplyId())).get(0));
+        for (int i = 0; i < userIdList.size(); i++)
+            result.add(findUserById(userIdList.get(i)));
+        return result;
+    }
+
+    @Override
+    public List<User> findPostPushersByPostList(List<Post> postList) {
+        String hql = "select userId as uid from UserPost where postId = ?";
+        List<User> result = new ArrayList<User>();
+        List<Integer> userIdList = new ArrayList<Integer>();
+        for (int i = 0; i < postList.size(); i++)
+            userIdList.add(((List<Integer>)getHibernateTemplate().find(hql, postList.get(i).getPostId())).get(0));
+        for (int i = 0; i < userIdList.size(); i++)
+            result.add(findUserById(userIdList.get(i)));
+        return result;
+    }
+
+    @Override
+    public List<User> findSendersByLetterList(List<Letter> letterList) {
+        List<User> result = new ArrayList<User>();
+        for (int i = 0; i < letterList.size(); i++)
+            result.add(findUserById(letterList.get(i).getSenderId()));
+        return result;
+    }
+
+    @Override
+    public User findPostPusherByPostId(int postId) {
+        String hql = "select userId as uid from UserPost where postId = ?";
+        return findUserById(((List<Integer>)getHibernateTemplate().find(hql,postId)).get(0));
     }
 }

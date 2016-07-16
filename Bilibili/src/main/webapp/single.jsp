@@ -226,6 +226,7 @@
 		{
 			var id="reply"+comment_id;
 			var btid="btnR"+reply_id;
+			alert(comment_user);
 			var content=document.getElementById(id);
 			/*content.innerHTML+=document.getElementById("commentModal").innerHTML;*/
 			var btn=document.getElementById(btid);
@@ -525,8 +526,6 @@
 			<div class="row">
 				<div id="main-content" class="col-2-3">
 					<div class="wrap-vid">
-
-
 						<div class="barrage">
 							<div class="barrage-content">
 								<label>发表弹幕：</label>
@@ -738,23 +737,29 @@
 								</div>
 							</div>
 						</div>
+					</section>
+					<section class="vid-related">
 						<div class="header">
 							<h2>评论专区</h2>
 						</div>
 						<ul class="comment" id="comment-field" height="100px">
 							<% int count=0;%>
-							<s:iterator value="commentListBean" var="comment" status="st">
+							<s:iterator value="commentList" var="comment" status="st">
 								<li class="comment_add"  >
 									<img src="images/10.jpg" alt="image"/>
 									<div class="user_info" id="reply${comment.commentId}"	>
 										<div class="user_name">
-											<h4><b>${comment.commentPusher}</b>
+											<h4><b><%--${comment.commentPusher}--%>
+											<%--	<s:property value="commentPusherList">
+
+												</s:property>--%>
+												</b>
 												<span class="date_time">${comment.createTime}</span>
 											</h4>
 										</div>
 										<div class="comment">${comment.content}</div>
 										<div class="bottom-function">
-											<label>#<s:property value="commentListBean.size-#st.index"/> </label>
+											<label>#<s:property value="commentList.size-#st.index"/> </label>
 											<button id="thumb${comment.commentId}" onclick="commentThumb(${comment.commentId},${comment.thumbCount})" >赞(${comment.thumbCount})</button>
 											<button id="btn${comment.commentId}" onclick="commentModal(${comment.commentId},'<%=session.getAttribute("username")%>')">回复</button>
 											<button onclick="report_comment(${comment.commentId})">举报</button>
@@ -762,21 +767,25 @@
                                                     <button style="float: right;">删除</button>
                                                 </s:if>--%>
 										</div>
-										<s:iterator value="replyListBean[#st.index]" var="replyList">
+										<s:iterator value="replyList[#st.index]" var="reply" status="rst">
 
 											<img src="images/10.jpg" alt="image"/>
 											<div class="user_info" id="reply${comment.commentId}"	>
 												<div class="user_name">
-													<h4><b>${replyList.replyPusher}</b>
+													<h4><b><%--${replyList.replyPusher}--%>
+														<%--<s:iterator value="replyPusherList[#st.index]" var="replyPusher">
+															&lt;%&ndash;${replyPusher.username}&ndash;%&gt;
+														</s:iterator>--%>
+														</b>
 														<!-- rr[#st.index-->
 													</h4>
 												</div>
-												<div class="comment">${replyList.content}</div>
+												<div class="comment">${reply.content}</div>
 												<div class="bottom-function">
-													<button id="thumbR${replyList.replyId}" onclick="replyThumb(${replyList.replyId},${replyList.thumbCount})" >赞(${replyList.thumbCount})</button>
-													<button id="btnR${replyList.replyId}" onclick="replyModal(${comment.commentId},${replyList.replyId},
-															'<%=session.getAttribute("username")%>','${comment.commentPusher}')">回复</button>
-													<button onclick="report_reply(${replyList.replyId})">举报</button>
+													<button id="thumbR${reply.replyId}" onclick="replyThumb(${reply.replyId},${reply.thumbCount})" >赞(${reply.thumbCount})</button>
+													<button id="btnR${reply.replyId}" onclick="replyModal(${comment.commentId},${reply.replyId},
+															'<%=session.getAttribute("username")%>','<s:property value="replyPusherList[#st.index][#rst.index].username"/>')">回复</button>
+													<button onclick="report_reply(${reply.replyId})">举报</button>
 														<%--<s:if test="${comment.commentPusher}==<%=session.getAttribute("username")%>">
                                                             <button style="float: right;">删除</button>
                                                         </s:if>--%>

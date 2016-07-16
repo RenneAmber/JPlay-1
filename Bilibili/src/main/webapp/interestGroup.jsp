@@ -165,14 +165,33 @@
     <section id="container" class="index-page">
         <div class="wrap-container zerogrid">
             <!------------------------------------->
-            <div class="row">
-                <div class="col-2-4">
-                    <div class="wrap-col">
-                        <div class="zoom-container">
-                            <img src="images/temp.jpg" />
+            <div class="community">
+                <div class="left">
+                    <div class="info">
+                        <a class="community-name" href="http://www.im9.com/community.html?community_id=5562#" title="新番情报">新番情报</a>
+                        <div class="community-desc double" title="ACG情报站，声优、新番资讯、老番安利杂谈等，欢迎光临ヽ(ﾟ∀ﾟ)ﾉ">ACG情报站，声优、新番资讯、老番安利杂谈等，欢迎光临ヽ(ﾟ∀ﾟ)ﾉ</div>
+                        <div class="community-info">
+                            <div class="border">
+                                <label title="搬运工">搬运工</label>
+                                <br>
+                                <span title="2.8万"> 2.8万</span>
+                            </div>
+                            <div class="split"></div>
+                            <div class="border">
+                                <label title="情报">情报</label>
+                                <br>
+                                <span title="700">700</span>
+                            </div>
                         </div>
+                        <div class="community-join disable">已加入</div>
+                        <!--v-if-->
+                    </div>
+                    <div class="overlay" style="overflow: hidden">
+                        <div class="blur overlay"></div>
+                        <div class="bg overlay"> <img src="images/groupPic.jpg" no-repeat></div>
                     </div>
                 </div>
+                <div class="right"> <img src="images/groupPic.jpg"></div>
             </div>
 
             <!-- Title & Post-->

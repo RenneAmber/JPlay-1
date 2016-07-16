@@ -4,7 +4,7 @@ package com.dao;
  * Created by Admin on 2016/6/27.
  */
 
-import com.pojo.User;
+import com.pojo.*;
 
 import java.util.List;
 
@@ -48,5 +48,18 @@ public interface userDAO {
 
     public List<User> findAllUsers();
 
-    public List<User> findUpersByVideoId(int videoId);
+    public List<User> findUpersByVideoList(List<Video>videoList);
+
+    public User findUperByVideoId(int videoId);
+
+    public List<User>findCommentPushersByCommentList(List<Comment>commentList);
+
+    public List<User>findReplyPushersByReplyList(List<Reply>replyList);
+
+    public List<User>findPostPushersByPostList(List<Post>postList);
+
+    public User findPostPusherByPostId(int postId);
+
+    public List<User>findSendersByLetterList(List<Letter>letterList);
+
 }

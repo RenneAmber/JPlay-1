@@ -23,7 +23,6 @@ public class postDAOImpl extends HibernateDaoSupport implements postDAO{
     @Override
     public void createPost(Post post) {
         getHibernateTemplate().save(post);
-        System.out.println(post.getContent());
         getHibernateTemplate().flush();
     }
 

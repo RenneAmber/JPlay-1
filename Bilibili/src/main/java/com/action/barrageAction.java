@@ -12,23 +12,6 @@ import org.springframework.data.mongodb.core.query.Update;
  * Created by Admin on 2016/6/27.
  */
 public class barrageAction extends baseAction {
-//    private Map<String, String> timeLine;
-//    private Integer mode;
-//    private Integer stime;
-//    private String text;
-//    private Integer ttl;
-//    private Integer dur;
-//    private Integer cindex;
-//    private ArrayList<Object> motion;
-//    private Boolean movable;
-//    private Object _alphaMotion;
-//    private Integer align;
-//    private Integer _alpha;
-//    private Integer _size;
-//    private Integer _color;
-//    private Boolean _border;
-//    private Boolean _shadow;
-//    private String _font;
     private String barrageJson; // In json format
     private int videoId;
 

@@ -63,9 +63,12 @@ public interface videoService {
 
     public void addVideoUper(String email,int videoId);
 
-    public List<Video> showVideoByUper(String email);
+    public List<Video> findVideosByUper(String email);
+
+    public List<User> findUpersByVideoList(List<Video>videoList);
+
+    public User findUperByVideoId(int videoId);
 
     public List<Video> findAllVideos();
-
 
 }
